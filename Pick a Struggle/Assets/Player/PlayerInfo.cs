@@ -96,18 +96,27 @@ public class PlayerInfo : MonoBehaviour
 
         /*============ Custom Functions ============*/
         // Boost adding
-        void addBoostHealth(float boost){boost_health += boost;}
-        void addBoostSpeed(float boost){boost_speed += boost;}
-        void addBoostStaminaDrain(float boost){boost_stamina_drain += boost;}
-        void addBoostDamage(float boost){boost_damage += boost;}
-        void addBoostMeleeRange(float boost){boost_melee_range += boost;}
-        void addBoostHandlingSpeed(float boost){boost_handling_speed += boost;}
-        void addBoostEmotionBuildup(float boost){boot_emotion_buildup += boost;}
+        void addBoostHealth(float boost){
+            boost_health += boost;
+            setHealth();
+        }
+
+        void boostSpeed(float boost){boost_speed += boost;}
+        
+        void boostStaminaDrain(float boost){boost_stamina_drain += boost;}
+        
+        void boostDamage(float boost){boost_damage += boost;}
+        
+        void boostMeleeRange(float boost){boost_melee_range += boost;}
+        
+        void boostHandlingSpeed(float boost){boost_handling_speed += boost;}
+        
+        void boostEmotionBuildup(float boost){boot_emotion_buildup += boost;}
 
         // Other
-        void damageHealth(float attack_dmg){
-            if(total_health > 0){total_health -= attack_dmg;}
-            if(total_health < 0){total_health = 0;}
+        void dealDamage(float attack_dmg){
+            if(curr_health > 0){curr_health -= attack_dmg;}
+            if(curr_health < 0){curr_health = 0;}
         }
 
         void applyStaminaDrain(float time_slice){
