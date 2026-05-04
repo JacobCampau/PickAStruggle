@@ -1,3 +1,5 @@
-class PlayerController : PlayerInfo {
+using UnityEngine;
+
+public class PlayerController : PlayerInfo {
   
 }
