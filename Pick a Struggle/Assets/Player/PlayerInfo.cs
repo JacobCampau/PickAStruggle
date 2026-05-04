@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerInfo : MonoBehaviour
 {
     /*========== Info For All Players ==========*/
-    // Base stats
+    // Base Stats
     float health;
     float curr_health;
     float speed;
@@ -15,12 +15,12 @@ public class PlayerInfo : MonoBehaviour
     float handling_speed;
     float melee_range;
 
-    // Emotion stats
+    // Emotion Stats
     float emotion_max;
     float curr_emotion;
     float emotion_buildup;
 
-    // Boost stats
+    // Boost Stats
     float boost_health;
     float boost_speed;
     float boost_stamina_drain;
@@ -38,21 +38,19 @@ public class PlayerInfo : MonoBehaviour
     float total_handling_speed;
     float total_emotion_buildup;
 
-    // Resistance stats
+    // Resistance Stats
     float slash_resist;
     float bludgeon_resist;
 
     // Online Player Information
-    int playerId;
-    string playerName;
-    Color playerColor;
+    int player_id;
+    string player_name;
+    Color player_color;
 
     // Player State Trackers
-    bool isGrounded;
-    bool isStunned;
-    bool isDead;
-
-    /*============= Player Objects =============*/
+    bool is_grounded;
+    bool is_stunned;
+    bool is_dead;
     
     public:
         /*============== Initial Call ==============*/
@@ -60,19 +58,19 @@ public class PlayerInfo : MonoBehaviour
             // Set Basics
             health = 100;
             curr_health = getHealth();
-            speed;
+            speed = 10;
             stamina_max = 100;
             curr_stamina = getStaminaMax();
-            stamina_drain;
-            jump_force;
+            stamina_drain = 1;
+            jump_force = 8;
             damage = 10;
-            handling_speed;
-            melee_range;
+            handling_speed = 1;
+            melee_range = 1;
         
             // Set Emotions
             emotion_max = 100;
             curr_emotion = 0;
-            emotion_buildup;
+            emotion_buildup = 1;
         
             // Set Boosts
             boost_health = 0;
@@ -90,25 +88,27 @@ public class PlayerInfo : MonoBehaviour
             setDamage();
             setMeleeRange();
             setHandlingSpeed();
-        
+
+            // Set Emotion
             setEmotionalBuildUp();
 
+            // Set Resistances
             setSlashResist(0);
             setBludgeonResist(0);
 
             // Set Base Info
-            int playerId = 0;
-            string playerName = "NONE";
-            Color playerColor = Color.white;
+            int player_id = 0;
+            string player_name = "NONE";
+            Color player_color = Color.white;
 
-            // Active state info
-            bool isGrounded = false;
-            bool isStunned = false;
-            bool isDead = false;
+            // Active State Info
+            bool is_grounded = false;
+            bool is_stunned = false;
+            bool is_dead = false;
         }
         
         /*================== Gets ==================*/
-        // Boosted gets
+        // Boosted Gets
         float getHealth(){
             setHealth();
             return total_health;
@@ -139,18 +139,18 @@ public class PlayerInfo : MonoBehaviour
             return total_handling_speed;
         }
         
-        // Base gets (Not including the boosted stats)
+        // Base Gets
         float getCurrentHealth(){return curr_health;}
         float getStaminaMax(){return stamina_max;}
         float getCurrentStamina(){return curr_stamina;}
         flaot getJumpForce(){return jump_force;}
 
-        // Emotion gets
+        // Emotion Gets
         float getEmotionMax(){return emotion_max;}
         float getCurrentEmotion(){return curr_emotion;}
         float getEmotionBuildup(){return total_emotion_buidup;}
 
-        // Boost gets
+        // Boost Gets
         float getBoostHealth(){return boost_health;}
         float getBoostSpeed(){return boost_speed;}
         float getBoostStaminaDrain(){return boost_stamina_drain;}
@@ -159,12 +159,22 @@ public class PlayerInfo : MonoBehaviour
         float getBoostHandlingSpeed(){return boost_handling_speed;}
         float getBoostEmotionBuildup(){return boost_emotion_buildup;}
 
-        // Resistance gets
+        // Resistance Gets
         float getSlashResist(){return slash_resist;}
         float getBludgeonResist(){return bludgeon_resist;}
 
+        // Player Info Gets
+        int getPlayerId(){return player_id;}
+        string getPlayerName(){return player_name;}
+        Color getPlayerColor(){return player_color;}
+
+        // Player States Gets
+        bool getIsGrounded(){return is_gounded;}
+        bool getIsStunned(){return is_stunned;}
+        bool getIsDead(){return is_dead;}
+
         /*================== Sets ==================*/
-        // Total sets
+        // Total Sets
         void setHealth(){total_health = health + boost_health;}
         void setSpeed(){total_speed = speed * boost_speed;}
         void setStaminaDrain(){total_stamina_drain = stamina_drain * boost_stamina_drain;}
@@ -172,15 +182,25 @@ public class PlayerInfo : MonoBehaviour
         void setMeleeRange(){total_melee_range = melee_range * boost_melee_range;}
         void setHandlingSpeed(){total_handling_speed = handling_speed * boost_handling_speed;}
         
-        // Emotional sets
+        // Emotional Sets
         void setEmotionalBuildUp(){total_emotion_buildup = emotion_buildup + boost_emotion_buildup;}
 
-        // Resistance sets
+        // Resistance Sets
         void setSlashResist(float new_resist){slash_resist = new_resist;}
         void setBludgeonResist(float new_resist){bludgeon_resist = new_resist;}
 
+        // Player Info Sets
+        void setPlayerId(int new_id){player_id = new_id;}
+        void setPlayerName(string new_name){player_name = new_name;}
+        void setPlayerColor(Color new_color){player_color = new_color;}
+
+        // Player States Sets
+        void setIsGrounded(bool new_truth){is_gounded = new_truth;}
+        void setIsStunned(bool new_truth){is_stunned = new_truth;}
+        void setIsDead(bool new_truth){is_dead = new_truth;}
+
         /*============ Custom Functions ============*/
-        // Boost adding
+        // Boost Adding
         void addBoostHealth(float boost){
             boost_health += boost;
             setHealth();
@@ -216,11 +236,12 @@ public class PlayerInfo : MonoBehaviour
             setEmotionBuildup();
         }
 
-        // Other
+        // More Complex Player Info Functions
         void dealDamage(float attack_dmg){
             if(curr_health > 0)
                 curr_health -= attack_dmg;
             if(curr_health < 0)
+                setIsDead(true);
                 curr_health = 0;
         }
 
