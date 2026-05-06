@@ -88,14 +88,6 @@
       "version": "2.0.0",
       "source": "builtin"
     },
-    "com.unity.visualscripting@1.9.5": {
-      "name": "com.unity.visualscripting",
-      "resolvedPath": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Library\\PackageCache\\com.unity.visualscripting",
-      "fingerprint": "1b53f46e931bea668e53f1feb0ac9138170c9455",
-      "editorCompatibility": "2021.3.0a1",
-      "version": "1.9.5",
-      "source": "registry"
-    },
     "com.unity.modules.accessibility@1.0.0": {
       "name": "com.unity.modules.accessibility",
       "resolvedPath": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Library\\PackageCache\\com.unity.modules.accessibility",

@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639133805418920747
-    m_Hash: 3880635901
+      ticks: 639136305991544743
+    m_Hash: 2897049844
   m_LockFileStatus:
     m_FilePath: C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639133805418955904
-    m_Hash: 2901663444
+      ticks: 639136305991594908
+    m_Hash: 917401281
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -1479,135 +1479,6 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 2.0.0
     minimumUnityVersion: 2019.2.0a1
-- packageId: com.unity.visualscripting@1.9.5
-  testable: 0
-  isDirectDependency: 1
-  version: 1.9.5
-  source: 1
-  resolvedPath: C:\Users\jacob\Documents\GitHub\PickAStruggle\Pick a Struggle\Library\PackageCache\com.unity.visualscripting
-  assetPath: Packages/com.unity.visualscripting
-  name: com.unity.visualscripting
-  displayName: Visual Scripting
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: tool
-  description: 'Visual scripting is a workflow that uses visual, node-based graphs
-    to design behaviors rather than write lines of C# script.
-
-
-    Enabling artists,
-    designers and programmers alike, visual scripting can be used to design final
-    logic, quickly create prototypes, iterate on gameplay and create custom nodes
-    to help streamline collaboration.
-
-
-    Visual scripting is compatible with third-party
-    APIs, including most packages, assets and custom libraries.'
-  errors: []
-  versions:
-    all:
-    - 1.5.0
-    - 1.5.1-pre.3
-    - 1.5.1-pre.5
-    - 1.5.1
-    - 1.5.2
-    - 1.6.0-pre.3
-    - 1.6.0
-    - 1.6.1
-    - 1.7.1
-    - 1.7.2
-    - 1.7.3
-    - 1.7.5
-    - 1.7.6
-    - 1.7.7
-    - 1.7.8
-    - 1.8.0-pre.1
-    - 1.8.0
-    - 1.9.0
-    - 1.9.1
-    - 1.9.2
-    - 1.9.4
-    - 1.9.5
-    - 1.9.6
-    - 1.9.7
-    - 1.9.8
-    - 1.9.9
-    - 1.9.10
-    - 1.9.11
-    compatible:
-    - 1.9.5
-    - 1.9.6
-    - 1.9.7
-    - 1.9.8
-    - 1.9.9
-    - 1.9.10
-    - 1.9.11
-    recommended: 1.9.11
-    deprecated:
-    - 1.8.0-pre.1
-  dependencies:
-  - name: com.unity.ugui
-    version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.ugui
-    version: 2.0.0
-  - name: com.unity.modules.ui
-    version: 1.0.0
-  - name: com.unity.modules.imgui
-    version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 638659692270900000
-  documentationUrl: 
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.cds.internal.unity3d.com/unity/com.unity.visualscripting.git
-    revision: 3621ef0207747a605f195118ba99d1a8bdb19433
-    path: 
-  unityLifecycle:
-    version: 1.9.5
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: '{"changelog":"### Fixed\n- Fixed \"NullReferenceException\" error
-    when returning to the State Graph from the Script Graph. [UVSB-1905](https://issuetracker.unity3d.com/product/unity/issues/guid/UVSB-1905)\n-
-    Fixed compilation error when a graph contains a reference to a method with an
-    \"in\" parameter. [UVSB-2544](https://issuetracker.unity3d.com/product/unity/issues/guid/UVSB-2487)\n-
-    Added missing truncate function to Formula node [UVSB-2526](https://issuetracker.unity3d.com/product/unity/issues/guid/UVSB-2525)\n-
-    Fixed an error when creating a Script Graph asset in an empty project\n\n###
-    Changed\n- Updated deprecated EditorAnalytics APIs to new ones"}'
-  assetStore:
-    productId: 
-  fingerprint: 1b53f46e931bea668e53f1feb0ac9138170c9455
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 1.9.5
-    minimumUnityVersion: 2021.3.0a1
 - packageId: com.unity.modules.accessibility@1.0.0
   testable: 0
   isDirectDependency: 1
