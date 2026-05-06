@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{856642AE-DFD3-4B86-1A51-6395237BB762}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\playerinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{856642AE-DFD3-4B86-1A51-6395237BB762}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\playerinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{856642AE-DFD3-4B86-1A51-6395237BB762}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\playercombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{856642AE-DFD3-4B86-1A51-6395237BB762}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\playercombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{856642AE-DFD3-4B86-1A51-6395237BB762}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\playerstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{856642AE-DFD3-4B86-1A51-6395237BB762}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\playerstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PlayerInfo.cs",
-              "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\PlayerInfo.cs",
-              "RelativeDocumentMoniker": "Assets\\Player\\PlayerInfo.cs",
-              "ToolTip": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\PlayerInfo.cs",
-              "RelativeToolTip": "Assets\\Player\\PlayerInfo.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAEwAAAAiAAAAAAAAAA==",
+              "Title": "PlayerCombat.cs",
+              "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\PlayerCombat.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\PlayerCombat.cs",
+              "ToolTip": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\PlayerCombat.cs",
+              "RelativeToolTip": "Assets\\Player\\PlayerCombat.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T01:34:28.935Z",
+              "WhenOpened": "2026-05-06T05:43:41.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerStats.cs",
+              "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\PlayerStats.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\PlayerStats.cs",
+              "ToolTip": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\PlayerStats.cs",
+              "RelativeToolTip": "Assets\\Player\\PlayerStats.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T03:40:47.641Z",
               "EditorCaption": ""
             }
           ]
