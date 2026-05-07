@@ -984,16 +984,20 @@ MonoBehaviour:
   _invertedPathToNearestParent: 
   _directChildren: []
   stats: {fileID: 11400000, guid: 0e143d1678f682544aac04ca94c4028e, type: 2}
+  moveSpeedMult: 1.25
   debug: 0
   groundDrag: 5
   jumpCooldown: 0.25
   airMult: 0.4
   jumpKey: 32
+  sprintKey: 304
   playerHeight: 3.75
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  maxSlopeAngle: 40
   orientation: {fileID: 449213763}
+  state: 0
 --- !u!114 &1482857715 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1165055683964716324, guid: ed1af03b85ff6884cae654a4a8c2232e, type: 3}

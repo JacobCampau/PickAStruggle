@@ -116,10 +116,10 @@ MonoBehaviour:
     y: 36
     width: 1920
     height: 933
-  m_MinSize: {x: 300, y: 106}
+  m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 40
+  controlID: 42
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -142,10 +142,10 @@ MonoBehaviour:
     y: 0
     width: 1406
     height: 933
-  m_MinSize: {x: 200, y: 106}
+  m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 41
+  controlID: 43
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -168,10 +168,10 @@ MonoBehaviour:
     y: 0
     width: 1406
     height: 634
-  m_MinSize: {x: 200, y: 50}
+  m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 42
+  controlID: 44
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -218,8 +218,8 @@ MonoBehaviour:
     y: 0
     width: 1073
     height: 634
-  m_MinSize: {x: 202, y: 226}
-  m_MaxSize: {x: 4002, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 15}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -248,15 +248,15 @@ MonoBehaviour:
     y: 634
     width: 1406
     height: 299
-  m_MinSize: {x: 231, y: 276}
-  m_MaxSize: {x: 10001, y: 10026}
-  m_ActualView: {fileID: 19}
+  m_MinSize: {x: 101, y: 126}
+  m_MaxSize: {x: 4001, y: 4026}
+  m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 19}
   - {fileID: 20}
   - {fileID: 21}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -709,19 +709,17 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: 51346
+      - m_Data: 45758
       m_LastClickedID:
-        m_Data: 0
+        m_Data: 45758
       m_ExpandedIDs:
-      - m_Data: -72470
-      - m_Data: -72462
-      - m_Data: -72452
-      - m_Data: -72404
-      - m_Data: -48764
+      - m_Data: -1364
+      - m_Data: -1362
+      - m_Data: 45758
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Combat Cam
-        m_OriginalName: Combat Cam
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
@@ -729,10 +727,10 @@ MonoBehaviour:
           width: 0
           height: 0
         m_UserData:
-          m_Data: -72424
+          m_Data: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 8}
@@ -1476,9 +1474,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.22182079, y: -0.10449957, z: 0.023918614, w: -0.9691766}
   m_Size:
-    m_Target: 3.4974358
+    m_Target: 5.675824
     speed: 2
-    m_Value: 3.4974358
+    m_Value: 5.675824
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1739,13 +1737,12 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 61702
+    - m_Data: 46118
     m_LastClickedID:
-      m_Data: 61702
+      m_Data: 46118
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 32426
-    - m_Data: 63410
+    - m_Data: 32512
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -1781,7 +1778,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 32426
+    - m_Data: 32512
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1810,9 +1807,9 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 51346
+    - m_Data: 45758
     m_LastClickedEntityId:
-      m_Data: 51346
+      m_Data: 45758
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -1924,7 +1921,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_LastSelectedObjectID:
-    m_Data: 51346
+    m_Data: 45758
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
