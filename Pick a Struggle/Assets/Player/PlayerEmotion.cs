@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerEmotion : MonoBehaviour
 {
+    public PlayerStats stats;
+
     // Emotion stats
     private float emotionMax;
     private float currEmotion;
@@ -12,6 +14,11 @@ public class PlayerEmotion : MonoBehaviour
     private float totalEmotionBuildup;
 
     private void Start(){
+        // Stat sets
+        emotionMax = stats.emotionMax;
+        currEmotion = 0;
+        emotionBuildup = stats.emotionBuildup;
+        
         // Initial set
         SetTotalEmotionBuildup();
 
@@ -19,7 +26,17 @@ public class PlayerEmotion : MonoBehaviour
     }
 
     private void Update(){
-    
+        currEmotion += totalEmotionBuildup * Time.deltaTime;
+        if(currEmotion >= emotionMax){
+            // Call the virtual emotion affect
+            currEmotion = 0;
+            EmotionAffect();
+        }
+    }
+
+    // Virtual emotion function
+    public virtual void EmotionAffect(){
+        Debug.Log("EMOTION AFFECT NOT ASSIGNED");
     }
 
     // Setters
