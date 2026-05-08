@@ -5,27 +5,31 @@ public class PlayerCombat : MonoBehaviour
     public PlayerStats stats; 
 
     // Health stats
-    float health;
-    float currHealth;
+    private float health;
+    private float currHealth;
 
-    float boostHealth = 0;
+    private float boostHealth = 0;
 
-    float totalHealth;
+    private float totalHealth;
 
     // Combat stats
-    float meleeDamage;
-    float meleeRange;
-    float handlingSpeed;
+    private float meleeDamage;
+    private float meleeRange;
+    private float handlingSpeed;
 
-    float boostMeleeDamage = 0;
-    float boostMeleeRange = 0;
-    float boostHandlingSpeed = 0;
+    private float boostMeleeDamage = 0;
+    private float boostMeleeRange = 0;
+    private float boostHandlingSpeed = 0;
 
-    float totalMeleeDamage;
-    float totalMeleeRange;
-    float totalHandlingSpeed;
+    private float totalMeleeDamage;
+    private float totalMeleeRange;
+    private float totalHandlingSpeed;
 
-    void Start() {
+    // Death info
+    public bool isDead;
+    private bool deathSequence;
+
+    private void Start() {
         // Set starting values
         health = stats.health;
         currHealth = health;
@@ -41,10 +45,30 @@ public class PlayerCombat : MonoBehaviour
         SetHandlingSpeed();
 
         // Other set-up calls
+        isDead = false;
+        deathSequence = false;
     }
 
-    void Update() {
-        
+    private void Update() {
+        if (isDead && !deathSequence){
+            DeathSequence();
+            deathSequence = true;
+        }
+    }
+
+    private void DeathSequence(){
+        // All actions that happen with death
+    }
+
+    // Player affects
+    public void dealDamage(float dmg){
+        currHealth -= dmg;
+
+        if(currHealth <= 0){
+            // Death logic
+            isDead = true;
+            currHealth = 0;
+        }
     }
 
     // Setters used to ensure the stats are accurate to boosts
