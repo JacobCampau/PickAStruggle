@@ -9,7 +9,8 @@ public class PlayerMovement : NetworkIdentity
 
     // Move stats
     private float moveSpeed;
-    [SerializeField] private float moveSpeedMult = 1.25f;
+    [SerializeField] private float sprintSpeedMult = 1.25f;
+    [SerializeField] private float crouchSpeedMult = 0.5f;
     private float staminaMax = 100;
     private float staminaDrain = 5;
     private float currStamina;
@@ -34,6 +35,7 @@ public class PlayerMovement : NetworkIdentity
     [Header("Key Binds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
+    public KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
     [SerializeField] private float playerHeight;
@@ -56,7 +58,7 @@ public class PlayerMovement : NetworkIdentity
     private Rigidbody rb;
 
     public enum MovementState { 
-        walking, sprinting, air
+        walking, sprinting, air, crouch
     }
     public MovementState state;
 
@@ -85,6 +87,9 @@ public class PlayerMovement : NetworkIdentity
     private void Update() {
         // Always running, no matter frames
         StateHandler();
+        SetStaminaDrain();
+        SetMoveSpeed();
+        SetSprintSpeed();
 
         // Ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -99,7 +104,6 @@ public class PlayerMovement : NetworkIdentity
         if(Input.GetKey(jumpKey) && grounded && readyToJump) {
             readyToJump = false;
             Jump();
-
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
@@ -109,6 +113,25 @@ public class PlayerMovement : NetworkIdentity
         } else {
             rb.linearDamping = 0;
         }
+
+        // Stamina Drain
+        if(state = MovementState.sprinting){
+            // Stamina drain
+            currStamina -= totalStaminaDrain * Time.deltaTime;
+            if(currStamina <= 0){ 
+                currStamina = 0; 
+                Debug.Log("Stamina depleted");
+            }
+        }else{
+            // Regen stamina at twice the pace
+            if(currStamina < staminaMax)
+                currStamina += totalStaminaDrain * 2 * Time.deltaTime;
+            
+            if(currStamina > staminaMax){ 
+                currStamina = staminaMax; 
+                Debug.Log("Stamina filled");
+            }
+        }
     }
 
     private void FixedUpdate() {
@@ -116,15 +139,19 @@ public class PlayerMovement : NetworkIdentity
         MovePlayer();
     }
 
-    Vector3 GetMovementDir() {
+    private Vector3 GetMovementDir() {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
         return orientation.forward * verticalInput + orientation.right * horizontalInput;
     }
 
-    void StateHandler() {
-        if(grounded && Input.GetKey(sprintKey)) {
+    private void StateHandler() {
+        if(grounded && Input.GetKey(crouchKey)){
+            // Crouching
+            state = MovementState.crouch;
+            SetCrouchSpeed();
+        } else if(grounded && Input.GetKey(sprintKey) && currStamina > 0) {
             // Sprinting
             state = MovementState.sprinting;
             SetSprintSpeed();
@@ -138,7 +165,7 @@ public class PlayerMovement : NetworkIdentity
         }
     }
 
-    void MovePlayer() {
+    private void MovePlayer() {
         // calc move direction
         moveDir = GetMovementDir();
 
@@ -156,13 +183,14 @@ public class PlayerMovement : NetworkIdentity
             rb.AddForce(moveDir.normalized * totalSpeed * 10f * airMult, ForceMode.Force);
         }
 
+        // Clamp speeds as needed
         SpeedControl();
 
         // Cancel gravity on slope
         rb.useGravity = !OnSlope();
     }
 
-    void SpeedControl() {
+    private void SpeedControl() {
         if(OnSlope() && !exitingSlope) {
             // Limiting speed on slopes
             if(rb.linearVelocity.magnitude > totalSpeed)
@@ -177,21 +205,20 @@ public class PlayerMovement : NetworkIdentity
         }
     }
 
-    void Jump() {
+    private void Jump() {
         exitingSlope = true;
-
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         // Claude added cartoonsh snap
         rb.AddForce(moveDir.normalized * (totalSpeed * 0.4f), ForceMode.Impulse);
     }
 
-    void ResetJump() {
+    private void ResetJump() {
         readyToJump = true;
         exitingSlope = false;
     }
 
-    bool OnSlope() {
+    private bool OnSlope() {
         if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -199,12 +226,17 @@ public class PlayerMovement : NetworkIdentity
         return false;
     }
 
-    Vector3 GetSlopeMoveDirection() {
+    private Vector3 GetSlopeMoveDirection() {
         return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
     }
 
     // Setters used to ensure the stats are accurate to boosts
-    void SetMoveSpeed() { totalSpeed = moveSpeed + boostSpeed; }
-    void SetSprintSpeed() { totalSpeed = moveSpeed * moveSpeedMult + boostSpeed; }
-    void SetStaminaDrain() { totalStaminaDrain = staminaDrain + boostStaminaDrain; }
+    private void SetMoveSpeed() { totalSpeed = moveSpeed + boostSpeed; }
+    private void SetSprintSpeed() { totalSpeed = moveSpeed * sprintSpeedMult + boostSpeed; }
+    private void SetCrouchSpeed() { totalSpeed = moveSpeed * crouchSpeedMult + boostSpeed; }
+    private void SetStaminaDrain() { totalStaminaDrain = staminaDrain + boostStaminaDrain; }
+
+    // Boosters
+    public void BoostSpeed(float boost) { boostSpeed += boost; }
+    public void BoostStaminaDrain(float boost) { boostStaminaDrain += boost; }
 }
