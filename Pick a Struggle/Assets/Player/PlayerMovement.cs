@@ -114,8 +114,6 @@ public class PlayerMovement : NetworkIdentity
     private void FixedUpdate() {
         // Movement
         MovePlayer();
-
-        // Slope Control
     }
 
     Vector3 GetMovementDir() {
