@@ -19,11 +19,6 @@ public class PlayerStats : ScriptableObject
     public float handlingSpeed = 1;
 
     // Emotion
-    public float emotionMax;
-    public float currEmotion;
-    public float emotionBuildup;
-    public float totalEmotionBuildup;
-
-    // Boost
-    public float boostEmotionBuildup;
+    public float emotionMax = 100;
+    public float emotionBuildup = 1;
 }
