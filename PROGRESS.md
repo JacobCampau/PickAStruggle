@@ -10,3 +10,6 @@ I am aware that this is an short timeline for the development of a game. If this
 ## Day-to-Day Logs
 ### 05/05/2026
 The first offical day working on this project. I have ported my movement from an old project. Next time I want to fix the aiming camera and tweak values for the movement to get the right feel.
+
+### 05/09/2026
+A few days into the project and I have a character that can move around with sprinting and crouching speeds. The aiming camera is good enough for now, but will likely need to be tweaked once I begin working on the combat system. Had to change the model a lot to get rid of weird scaling issues for animation and gave the arms/legs two joints instead of one. I also began the process of ragdoll physics on death. Only about 30 minutes of effort into it so far and it appears to be possessed. Progress is steady.
