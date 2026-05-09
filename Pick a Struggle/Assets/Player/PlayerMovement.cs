@@ -88,8 +88,6 @@ public class PlayerMovement : NetworkIdentity
         // Always running, no matter frames
         StateHandler();
         SetStaminaDrain();
-        SetMoveSpeed();
-        SetSprintSpeed();
 
         // Ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -115,12 +113,11 @@ public class PlayerMovement : NetworkIdentity
         }
 
         // Stamina Drain
-        if(state = MovementState.sprinting){
+        if(state == MovementState.sprinting){
             // Stamina drain
             currStamina -= totalStaminaDrain * Time.deltaTime;
             if(currStamina <= 0){ 
-                currStamina = 0; 
-                Debug.Log("Stamina depleted");
+                currStamina = 0;
             }
         }else{
             // Regen stamina at twice the pace
@@ -128,8 +125,7 @@ public class PlayerMovement : NetworkIdentity
                 currStamina += totalStaminaDrain * 2 * Time.deltaTime;
             
             if(currStamina > staminaMax){ 
-                currStamina = staminaMax; 
-                Debug.Log("Stamina filled");
+                currStamina = staminaMax;
             }
         }
     }

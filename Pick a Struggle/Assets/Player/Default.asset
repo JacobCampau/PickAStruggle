@@ -20,8 +20,5 @@ MonoBehaviour:
   meleeDamage: 10
   meleeRange: 1
   handlingSpeed: 1
-  emotionMax: 0
-  currEmotion: 0
-  emotionBuildup: 0
-  totalEmotionBuildup: 0
-  boostEmotionBuildup: 0
+  emotionMax: 100
+  emotionBuildup: 1
