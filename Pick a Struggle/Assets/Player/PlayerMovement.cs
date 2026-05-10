@@ -139,9 +139,11 @@ public class PlayerMovement : NetworkIdentity
 
         // Hitting the ground too hard
         if(FallingFast() && grounded) {
-            if(debug)
-                Debug.Log("Ouch");
-            StunPlayer();
+            if(!ragdoll.ragdollActive) {
+                if(debug)
+                    Debug.Log("Ouch");
+                StunPlayer();
+            }
         }
     }
 
@@ -242,13 +244,26 @@ public class PlayerMovement : NetworkIdentity
         return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
     }
 
+    // Stun stuff
     private bool FallingFast() {
         return rb.linearVelocity.y < -maxVelocity;
     }
 
     public void StunPlayer() {
+        // Make sure GetUp isnt running
+        CancelInvoke(nameof(GetUp));
+
+        // Begin ragdoll process and timer
         ragdoll.ragdollActive = true;
-        ragdoll.EnableRagdoll();
+        Invoke(nameof(GetUp), stunTimer);
+        Vector3 ragdollForce = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        if(debug)
+            Debug.Log("Ragdoll applied force: " + ragdollForce);
+        ragdoll.EnableRagdoll(ragdollForce / rb.mass);
+    }
+
+    private void GetUp() {
+        ragdoll.EnableAnimator();
     }
 
     // Setters used to ensure the stats are accurate to boosts

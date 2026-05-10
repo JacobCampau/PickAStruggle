@@ -807,7 +807,7 @@ MonoBehaviour:
     m_Bits: 8
   maxSlopeAngle: 40
   maxVelocity: 15
-  stunTimer: 0
+  stunTimer: 3
   orientation: {fileID: 1583648336168427138}
   state: 0
 --- !u!1 &1606714299
@@ -3569,7 +3569,7 @@ Transform:
   m_GameObject: {fileID: 7838673287346147011}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.008, z: 0}
+  m_LocalPosition: {x: -6.82, y: 13.38, z: -19.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
