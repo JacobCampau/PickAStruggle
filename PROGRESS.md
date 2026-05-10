@@ -14,5 +14,5 @@ The first offical day working on this project. I have ported my movement from an
 ### 05/08/2026
 A few days into the project and I have a character that can move around with sprinting and crouching speeds. The aiming camera is good enough for now, but will likely need to be tweaked once I begin working on the combat system. Had to change the model a lot to get rid of weird scaling issues for animation and gave the arms/legs two joints instead of one. I also began the process of ragdoll physics on death. Only about 30 minutes of effort into it so far and it appears to be possessed. Progress is steady.
 
-### 05/10/2026
+### 05/09/2026
 Ragdoll added. Has to be one of the funniest things I have ever added to a game in unity. Once I make the player able to get back up, i'll figure out picking up items, then begin on animations.
