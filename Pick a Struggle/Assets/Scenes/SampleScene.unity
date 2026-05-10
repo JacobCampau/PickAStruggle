@@ -435,7 +435,6 @@ MonoBehaviour:
   rotationSpeed: 90
   combatCam: {fileID: 167588220169114794}
   combatLookAt: {fileID: 1427067733674211135}
-  aiming: 0
 --- !u!1 &841508947
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,18 +795,19 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 0e143d1678f682544aac04ca94c4028e, type: 2}
   sprintSpeedMult: 1.25
   crouchSpeedMult: 0.5
-  debug: 1
+  debug: 0
   groundDrag: 5
   jumpCooldown: 0.25
   airMult: 0.4
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
-  playerHeight: 2.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   maxSlopeAngle: 40
+  maxVelocity: 15
+  stunTimer: 0
   orientation: {fileID: 1583648336168427138}
   state: 0
 --- !u!1 &1606714299
@@ -835,7 +835,7 @@ Transform:
   m_GameObject: {fileID: 1606714299}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1200,7 +1200,7 @@ GameObject:
   - component: {fileID: 6393209512692562608}
   - component: {fileID: 6393209512692562606}
   - component: {fileID: 6393209512692562607}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg (RightUpper)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1371,7 +1371,7 @@ GameObject:
   - component: {fileID: 8886499819543460398}
   - component: {fileID: 8886499819543460397}
   - component: {fileID: 8886499819543460396}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm (RightLower)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1507,7 +1507,7 @@ GameObject:
   - component: {fileID: 8537927229162770700}
   - component: {fileID: 8537927229162770698}
   - component: {fileID: 8537927229162770699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm (RightUpper)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1562,7 +1562,7 @@ Transform:
   m_GameObject: {fileID: 4572148350201674028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1592,8 +1592,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5631180887498353441}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.18748194, y: -0.27870116, z: -0.055571284, w: 0.9402596}
-  m_LocalPosition: {x: 1.7243264, y: -1, z: -2.4549336}
+  m_LocalRotation: {x: -0.023814732, y: -0.3013959, z: -0.0075302916, w: 0.9531719}
+  m_LocalPosition: {x: 1.1498456, y: 0.9000001, z: -1.6364152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2020,10 +2020,9 @@ GameObject:
   - component: {fileID: 2197793999873670084}
   - component: {fileID: 8622654216320917020}
   - component: {fileID: 358532440745838296}
-  - component: {fileID: 8622654216320917023}
   - component: {fileID: 8622654216320917021}
   - component: {fileID: 8622654216320917022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2222,7 +2221,7 @@ GameObject:
   - component: {fileID: 8770145832063827368}
   - component: {fileID: 8770145832063827367}
   - component: {fileID: 8770145832063827366}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg (RightLower)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2237,8 +2236,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8592183593771445206}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.18748194, y: -0.27870116, z: -0.055571288, w: 0.9402596}
-  m_LocalPosition: {x: 1.7243264, y: -1, z: -2.4549336}
+  m_LocalRotation: {x: -0.19778174, y: -0.27807504, z: -0.058624253, w: 0.93814707}
+  m_LocalPosition: {x: 1.7243264, y: 0.00000011920929, z: -2.4549336}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2402,13 +2401,13 @@ MonoBehaviour:
   Orbits:
     Top:
       Radius: 2.2
-      Height: 2.5
+      Height: 3.5
     Center:
       Radius: 2.91
-      Height: 0.75
+      Height: 1.75
     Bottom:
       Radius: 2
-      Height: -1.1
+      Height: -0.1
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
@@ -2504,7 +2503,7 @@ GameObject:
   - component: {fileID: 4517126559194236850}
   - component: {fileID: 4517126559194236848}
   - component: {fileID: 4517126559194236849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm (LeftUpper)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2519,7 +2518,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4517126559194236847}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2545,7 +2544,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4517126559194236847}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2569,7 +2568,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 8622654216320917021}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.29999992, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -2645,13 +2644,13 @@ MonoBehaviour:
   Orbits:
     Top:
       Radius: 3
-      Height: 3
+      Height: 4
     Center:
       Radius: 4
-      Height: 0
+      Height: 1
     Bottom:
       Radius: 3
-      Height: -2
+      Height: -1
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
@@ -2748,8 +2747,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838197009219722536}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.23720522, y: -0.292011, z: -0.075005025, w: 0.923492}
-  m_LocalPosition: {x: 1.1498456, y: -0.10000014, z: -1.6364152}
+  m_LocalRotation: {x: -0.023814742, y: -0.30139586, z: -0.0075302636, w: 0.9531719}
+  m_LocalPosition: {x: 1.1498456, y: 0.9000001, z: -1.6364152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2769,7 +2768,7 @@ GameObject:
   - component: {fileID: 7050552249139256010}
   - component: {fileID: 7050552249139256009}
   - component: {fileID: 7050552249139256008}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg (LeftLower)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2798,7 +2797,7 @@ GameObject:
   - component: {fileID: 5287070945866011159}
   - component: {fileID: 5287070945866011158}
   - component: {fileID: 5287070945866011157}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm (LeftLower)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2812,7 +2811,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5287070945866011156}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2834,7 +2833,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5287070945866011156}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2863,7 +2862,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 4517126559194236848}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.2999998, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -3347,7 +3346,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352920415091477577}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3373,7 +3372,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352920415091477577}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3397,7 +3396,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 8622654216320917021}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.29999956, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -3455,7 +3454,7 @@ GameObject:
   - component: {fileID: 6996491515401374120}
   - component: {fileID: 6996491515401374119}
   - component: {fileID: 6996491515401374118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3570,7 +3569,7 @@ Transform:
   m_GameObject: {fileID: 7838673287346147011}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.116, z: 0}
+  m_LocalPosition: {x: 0, y: 2.008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3632,7 +3631,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 45
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3764,7 +3763,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6571141688455333330}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3776,7 +3775,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 1.8, z: 1.4}
+  m_Size: {x: 1.8, y: 1.8, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0.7999994}
 --- !u!54 &6996491515401374119
 Rigidbody:
@@ -3786,7 +3785,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6571141688455333330}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3815,7 +3814,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 8622654216320917021}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.9999998, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -3874,7 +3873,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5115893746439839528}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3896,7 +3895,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5115893746439839528}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3925,7 +3924,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 8052514660414487490}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.29999956, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -4026,10 +4025,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6660831945415972083}
   - component: {fileID: 1437427246}
+  - component: {fileID: 7838673287346147014}
   - component: {fileID: 6189409374240374674}
   - component: {fileID: 7838673287346147012}
   - component: {fileID: 7838673287346147013}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4056,7 +4056,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.629444, y: 2.2130103, z: 0.40332165}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!95 &7838673287346147013
 Animator:
   serializedVersion: 7
@@ -4079,6 +4079,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7838673287346147014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838673287346147011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a298a549130591f4aa2cb23170c0a072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollLogic
+  ragdollRoot: {fileID: 1606714300}
+  centerBone: {fileID: 2197793999873670084}
+  player: {fileID: 6660831945415972083}
+  baseCharacter: {fileID: 2368822224042235413}
+  followSpeed: 10
+  ragdollActive: 0
 --- !u!23 &7996861393451607623
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4142,7 +4160,7 @@ GameObject:
   - component: {fileID: 8052514660414487492}
   - component: {fileID: 8052514660414487490}
   - component: {fileID: 8052514660414487491}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg (LeftUpper)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4157,7 +4175,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8052514660414487489}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4183,7 +4201,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8052514660414487489}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4207,7 +4225,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 8622654216320917021}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.29999956, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -4373,7 +4391,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463262285563554467}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4399,7 +4417,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463262285563554467}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4423,7 +4441,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 8622654216320917021}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.29999992, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -4515,7 +4533,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3424122222365676950}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 20
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4541,7 +4559,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3424122222365676950}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4553,54 +4571,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 0.9999998, z: 1.9999995}
+  m_Size: {x: 1.4, y: 0.9, z: 1.7}
   m_Center: {x: 0, y: 0, z: 0.99999934}
---- !u!144 &8622654216320917023
-CharacterJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3424122222365676950}
-  serializedVersion: 3
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.4999999, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_SwingAxis: {x: 0, y: 1, z: 0}
-  m_TwistLimitSpring:
-    spring: 0
-    damper: 0
-  m_LowTwistLimit:
-    limit: -20
-    bounciness: 0
-    contactDistance: 0
-  m_HighTwistLimit:
-    limit: 70
-    bounciness: 0
-    contactDistance: 0
-  m_SwingLimitSpring:
-    spring: 0
-    damper: 0
-  m_Swing1Limit:
-    limit: 40
-    bounciness: 0
-    contactDistance: 0
-  m_Swing2Limit:
-    limit: 40
-    bounciness: 0
-    contactDistance: 0
-  m_EnableProjection: 0
-  m_ProjectionDistance: 0.1
-  m_ProjectionAngle: 180
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!114 &8646452208800538281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4633,7 +4605,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3898472784537901273}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4655,7 +4627,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3898472784537901273}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4684,7 +4656,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 6393209512692562606}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.29999956, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -4825,7 +4797,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104011585180389983}
-  m_Material: {fileID: 13400000, guid: d81f80cf5be0a3c4c9a43a7cf70150ea, type: 2}
+  m_Material: {fileID: 13400000, guid: c55aba25787c7394cbfd12c28fb8ee1e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4847,7 +4819,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104011585180389983}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4876,7 +4848,7 @@ CharacterJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 8537927229162770698}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.2999998, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}

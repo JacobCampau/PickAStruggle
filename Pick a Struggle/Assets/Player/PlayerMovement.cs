@@ -6,6 +6,7 @@ using UnityEditor.SceneManagement;
 public class PlayerMovement : NetworkIdentity
 {
     public PlayerStats stats;
+    private RagdollLogic ragdoll;
 
     // Move stats
     private float moveSpeed;
@@ -38,7 +39,6 @@ public class PlayerMovement : NetworkIdentity
     public KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
-    [SerializeField] private float playerHeight;
     [SerializeField] private LayerMask whatIsGround;
     private bool grounded;
 
@@ -46,6 +46,12 @@ public class PlayerMovement : NetworkIdentity
     [SerializeField] private float maxSlopeAngle = 45f;
     private RaycastHit slopeHit;
     private bool exitingSlope;
+
+    [Header("Stunned Timing")]
+    [SerializeField] private float maxVelocity;
+
+    // Stunned info
+    [SerializeField] private float stunTimer;
 
     [Header("Other")]
     [SerializeField] private Transform orientation;
@@ -81,6 +87,8 @@ public class PlayerMovement : NetworkIdentity
 
         // Other Set-up calls
         rb = GetComponent<Rigidbody>();
+        ragdoll = GetComponent<RagdollLogic>();
+
         readyToJump = true;
     }
 
@@ -90,12 +98,12 @@ public class PlayerMovement : NetworkIdentity
         SetStaminaDrain();
 
         // Ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, 0.2f, whatIsGround);
         if(debug)
             if(grounded) {
-                Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.green);
+                Debug.DrawRay(transform.position, Vector3.down * 0.2f, Color.green);
             } else { 
-                Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
+                Debug.DrawRay(transform.position, Vector3.down * 0.2f, Color.red);
             }
 
         // Jump
@@ -128,11 +136,19 @@ public class PlayerMovement : NetworkIdentity
                 currStamina = staminaMax;
             }
         }
+
+        // Hitting the ground too hard
+        if(FallingFast() && grounded) {
+            if(debug)
+                Debug.Log("Ouch");
+            StunPlayer();
+        }
     }
 
     private void FixedUpdate() {
         // Movement
-        MovePlayer();
+        if(!ragdoll.ragdollActive)
+            MovePlayer();
     }
 
     private Vector3 GetMovementDir() {
@@ -215,7 +231,7 @@ public class PlayerMovement : NetworkIdentity
     }
 
     private bool OnSlope() {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) {
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, 0.3f)) {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
         }
@@ -224,6 +240,15 @@ public class PlayerMovement : NetworkIdentity
 
     private Vector3 GetSlopeMoveDirection() {
         return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
+    }
+
+    private bool FallingFast() {
+        return rb.linearVelocity.y < -maxVelocity;
+    }
+
+    public void StunPlayer() {
+        ragdoll.ragdollActive = true;
+        ragdoll.EnableRagdoll();
     }
 
     // Setters used to ensure the stats are accurate to boosts

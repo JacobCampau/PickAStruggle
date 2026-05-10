@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public PlayerStats stats; 
+    public PlayerStats stats;
 
     // Health stats
     private float health;

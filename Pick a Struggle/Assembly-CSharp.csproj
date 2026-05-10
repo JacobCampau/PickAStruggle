@@ -65,7 +65,7 @@
     <Compile Include="Assets\Player\PlayerEmotion.cs" />
     <Compile Include="Assets\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Player\PlayerStats.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Player\RagdollLogic.cs" />
     <Compile Include="Assets\Player\PlayerCombat.cs" />
   </ItemGroup>
   <ItemGroup>

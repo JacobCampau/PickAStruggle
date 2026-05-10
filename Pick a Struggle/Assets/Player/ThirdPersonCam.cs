@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class ThirdPersonCam : NetworkIdentity 
 {
+    private RagdollLogic ragdoll;
+
     [Header("References")]
-    public Transform orientation;
-    public Transform player;
-    public Transform playerObj;
-    public CinemachineCamera playerCam;
-    Rigidbody rb;
+    [SerializeField] private Transform orientation;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform playerObj;
+    [SerializeField] private CinemachineCamera playerCam;
 
-    public float rotationSpeed;
+    [SerializeField] private float rotationSpeed;
 
-    public CinemachineCamera combatCam;
-    public Transform combatLookAt;
-    public bool aiming;
+    [SerializeField] private CinemachineCamera combatCam;
+    [SerializeField] private Transform combatLookAt;
+    private bool aiming;
 
     protected override void OnSpawned() {
         base.OnSpawned();
@@ -28,36 +29,37 @@ public class ThirdPersonCam : NetworkIdentity
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        rb = player.gameObject.GetComponent<Rigidbody>();
+        ragdoll = player.GetComponent<RagdollLogic>();
 
         aiming = false;
     }
 
     private void LateUpdate() {
         // orientation
-        Vector3 viewDir = player.position - new Vector3(playerCam.transform.position.x, player.position.y, transform.position.z);
+        Vector3 viewDir = player.position - new Vector3(playerCam.transform.position.x, player.position.y, playerCam.transform.position.z);
         orientation.forward = viewDir.normalized;
 
-        // rotate player
-        if(aiming) {
-            combatCam.Priority = 20;
-            playerCam.Priority = 10;
+        // rotate player if not stunned
+        if(!ragdoll.ragdollActive) {
+            if(aiming) {
+                combatCam.Priority = 20;
+                playerCam.Priority = 10;
 
-            Vector3 dirForCombat = combatLookAt.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-            orientation.forward = dirForCombat.normalized;
+                Vector3 dirForCombat = combatLookAt.position - player.position;
+                dirForCombat.y = 0;
 
-            playerObj.forward = dirForCombat.normalized;
-        } else {
-            combatCam.Priority = 10;
-            playerCam.Priority = 20;
+                orientation.forward = dirForCombat.normalized;
+                playerObj.forward = dirForCombat.normalized;
+            } else {
+                combatCam.Priority = 10;
+                playerCam.Priority = 20;
 
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-            Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+                float horizontalInput = Input.GetAxis("Horizontal");
+                float verticalInput = Input.GetAxis("Vertical");
+                Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-            if(inputDir != Vector3.zero) {
-                playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+                if(inputDir != Vector3.zero)
+                    playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
             }
         }
 
