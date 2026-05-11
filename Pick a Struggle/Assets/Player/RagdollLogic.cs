@@ -13,13 +13,14 @@ public class RagdollLogic : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform baseCharacter;
 
-    [Header("Ragdoll Speeds")]
+    [Header("Ragdoll")]
     [SerializeField] private float followSpeed = 10;
     [SerializeField] private float getUpDuration = 0.4f;
-    
-    private float weight;
+
+    public float weight;
 
     public bool ragdollActive = false;
+    private bool isGettingUp = false;
 
     private Rigidbody[] rigidbodies;
     private CharacterJoint[] joints;
@@ -64,7 +65,7 @@ public class RagdollLogic : MonoBehaviour
     }
 
     private void Update() {
-        if(ragdollActive)
+        if(ragdollActive && !isGettingUp)
             player.position = Vector3.Lerp(player.position, centerBone.position, Time.deltaTime * followSpeed);
     }
 
@@ -94,29 +95,15 @@ public class RagdollLogic : MonoBehaviour
 
     public void EnableAnimator() {
         StartCoroutine(GetUpRoutine());
-
-        //ragdollActive = false;
-
-        //// Re-attatch the model
-        //baseCharacter.SetParent(player);
-        //baseCharacter.localPosition = Vector3.zero;
-        //baseCharacter.localRotation = Quaternion.identity;
-
-        //anim.enabled = true;
-        //foreach(CharacterJoint joint in joints) 
-        //    joint.enableCollision = false;
-
-        //foreach(Collider collider in colliders) 
-        //    collider.enabled = false;
-
-        //foreach(Rigidbody rb in rigidbodies) {
-        //    rb.isKinematic = true;
-        //    rb.detectCollisions = false;
-        //    rb.useGravity = false;
-        //}
     }
 
     private IEnumerator GetUpRoutine() {
+        isGettingUp = true;
+
+        // Re-attatch model
+        baseCharacter.SetParent(player);
+        Vector3 bcStartPos = baseCharacter.localPosition;
+
         // Get the current info
         Vector3[] startPositions = new Vector3[transforms.Length];
         Quaternion[] startRotations = new Quaternion[transforms.Length];
@@ -125,16 +112,14 @@ public class RagdollLogic : MonoBehaviour
             startRotations[i] = transforms[i].localRotation;
         }
 
-        // Re-attatch model
-        baseCharacter.SetParent(player);
-        baseCharacter.localPosition = Vector3.zero;
-        baseCharacter.localRotation = Quaternion.identity;
-
         // lerp transitions
         float elapsed = 0;
         while(elapsed < getUpDuration) {
             elapsed += Time.deltaTime;
             float t = Mathf.SmoothStep(0f, 1f, elapsed / getUpDuration);
+
+            baseCharacter.localPosition = Vector3.Lerp(bcStartPos, Vector3.zero, t);
+
             for(int i = 0; i < transforms.Length; i++) {
                 transforms[i].localPosition = Vector3.Lerp(startPositions[i], initialPositions[i], t);
                 transforms[i].localRotation = Quaternion.Lerp(startRotations[i], initialRotations[i], t);
@@ -143,12 +128,14 @@ public class RagdollLogic : MonoBehaviour
         }
 
         // Snap to exact pose
+        baseCharacter.localPosition = Vector3.zero;
         for(int i = 0; i < transforms.Length; i++) {
             transforms[i].localPosition = initialPositions[i];
             transforms[i].localRotation = initialRotations[i];
         }
 
         ragdollActive = false;
+        isGettingUp = false;
         anim.enabled = true;
         foreach(CharacterJoint joint in joints)
             joint.enableCollision = false;

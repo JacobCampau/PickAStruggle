@@ -709,14 +709,19 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: 46008
+      - m_Data: 45028
       m_LastClickedID:
-        m_Data: 46008
+        m_Data: 0
       m_ExpandedIDs:
       - m_Data: -1362
       - m_Data: 45752
+      - m_Data: 45788
       - m_Data: 45854
+      - m_Data: 45860
+      - m_Data: 45904
+      - m_Data: 45972
       - m_Data: 46008
+      - m_Data: 46018
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1422,9 +1427,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -16.588842, y: -0.3400597, z: -7.00838}
+    m_Target: {x: -6.930938, y: 14.849022, z: -20.49956}
     speed: 2
-    m_Value: {x: -16.588842, y: -0.3400597, z: -7.00838}
+    m_Value: {x: -6.930938, y: 14.849022, z: -20.49956}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1471,13 +1476,13 @@ MonoBehaviour:
     m_gridOpacity: 0.5
     m_NearestPlaneToHandleMode: 0
   m_Rotation:
-    m_Target: {x: 0.21929957, y: 0.73523825, z: -0.2792671, w: 0.5773602}
+    m_Target: {x: -0.0013270238, y: -0.9941013, z: 0.10778272, w: -0.012213705}
     speed: 2
-    m_Value: {x: 0.2192993, y: 0.73523736, z: -0.27926677, w: 0.5773595}
+    m_Value: {x: -0.0013270202, y: -0.99409854, z: 0.10778242, w: -0.012213672}
   m_Size:
-    m_Target: 4.827543
+    m_Target: 1.161009
     speed: 2
-    m_Value: 4.827543
+    m_Value: 1.161009
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1553,14 +1558,14 @@ MonoBehaviour:
     m_KeySerializationHelper:
     - {fileID: -4263556139240787102, guid: 86644fecc8e786445a38d2e7ab8c27ef, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.66393447
+    - e00: 0.59252834
       e01: 0
       e02: 0
-      e03: 271.92676
+      e03: 335.25253
       e10: 0
-      e11: 0.66393447
+      e11: 0.59252834
       e12: 0
-      e13: 285.15176
+      e13: 296.04932
       e20: 0
       e21: 0
       e22: 1
@@ -1757,9 +1762,9 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 55850
+    - m_Data: 46292
     m_LastClickedID:
-      m_Data: 55850
+      m_Data: 46292
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 32510
@@ -1827,10 +1832,10 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 46008
+    - m_Data: 45028
     m_LastClickedEntityId:
-      m_Data: 46008
-    m_HadKeyboardFocusLastEvent: 0
+      m_Data: 45028
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1941,7 +1946,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_LastSelectedObjectID:
-    m_Data: 46008
+    m_Data: 45028
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1988,7 +1993,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
     m_Data: 0
-  m_LastVerticalScrollValue: 108
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

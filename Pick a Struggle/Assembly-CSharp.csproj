@@ -67,6 +67,7 @@
     <Compile Include="Assets\Player\PlayerStats.cs" />
     <Compile Include="Assets\Player\RagdollLogic.cs" />
     <Compile Include="Assets\Player\PlayerCombat.cs" />
+    <Compile Include="Assets\Player\PlayerAnimatior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

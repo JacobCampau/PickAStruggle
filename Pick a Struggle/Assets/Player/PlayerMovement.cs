@@ -7,6 +7,7 @@ public class PlayerMovement : NetworkIdentity
 {
     public PlayerStats stats;
     private RagdollLogic ragdoll;
+    private PlayerAnimatior animator; 
 
     // Move stats
     private float moveSpeed;
@@ -88,6 +89,7 @@ public class PlayerMovement : NetworkIdentity
         // Other Set-up calls
         rb = GetComponent<Rigidbody>();
         ragdoll = GetComponent<RagdollLogic>();
+        animator = GetComponent<PlayerAnimatior>();
 
         readyToJump = true;
     }
@@ -253,6 +255,9 @@ public class PlayerMovement : NetworkIdentity
         // Make sure GetUp isnt running
         CancelInvoke(nameof(GetUp));
 
+        // Set stun eyes
+        animator.SetStunEyes();
+
         // Begin ragdoll process and timer
         ragdoll.ragdollActive = true;
         Invoke(nameof(GetUp), stunTimer);
@@ -263,6 +268,7 @@ public class PlayerMovement : NetworkIdentity
     }
 
     private void GetUp() {
+        animator.SetNormalEyes();
         ragdoll.EnableAnimator();
     }
 

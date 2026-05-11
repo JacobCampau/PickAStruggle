@@ -49,7 +49,8 @@ public class ThirdPersonCam : NetworkIdentity
                 dirForCombat.y = 0;
 
                 orientation.forward = dirForCombat.normalized;
-                playerObj.forward = dirForCombat.normalized;
+                //playerObj.forward = dirForCombat.normalized;
+                playerObj.forward = Vector3.Slerp(playerObj.forward, dirForCombat.normalized, Time.deltaTime * rotationSpeed);
             } else {
                 combatCam.Priority = 10;
                 playerCam.Priority = 20;
@@ -61,6 +62,9 @@ public class ThirdPersonCam : NetworkIdentity
                 if(inputDir != Vector3.zero)
                     playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
             }
+        } else {
+            combatCam.Priority = 10;
+            playerCam.Priority = 20;
         }
 
         // switching cams
