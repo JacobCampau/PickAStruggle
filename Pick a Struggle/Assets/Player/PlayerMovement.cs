@@ -144,7 +144,8 @@ public class PlayerMovement : NetworkIdentity
             if(!ragdoll.ragdollActive) {
                 if(debug)
                     Debug.Log("Ouch");
-                StunPlayer();
+                Vector3 ragdollForce = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+                StunPlayer(ragdollForce, 1);
             }
         }
     }
@@ -251,7 +252,7 @@ public class PlayerMovement : NetworkIdentity
         return rb.linearVelocity.y < -maxVelocity;
     }
 
-    public void StunPlayer() {
+    public void StunPlayer(Vector3 force, float mult) {
         // Make sure GetUp isnt running
         CancelInvoke(nameof(GetUp));
 
@@ -259,12 +260,10 @@ public class PlayerMovement : NetworkIdentity
         animator.SetStunEyes();
 
         // Begin ragdoll process and timer
-        ragdoll.ragdollActive = true;
         Invoke(nameof(GetUp), stunTimer);
-        Vector3 ragdollForce = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         if(debug)
-            Debug.Log("Ragdoll applied force: " + ragdollForce);
-        ragdoll.EnableRagdoll(ragdollForce / rb.mass);
+            Debug.Log("Ragdoll applied force: " + force);
+        ragdoll.EnableRagdoll(mult * force / rb.mass);
     }
 
     private void GetUp() {
