@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAnimatior : MonoBehaviour
+public class PlayerAnimatior : NetworkIdentity
 {
     private Animator anim;
     private PlayerMovement player;
@@ -19,7 +19,7 @@ public class PlayerAnimatior : MonoBehaviour
     }
 
     private void Update(){
-        if(ragdoll.ragdollIsActive){
+        if(ragdoll.ragdollActive){
             // Player is not moving
             if(combat.isDead){
                 SetDeadEyes();

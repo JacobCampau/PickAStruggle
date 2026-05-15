@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : NetworkIdentity
 {
     public PlayerStats stats;
+    public RagdollLogic ragdoll;
 
     // Health stats
     private float health;
@@ -29,6 +30,9 @@ public class PlayerCombat : MonoBehaviour
     public bool isDead;
     private bool deathSequence;
 
+    [Header("Fall Damage Mult")]
+    [SerializeField] private float fallDamageMult = 10;
+
     private void Start() {
         // Set starting values
         health = stats.health;
@@ -45,6 +49,8 @@ public class PlayerCombat : MonoBehaviour
         SetHandlingSpeed();
 
         // Other set-up calls
+        ragdoll = GetComponent<RagdollLogic>();
+
         isDead = false;
         deathSequence = false;
     }
@@ -60,6 +66,7 @@ public class PlayerCombat : MonoBehaviour
     private void DeathSequence(){
         // All actions that happen with death
         Debug.Log("Player Has Died");
+        ragdoll.EnableRagdoll(Vector3.up * (1933/54));
     }
 
     // Player affects
@@ -71,6 +78,10 @@ public class PlayerCombat : MonoBehaviour
             isDead = true;
             currHealth = 0;
         }
+    }
+
+    public void fallDamage(float speed){
+        dealDamage(speed * fallDamageMult);
     }
 
     // Setters used to ensure the stats are accurate to boosts

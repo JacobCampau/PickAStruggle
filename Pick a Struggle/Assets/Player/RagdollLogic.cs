@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class RagdollLogic : MonoBehaviour
+public class RagdollLogic : NetworkIdentity
 {
     private Animator anim;
 

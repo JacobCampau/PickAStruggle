@@ -151,9 +151,10 @@ public class PlayerMovement : NetworkIdentity
     }
 
     private void FixedUpdate() {
+        if(ragdoll.ragdollActive) return;
+        
         // Movement
-        if(!ragdoll.ragdollActive)
-            MovePlayer();
+        MovePlayer();
     }
 
     private Vector3 GetMovementDir() {
