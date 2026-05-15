@@ -256,9 +256,6 @@ public class PlayerMovement : NetworkIdentity
         // Make sure GetUp isnt running
         CancelInvoke(nameof(GetUp));
 
-        // Set stun eyes
-        animator.SetStunEyes();
-
         // Begin ragdoll process and timer
         Invoke(nameof(GetUp), stunTimer);
         if(debug)
@@ -267,7 +264,6 @@ public class PlayerMovement : NetworkIdentity
     }
 
     private void GetUp() {
-        animator.SetNormalEyes();
         ragdoll.EnableAnimator();
     }
 

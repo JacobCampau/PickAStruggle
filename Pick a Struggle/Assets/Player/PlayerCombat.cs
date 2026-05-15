@@ -51,6 +51,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update() {
         if (isDead && !deathSequence){
+            // Run the sequence once
             DeathSequence();
             deathSequence = true;
         }
@@ -58,6 +59,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void DeathSequence(){
         // All actions that happen with death
+        Debug.Log("Player Has Died");
     }
 
     // Player affects
@@ -76,4 +78,10 @@ public class PlayerCombat : MonoBehaviour
     void SetMeleeDamage() { totalMeleeDamage = meleeDamage + boostMeleeDamage; }
     void SetMeleeRange() { totalMeleeRange = meleeRange + boostMeleeRange; }
     void SetHandlingSpeed() { totalHandlingSpeed = handlingSpeed + boostHandlingSpeed; }
+
+    // Boosts for gaining boosts
+    void BoostHealth(float boost){ boostHealth += boost; }
+    void BoostMeleeDamage(float boost){ boostMeleeDamage += boost; }
+    void BoostMeleeRange(float boost){ boostMeleeRange += boost; }
+    void BoostHandlingSpeed(float boost){ boostHandlingSpeed += boost; }
 }
