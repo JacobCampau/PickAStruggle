@@ -10,19 +10,14 @@ public class RagdollLogic : NetworkIdentity
 
     [Header("Needed Transforms")]
     [SerializeField] private Transform ragdollRoot;
-    [SerializeField] private Transform centerBone;
-
+    [SerializeField] private Transform bodyBone;
     [SerializeField] private Transform player;
-    [SerializeField] private Transform baseCharacter;
+    [SerializeField] private Transform characterModel;
 
     [Header("Ragdoll")]
-    [SerializeField] private float followSpeed = 10;
-    [SerializeField] private float getUpDuration = 0.4f;
-
     public float weight;
 
     public bool ragdollActive = false;
-    private bool isGettingUp = false;
 
     private Rigidbody[] rigidbodies;
     private CharacterJoint[] joints;
@@ -32,16 +27,18 @@ public class RagdollLogic : NetworkIdentity
     private Vector3[] initialPositions;
     private Quaternion[] initialRotations;
 
-    Rigidbody rbBody;
-    Rigidbody rb;
+    private Rigidbody rbBody;
+    private Rigidbody rb;
+
+    private Vector3 bodyPos;
 
     private void Awake() {
         anim = GetComponentInChildren<Animator>();
-        rbBody = centerBone.GetComponent<Rigidbody>();
+        rbBody = bodyBone.GetComponent<Rigidbody>();
         rb = GetComponent<Rigidbody>();
 
-        baseCharacter = ragdollRoot.parent;
-        player = baseCharacter.parent;
+        characterModel = ragdollRoot.parent;
+        player = characterModel.parent;
 
         rigidbodies = ragdollRoot.GetComponentsInChildren<Rigidbody>();
         joints = ragdollRoot.GetComponentsInChildren<CharacterJoint>();
@@ -51,16 +48,19 @@ public class RagdollLogic : NetworkIdentity
         initialPositions = new Vector3[transforms.Length];
         initialRotations = new Quaternion[transforms.Length];
 
-        // Set the initial positions and rotations
+        // Set the initial rotations
         for(int i = 0; i < transforms.Length; i++) {
             initialPositions[i] = transforms[i].localPosition;
             initialRotations[i] = transforms[i].localRotation;
         }
 
+        // Initial body position
+        bodyPos = bodyBone.transform.localPosition;
+
         if(ragdollActive) {
             EnableRagdoll(Vector3.zero);
         } else {
-            EnableAnimator();
+            DisableRagdoll();
         }
 
         weight = 0;
@@ -68,16 +68,11 @@ public class RagdollLogic : NetworkIdentity
             weight += rb.mass;
     }
 
-    private void Update() {
-        if(ragdollActive && !isGettingUp)
-            player.position = Vector3.Lerp(player.position, centerBone.position, Time.deltaTime * followSpeed);
-    }
-
     public void EnableRagdoll(Vector3 force) {
         ragdollActive = true;
 
         // Detatch the model
-        baseCharacter.SetParent(null);
+        characterModel.SetParent(null);
 
         anim.enabled = false;
         foreach(CharacterJoint joint in joints) 
@@ -91,21 +86,13 @@ public class RagdollLogic : NetworkIdentity
             rb.isKinematic = false;
             rb.detectCollisions = true;
             rb.useGravity = true;
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
         }
 
         // Apply force direction
-        rbBody.AddForce(force * weight, ForceMode.Impulse);
+        TossRagdoll(force, 1);
     }
 
-    public void EnableAnimator() {
-        StartCoroutine(GetUpRoutine());
-    }
-
-    private IEnumerator GetUpRoutine() {
-        isGettingUp = true;
-
-        // Reset body parts
+    private void DisableRagdoll() {
         foreach(CharacterJoint joint in joints)
             joint.enableCollision = false;
 
@@ -119,48 +106,42 @@ public class RagdollLogic : NetworkIdentity
             rb.detectCollisions = false;
             rb.useGravity = false;
         }
+    }
+
+    public void EnableAnimator() {
+        //StartCoroutine(GetUpRoutine());
+
+        // Align the player container
+        AlignPosition();
 
         // Kill lingering velocities
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
+        // Reset body parts
+        DisableRagdoll();
+
         // Re-attatch model
-        baseCharacter.SetParent(player);
-        Vector3 bcStartPos = baseCharacter.localPosition;
-
-        // Get the current info
-        Vector3[] startPositions = new Vector3[transforms.Length];
-        Quaternion[] startRotations = new Quaternion[transforms.Length];
-        for(int i = 0; i < transforms.Length; i++) {
-            startPositions[i] = transforms[i].localPosition;
-            startRotations[i] = transforms[i].localRotation;
-        }
-
-        // lerp transitions
-        float elapsed = 0;
-        while(elapsed < getUpDuration) {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0f, 1f, elapsed / getUpDuration);
-
-            baseCharacter.localPosition = Vector3.Lerp(bcStartPos, Vector3.zero, t);
-
-            for(int i = 0; i < transforms.Length; i++) {
-                transforms[i].localPosition = Vector3.Lerp(startPositions[i], initialPositions[i], t);
-                transforms[i].localRotation = Quaternion.Lerp(startRotations[i], initialRotations[i], t);
-            }
-            yield return null;
-        }
-
-        // Snap to exact pose
-        baseCharacter.localPosition = Vector3.zero;
-        for(int i = 0; i < transforms.Length; i++) {
-            transforms[i].localPosition = initialPositions[i];
-            transforms[i].localRotation = initialRotations[i];
-        }
+        characterModel.SetParent(player);
+        characterModel.localPosition = Vector3.zero;
+        characterModel.localRotation = Quaternion.identity;
 
         ragdollActive = false;
-        isGettingUp = false;
         anim.enabled = true;
+
+        // Fix animations
+        anim.Rebind();
+        anim.Update(0f);
+    }
+
+    private void AlignPosition() {
+        Vector3 originalHipPosition = bodyBone.position;
+        transform.position = originalHipPosition;
+
+        if(Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo))
+            transform.position = new Vector3(transform.position.x, hitInfo.point.y, transform.position.z);
+
+        bodyBone.position = originalHipPosition;
     }
 
     public void TossRagdoll(Vector3 dir, float mult){

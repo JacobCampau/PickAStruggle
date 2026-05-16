@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   health: 100
-  speed: 5
+  speed: 10
   staminaMax: 100
   staminaDrain: 5
-  jumpForce: 8
+  jumpForce: 30
   meleeDamage: 10
   meleeRange: 1
   handlingSpeed: 1

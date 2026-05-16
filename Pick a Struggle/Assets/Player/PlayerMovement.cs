@@ -32,6 +32,7 @@ public class PlayerMovement : NetworkIdentity
     [SerializeField] private float groundDrag;
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float airMult;
+    [SerializeField] private float groundMult;
     private bool readyToJump;
 
     [Header("Key Binds")]
@@ -54,6 +55,7 @@ public class PlayerMovement : NetworkIdentity
 
     [Header("Other")]
     [SerializeField] private Transform orientation;
+    [SerializeField] private float stoppedSpeed;
 
     private float horizontalInput;
     private float verticalInput;
@@ -142,7 +144,7 @@ public class PlayerMovement : NetworkIdentity
             if(!ragdoll.ragdollActive) {
                 if(debug)
                     Debug.Log($"Player hit the ground too hard with velocity of {rb.linearVelocity.y}");
-                combat.FallDamage(rb.linearVelocity, 1);
+                combat.FallDamage(rb.linearVelocity, 3);
             }
         }
     }
@@ -162,6 +164,8 @@ public class PlayerMovement : NetworkIdentity
     }
 
     private void StateHandler() {
+        Debug.Log($"Player State: {state}");
+
         if(grounded && Input.GetKey(crouchKey)){
             // Crouching
             state = MovementState.crouch;
@@ -186,16 +190,16 @@ public class PlayerMovement : NetworkIdentity
 
         // On slope
         if(OnSlope() && !exitingSlope) {
-            rb.AddForce(GetSlopeMoveDirection() * totalSpeed * 20f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection() * totalSpeed * groundMult, ForceMode.Force);
 
             if(rb.linearVelocity.y > 0)
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
-        }
-
-        if(grounded) {
-            rb.AddForce(moveDir.normalized * totalSpeed * 10f, ForceMode.Force);
         } else {
-            rb.AddForce(moveDir.normalized * totalSpeed * 10f * airMult, ForceMode.Force);
+            if(state == MovementState.air) {
+                rb.AddForce(moveDir.normalized * totalSpeed * airMult, ForceMode.Force);
+            } else {
+                rb.AddForce(moveDir.normalized * totalSpeed * groundMult, ForceMode.Force);
+            }
         }
 
         // Clamp speeds as needed
