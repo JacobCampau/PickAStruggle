@@ -19,6 +19,8 @@ public class ThirdPersonCam : NetworkIdentity
     [SerializeField] private Transform combatLookAt;
     private bool aiming;
 
+    [SerializeField] private CinemachineCamera ragdollCam;
+
     protected override void OnSpawned() {
         base.OnSpawned();
 
@@ -41,6 +43,7 @@ public class ThirdPersonCam : NetworkIdentity
 
         // rotate player if not stunned
         if(!ragdoll.ragdollActive) {
+            ragdollCam.Priority = 5;
             if(aiming) {
                 combatCam.Priority = 20;
                 playerCam.Priority = 10;
@@ -63,8 +66,9 @@ public class ThirdPersonCam : NetworkIdentity
                     playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
             }
         } else {
-            combatCam.Priority = 10;
-            playerCam.Priority = 20;
+            combatCam.Priority = 5;
+            playerCam.Priority = 5;
+            ragdollCam.Priority = 20;
         }
 
         // switching cams

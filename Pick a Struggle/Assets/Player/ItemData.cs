@@ -1,3 +1,4 @@
+using PurrNet;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewItemData", menuName = "Inventory/Item Data")]

@@ -1,5 +1,7 @@
+using PurrNet;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
 
 public class RagdollLogic : NetworkIdentity
@@ -31,10 +33,12 @@ public class RagdollLogic : NetworkIdentity
     private Quaternion[] initialRotations;
 
     Rigidbody rbBody;
+    Rigidbody rb;
 
     private void Awake() {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         rbBody = centerBone.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
         baseCharacter = ragdollRoot.parent;
         player = baseCharacter.parent;
@@ -87,6 +91,7 @@ public class RagdollLogic : NetworkIdentity
             rb.isKinematic = false;
             rb.detectCollisions = true;
             rb.useGravity = true;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
         }
 
         // Apply force direction
@@ -99,6 +104,25 @@ public class RagdollLogic : NetworkIdentity
 
     private IEnumerator GetUpRoutine() {
         isGettingUp = true;
+
+        // Reset body parts
+        foreach(CharacterJoint joint in joints)
+            joint.enableCollision = false;
+
+        foreach(Collider collider in colliders)
+            collider.enabled = false;
+
+        foreach(Rigidbody rb in rigidbodies) {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+            rb.useGravity = false;
+        }
+
+        // Kill lingering velocities
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
         // Re-attatch model
         baseCharacter.SetParent(player);
@@ -137,17 +161,6 @@ public class RagdollLogic : NetworkIdentity
         ragdollActive = false;
         isGettingUp = false;
         anim.enabled = true;
-        foreach(CharacterJoint joint in joints)
-            joint.enableCollision = false;
-
-        foreach(Collider collider in colliders)
-            collider.enabled = false;
-
-        foreach(Rigidbody rb in rigidbodies) {
-            rb.isKinematic = true;
-            rb.detectCollisions = false;
-            rb.useGravity = false;
-        }
     }
 
     public void TossRagdoll(Vector3 dir, float mult){

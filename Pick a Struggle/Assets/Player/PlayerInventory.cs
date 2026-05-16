@@ -1,3 +1,4 @@
+using PurrNet;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -107,7 +108,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void DropActiveItem()
     {
-        Item item = _hotbar[_activeSlot];
+        Item item = hotbar[activeSlot];
         if (item == null) return;
 
         item.Eject(Vector3.zero, 0f);

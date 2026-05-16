@@ -19,6 +19,16 @@
       "source": "registry",
       "testable": false
     },
+    "com.unity.animation.rigging@1.4.1": {
+      "name": "com.unity.animation.rigging",
+      "displayName": "Animation Rigging",
+      "resolvedPath": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Library\\PackageCache\\com.unity.animation.rigging@ae5f251e1ed4",
+      "fingerprint": "ae5f251e1ed4767c6e0945cd4250d5af8cd82112",
+      "editorCompatibility": "6000.0.23f1",
+      "version": "1.4.1",
+      "source": "registry",
+      "testable": false
+    },
     "com.unity.burst@1.8.29": {
       "name": "com.unity.burst",
       "displayName": "Burst",

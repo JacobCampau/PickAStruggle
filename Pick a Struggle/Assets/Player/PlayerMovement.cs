@@ -42,17 +42,15 @@ public class PlayerMovement : NetworkIdentity
     [Header("Ground Check")]
     [SerializeField] private LayerMask whatIsGround;
     private bool grounded;
+    [SerializeField] private float groundCheckDistance;
 
     [Header("Slope Handling")]
     [SerializeField] private float maxSlopeAngle = 45f;
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
-    [Header("Stunned Timing")]
+    [Header("Fall Damage Limit")]
     [SerializeField] private float maxVelocity;
-
-    // Stunned info
-    [SerializeField] private float stunTimer;
 
     [Header("Other")]
     [SerializeField] private Transform orientation;
@@ -100,12 +98,12 @@ public class PlayerMovement : NetworkIdentity
         SetStaminaDrain();
 
         // Ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, whatIsGround);
         if(debug)
             if(grounded) {
-                Debug.DrawRay(transform.position, Vector3.down * 0.2f, Color.green);
+                Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, Color.green);
             } else { 
-                Debug.DrawRay(transform.position, Vector3.down * 0.2f, Color.red);
+                Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, Color.red);
             }
 
         // Jump

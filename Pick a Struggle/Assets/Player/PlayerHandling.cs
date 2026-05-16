@@ -1,8 +1,10 @@
+using PurrNet;
 using UnityEngine;
 
 public class PlayerHandling : NetworkIdentity
 {
     private PlayerInventory inv;
+    private RagdollLogic ragdoll;
 
     [SerializeField] private bool debug;
 
@@ -25,6 +27,9 @@ public class PlayerHandling : NetworkIdentity
 
     private void Start(){
         cam = Camera.main;
+
+        ragdoll = GetComponent<RagdollLogic>();
+        inv = GetComponent<PlayerInventory>();
     }
 
     private void Update(){
@@ -33,7 +38,7 @@ public class PlayerHandling : NetworkIdentity
         if (Input.GetKeyDown(grabItem)) 
             TryPickUp();
 
-        if (Input.GetKeyDown(dropItem) && heldItem != null)
+        if (Input.GetKeyDown(dropItem))
             TryThrow();
 
         if(debug)
@@ -62,7 +67,7 @@ public class PlayerHandling : NetworkIdentity
 
     private void TryThrow(){
         Vector3 throwDir = Quaternion.AngleAxis(-throwUpwardAngle, cam.transform.right) * cam.transform.forward;
-        inv.ThrowActiveItem(throwForce, BuildThrowDirection());
+        inv.ThrowActiveItem(throwForce, throwDir);
     }
 
     private void OnDrawGizmosSelected(){

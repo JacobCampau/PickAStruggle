@@ -1,3 +1,4 @@
+using PurrNet;
 using UnityEngine;
 
 public class PlayerCombat : NetworkIdentity
@@ -31,6 +32,9 @@ public class PlayerCombat : NetworkIdentity
     public bool isDead;
     private bool deathSequence;
 
+    // Other
+    private Rigidbody rb;
+
     [SerializeField] private bool debug;
 
     [Header("Fall Damage Mult")]
@@ -54,6 +58,7 @@ public class PlayerCombat : NetworkIdentity
         // Other set-up calls
         ragdoll = GetComponent<RagdollLogic>();
         animator = GetComponent<PlayerAnimatior>();
+        rb = GetComponent<Rigidbody>();
 
         isDead = false;
         deathSequence = false;
@@ -87,7 +92,7 @@ public class PlayerCombat : NetworkIdentity
             Debug.Log($"Player health took a hit for {dmg} HP");
     }
 
-    public void fallDamage(Vector3 dir, float forceMult){
+    public void FallDamage(Vector3 dir, float forceMult){
         // Deal damage
         DealDamage(dir.y * fallDamageMult);
 

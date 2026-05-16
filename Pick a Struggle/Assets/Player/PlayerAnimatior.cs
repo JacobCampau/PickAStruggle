@@ -1,3 +1,4 @@
+using PurrNet;
 using UnityEngine;
 
 public class PlayerAnimatior : NetworkIdentity
@@ -6,17 +7,21 @@ public class PlayerAnimatior : NetworkIdentity
     private PlayerMovement player;
     private RagdollLogic ragdoll;
     private PlayerCombat combat;
-    
+
+    [SerializeField] private bool debug;
+
+    [Header("Objects")]
     [SerializeField] private GameObject normalEyes;
     [SerializeField] private GameObject deadEyes;
     [SerializeField] private GameObject stunnedEyes;
 
-    [SerializeField] private bool debug;
+    [Header("Time on ground")]
+    [SerializeField] private float stunTimer;
 
     private Rigidbody rb;
 
     private void Start() {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         player = GetComponent<PlayerMovement>();
         ragdoll = GetComponent<RagdollLogic>(); 
         combat = GetComponent<PlayerCombat>();
@@ -37,13 +42,13 @@ public class PlayerAnimatior : NetworkIdentity
             SetNormalEyes();
 
             // Lower body animation triggers and bools
-            if(player.MovementState == walking){
+            if(player.state == PlayerMovement.MovementState.walking) {
                 
-            }else if(player.MovementState == sprinting){
+            }else if(player.state == PlayerMovement.MovementState.sprinting){
                 
-            }else if(player.MovementState == crouch){
+            }else if(player.state == PlayerMovement.MovementState.crouch){
                 
-            }else if(player.MovementState == air){
+            }else if(player.state == PlayerMovement.MovementState.air){
                 
             }
             

@@ -1,3 +1,4 @@
+using PurrNet;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -28,9 +29,9 @@ public class Item : MonoBehaviour
         transform.SetParent(null);
         gameObject.SetActive(true);
 
-        Rb.isKinematic = false;
+        rb.isKinematic = false;
 
         if (force > 0f)
-            Rb.AddForce(throwDir.normalized * force, ForceMode.Impulse);
+            rb.AddForce(throwDir.normalized * force, ForceMode.Impulse);
     }
 }
