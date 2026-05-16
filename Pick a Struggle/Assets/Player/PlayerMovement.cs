@@ -7,7 +7,7 @@ public class PlayerMovement : NetworkIdentity
 {
     public PlayerStats stats;
     private RagdollLogic ragdoll;
-    private PlayerAnimatior animator; 
+    private PlayerCombat combat;
 
     // Move stats
     private float moveSpeed;
@@ -89,7 +89,7 @@ public class PlayerMovement : NetworkIdentity
         // Other Set-up calls
         rb = GetComponent<Rigidbody>();
         ragdoll = GetComponent<RagdollLogic>();
-        animator = GetComponent<PlayerAnimatior>();
+        combat = GetComponent<PlayerCombat>();
 
         readyToJump = true;
     }
@@ -143,9 +143,8 @@ public class PlayerMovement : NetworkIdentity
         if(FallingFast() && grounded) {
             if(!ragdoll.ragdollActive) {
                 if(debug)
-                    Debug.Log("Ouch");
-                Vector3 ragdollForce = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-                StunPlayer(ragdollForce, 1);
+                    Debug.Log($"Player hit the ground too hard with velocity of {rb.linearVelocity.y}");
+                combat.FallDamage(rb.linearVelocity, 1);
             }
         }
     }
@@ -251,21 +250,6 @@ public class PlayerMovement : NetworkIdentity
     // Stun stuff
     private bool FallingFast() {
         return rb.linearVelocity.y < -maxVelocity;
-    }
-
-    public void StunPlayer(Vector3 force, float mult) {
-        // Make sure GetUp isnt running
-        CancelInvoke(nameof(GetUp));
-
-        // Begin ragdoll process and timer
-        Invoke(nameof(GetUp), stunTimer);
-        if(debug)
-            Debug.Log("Ragdoll applied force: " + force);
-        ragdoll.EnableRagdoll(mult * force / rb.mass);
-    }
-
-    private void GetUp() {
-        ragdoll.EnableAnimator();
     }
 
     // Setters used to ensure the stats are accurate to boosts

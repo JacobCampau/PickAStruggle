@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Item : MonoBehaviour
 {
-    [Tooltip("Drag an ItemData ScriptableObject here to define this item's properties.")]
     public ItemData data;
     
     private Rigidbody rb;

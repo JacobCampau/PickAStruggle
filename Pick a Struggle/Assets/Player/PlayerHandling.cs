@@ -11,21 +11,14 @@ public class PlayerHandling : NetworkIdentity
     public KeyCode dropItem = KeyCode.Q;
 
     [Header("Hand Settings")]
-    [Tooltip("The transform the picked-up item will be parented to (e.g. the player's hand bone).")]
     public Transform handTransform;
 
     [Header("Pickup Settings")]
-    [Tooltip("Maximum distance at which the player can pick up an item.")]
     [SerializeField] private float pickupRange = 3f;
-
-    [Tooltip("Layer mask used for the raycast so it only hits pickupable objects.")]
     [SerializeField] private LayerMask pickupMask;
 
     [Header("Throw Settings")]
-    [Tooltip("Force applied to the item when thrown.")]
     [SerializeField] private float throwForce = 10f;
-
-    [Tooltip("Small upward angle (degrees) added to the throw direction.")]
     [SerializeField] private float throwUpwardAngle = 5f;
 
     private Camera cam;

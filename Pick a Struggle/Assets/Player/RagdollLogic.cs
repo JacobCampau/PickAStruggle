@@ -149,4 +149,11 @@ public class RagdollLogic : NetworkIdentity
             rb.useGravity = false;
         }
     }
+
+    public void TossRagdoll(Vector3 dir, float mult){
+        Vector3 force = dir * mult;
+
+        if(ragdollActive)
+            rbBody.AddForce(force * weight, ForceMode.Impulse);
+    }
 }

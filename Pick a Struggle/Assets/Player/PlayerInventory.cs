@@ -5,14 +5,10 @@ public class PlayerInventory : MonoBehaviour
     private PlayerHandling handler;
 
     [Header("Slot Counts")]
-    [Min(1)] [Tooltip("Number of hotbar slots. Default 3.")]
     public int hotbarSize = 3;
-
-    [Min(0)] [Tooltip("Number of overflow inventory slots. Default 4.")]
     public int inventorySize = 4;
 
     [Header("Hand Reference")]
-    [Tooltip("Items are parented here while held. Matches PlayerHandling.handTransform.")]
     [SerializeField] private Transform handTransform;
 
     private Item[] hotbar;

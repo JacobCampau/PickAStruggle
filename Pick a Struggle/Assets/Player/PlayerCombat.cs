@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerCombat : NetworkIdentity
 {
     public PlayerStats stats;
-    public RagdollLogic ragdoll;
+    private RagdollLogic ragdoll;
+    private PlayerAnimatior animator;
 
     // Health stats
     private float health;
@@ -30,8 +31,10 @@ public class PlayerCombat : NetworkIdentity
     public bool isDead;
     private bool deathSequence;
 
+    [SerializeField] private bool debug;
+
     [Header("Fall Damage Mult")]
-    [SerializeField] private float fallDamageMult = 10;
+    [SerializeField] private float fallDamageMult = 1;
 
     private void Start() {
         // Set starting values
@@ -50,6 +53,7 @@ public class PlayerCombat : NetworkIdentity
 
         // Other set-up calls
         ragdoll = GetComponent<RagdollLogic>();
+        animator = GetComponent<PlayerAnimatior>();
 
         isDead = false;
         deathSequence = false;
@@ -66,11 +70,11 @@ public class PlayerCombat : NetworkIdentity
     private void DeathSequence(){
         // All actions that happen with death
         Debug.Log("Player Has Died");
-        ragdoll.EnableRagdoll(Vector3.up * (1933/54));
+        ragdoll.TossRagdoll(Vector3.up / rb.mass, (1933/54));
     }
 
     // Player affects
-    public void dealDamage(float dmg){
+    public void DealDamage(float dmg){
         currHealth -= dmg;
 
         if(currHealth <= 0){
@@ -78,10 +82,18 @@ public class PlayerCombat : NetworkIdentity
             isDead = true;
             currHealth = 0;
         }
+
+        if(debug)
+            Debug.Log($"Player health took a hit for {dmg} HP");
     }
 
-    public void fallDamage(float speed){
-        dealDamage(speed * fallDamageMult);
+    public void fallDamage(Vector3 dir, float forceMult){
+        // Deal damage
+        DealDamage(dir.y * fallDamageMult);
+
+        // Ragdoll direction and logic
+        Vector3 ragdollForce = new Vector3(dir.x, 0, dir.z);
+        animator.StunPlayer(currHealth != 0, ragdollForce, forceMult); // begin the ragdoll
     }
 
     // Setters used to ensure the stats are accurate to boosts
