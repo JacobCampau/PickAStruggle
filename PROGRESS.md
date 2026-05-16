@@ -16,3 +16,6 @@ A few days into the project and I have a character that can move around with spr
 
 ### 05/09/2026
 Ragdoll added. Has to be one of the funniest things I have ever added to a game in unity. Once I make the player able to get back up, i'll figure out picking up items, then begin on animations.
+
+### 05/15/2026
+Changed the player model due to a reccomendation by my cousin. Definitely looks better but damn was that hard to make. Ragdoll logic was also smoothed out and the scripts are now interacting more and more. Getting complicated, but I keep making sure things stay on track. Next is the damage from falling and then picking up items.
