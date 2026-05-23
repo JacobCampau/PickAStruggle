@@ -49,17 +49,27 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.5f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Player\Item.cs" />
-    <Compile Include="Assets\Player\ThirdPersonCam.cs" />
-    <Compile Include="Assets\Player\PlayerEmotion.cs" />
-    <Compile Include="Assets\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Player\PlayerStats.cs" />
-    <Compile Include="Assets\Player\ItemData.cs" />
-    <Compile Include="Assets\Player\RagdollLogic.cs" />
-    <Compile Include="Assets\Player\PlayerCombat.cs" />
-    <Compile Include="Assets\Player\PlayerHandling.cs" />
-    <Compile Include="Assets\Player\PlayerAnimatior.cs" />
-    <Compile Include="Assets\Player\PlayerInventory.cs" />
+    <Compile Include="Assets\Items\ItemData.cs" />
+    <Compile Include="Assets\Player\Zombie.cs" />
+    <Compile Include="Assets\Player\Player Code\RagdollLogic.cs" />
+    <Compile Include="Assets\Player\Player Code\PlayerCombat.cs" />
+    <Compile Include="Assets\Player\Player State\PlayerContext.cs" />
+    <Compile Include="Assets\Player\Player Code\PlayerAnimator.cs" />
+    <Compile Include="Assets\State Machine\StateMachine.cs" />
+    <Compile Include="Assets\Player\Player Code\PlayerMovement.cs" />
+    <Compile Include="Assets\Player\Handler\PlayerHandler.cs" />
+    <Compile Include="Assets\Player\Player Code\PlayerStats.cs" />
+    <Compile Include="Assets\Player\Player Code\PlayerGrabbing.cs" />
+    <Compile Include="Assets\Player\Player Code\ThirdPersonCam.cs" />
+    <Compile Include="Assets\Player\States\PlayerRagdollState.cs" />
+    <Compile Include="Assets\Player\Player State\PlayerStateMachine.cs" />
+    <Compile Include="Assets\Player\Player Code\PlayerEmotion.cs" />
+    <Compile Include="Assets\Player\States\PlayerMove.cs" />
+    <Compile Include="Assets\Player\States\PlayerStandUp.cs" />
+    <Compile Include="Assets\Player\Player Code\PlayerInventory.cs" />
+    <Compile Include="Assets\State Machine\State.cs" />
+    <Compile Include="Assets\Player\Player State\PlayerState.cs" />
+    <Compile Include="Assets\Items\Item.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -632,10 +642,6 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Library\PackageCache\dev.purrnet.purrnet@f4dd26fb792b\Externals\7zip\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.5f1\Editor\Data\PlaybackEngines\MacStandaloneSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
