@@ -19,3 +19,6 @@ Ragdoll added. Has to be one of the funniest things I have ever added to a game 
 
 ### 05/15/2026
 Changed the player model due to a reccomendation by my cousin. Definitely looks better but damn was that hard to make. Ragdoll logic was also smoothed out and the scripts are now interacting more and more. Getting complicated, but I keep making sure things stay on track. Next is the damage from falling and then picking up items.
+
+### 05/22/2026
+After a week vacation, not much has changed. I was able to make the player be reposistioned where the ragdoll hip would be and be angled properly. This week I attempted to also do a standup animation. The idea was there, but too many building blocks were missing and I endedup having a lot of patchwork code instead of actual working code. So I deleted it all, animations included, and revisted the foundation. Made the model have a hip that was originall missing and made the player have a handler. This handler will handle major state transitions. Within each of the scripts is more states that will all help me maintain the current state of the player. The next thing I want to do is setup a getting up animation. Once that is done, I can continue on what I had previously set out as my next goals.
