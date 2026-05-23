@@ -32,6 +32,10 @@ public class PlayerAnimator : NetworkIdentity
     private Transform _rootBone;
     private Transform[] _bones;
 
+    private BoneTransform[] _standUpBoneTransforms;
+    private BoneTransform[] _ragdollBoneTransforms;
+    private float _elapsedResetBonesTime;
+
     [Header("Player's model container")]
     [SerializeField] private Transform _characterModel;
 
@@ -45,6 +49,18 @@ public class PlayerAnimator : NetworkIdentity
         complete
     }
     private EAnimationState _animationState;
+
+    private class BoneTransform
+    {
+        public Vector3 Position { get; set; }
+
+        public Quaternion Rotation { get; set; }
+    }
+
+    [Header("Getting up logic")]
+    [SerializeField] private string _standUpStateName;
+    [SerializeField] private string _standUpClipName;
+    [SerializeField] private float _timeToResetBones;
 
     // FK & IK bool
     [Header("Ik controls")]
@@ -70,7 +86,18 @@ public class PlayerAnimator : NetworkIdentity
         _hipBone = _bodyBone.parent;
         _rootBone = _hipBone.parent;
 
-        _bones = _rootBone.GetComponentsInChildren<Transform>();
+        // Bone transistions for ragdoll
+        _bones = _hipBone.GetComponentsInChildren<Transform>();
+        _standUpBoneTransforms = new BoneTransform[_bones.Length];
+        _ragdollBoneTransforms = new BoneTransform[_bones.Length];
+
+        for (int i = 0; i < _bones.Length; i++)
+        {
+            _standUpBoneTransforms[i] = new BoneTransform();
+            _ragdollBoneTransforms[i] = new BoneTransform();
+        }
+
+        PopulateAnimationStartBoneTransforms(_standUpClipName, _standUpBoneTransforms);
 
         // Initializations
         _animationState = EAnimationState.complete;
@@ -85,26 +112,31 @@ public class PlayerAnimator : NetworkIdentity
             Time.timeScale = 0.333f;
     }
 
-    private void Update(){
+    private void Update()
+    {
         SetActiveEye();
-        RagdollStandup();
+
+        switch (_handler.playerState)
+        {
+            case PlayerHandler.EPlayerState.moving:
+                // Player controlled animations
+                break;
+            default:
+                // Player NON controlled transition animations
+                RagdollStandup();
+                break;
+        }
     }
 
     // Eye control
     private void SetActiveEye() 
     {
         if (_handler.playerState == PlayerHandler.EPlayerState.ragdoll)
-        {
             SetStunEyes();
-        }
         else if (_handler.playerState == PlayerHandler.EPlayerState.dead)
-        {
             SetDeadEyes();
-        }
         else
-        {
             SetNormalEyes();
-        }
     }
 
     // Ragdoll control
@@ -135,7 +167,8 @@ public class PlayerAnimator : NetworkIdentity
     }
 
     // Ragdoll stunning
-    public void StunPlayer(bool getBackUp, Vector3 force, float mult) {
+    public void StunPlayer(bool getBackUp, Vector3 force, float mult) 
+    {
         // Make sure GetUp isnt running
         CancelInvoke(nameof(GetUp));
 
@@ -153,24 +186,62 @@ public class PlayerAnimator : NetworkIdentity
 
     private void GetUp()
     {
+        // Align player and turn off the rigidbody
         AlignRotation();
         _ragdoll.EnableAnimator();
         AlignPosition();
+
+        // Change state and get initial transforms
+        PopulateBoneTransforms(_ragdollBoneTransforms);
+        _elapsedResetBonesTime = 0;
+        _animationState = EAnimationState.resetingBones;
+
+        // Prep the animator and animation tools
+        SetIk(1);
+        _anim.enabled = true;
     }
 
     public void ExitRagdoll()
     {
-        _animationState = EAnimationState.resetingBones;
         _handler.playerState = PlayerHandler.EPlayerState.animated;
+        _animationState = EAnimationState.resetingBones;
     }
 
-    private void ResetingBones() {
-        _anim.enabled = true;
+    private void ResetingBones() 
+    {
+        // Lerp the animated transforms
+        _elapsedResetBonesTime += Time.deltaTime;
+        float elapsedPercentage = _elapsedResetBonesTime / _timeToResetBones;
+
+        for (int i = 0; i < _bones.Length; i++)
+        {
+            _bones[i].localPosition = Vector3.Lerp(
+                _ragdollBoneTransforms[i].Position,
+                _standUpBoneTransforms[i].Position,
+                elapsedPercentage);
+
+            _bones[i].localRotation = Quaternion.Lerp(
+                _ragdollBoneTransforms[i].Rotation,
+                _standUpBoneTransforms[i].Rotation,
+                elapsedPercentage);
+        }
+
+        if (elapsedPercentage >= 1)
+        {
+            _animationState = EAnimationState.standingUp;
+            _anim.Play(_standUpStateName);
+        }
     }
 
     private void StandingUp()
     {
-
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName(_standUpStateName) == false)
+        {
+            _animationState = EAnimationState.complete;
+            _handler.playerState = PlayerHandler.EPlayerState.moving;
+            SetIk(1);
+            SetTargetTracking(1);
+        }
     }
 
     // Aligning player
@@ -206,8 +277,36 @@ public class PlayerAnimator : NetworkIdentity
             Debug.Log($"End Direction: {transform.rotation.eulerAngles}");
         }
 
-        // Immediately face the opposite direction (saved incase needed for another time)
+        // Immediately face the opposite direction (saved in case it is needed for another time)
         //transform.rotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
+    }
+
+    private void PopulateBoneTransforms(BoneTransform[] boneTransforms)
+    {
+        for (int boneIndex = 0; boneIndex < _bones.Length; boneIndex++)
+        {
+            boneTransforms[boneIndex].Position = _bones[boneIndex].localPosition;
+            boneTransforms[boneIndex].Rotation = _bones[boneIndex].localRotation;
+        }
+    }
+
+    private void PopulateAnimationStartBoneTransforms(string clipName, BoneTransform[] boneTransforms)
+    {
+        Vector3 positionBeforeSampling = transform.position;
+        Quaternion rotationBeforeSampling = transform.rotation;
+
+        foreach (AnimationClip clip in _anim.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+            {
+                clip.SampleAnimation(gameObject, 0);
+                PopulateBoneTransforms(_standUpBoneTransforms);
+                break;
+            }
+        }
+
+        transform.position = positionBeforeSampling;
+        transform.rotation = rotationBeforeSampling;
     }
 
     // Eye functions

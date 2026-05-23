@@ -54,6 +54,7 @@
     <Compile Include="Assets\Player\Player Code\RagdollLogic.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerCombat.cs" />
     <Compile Include="Assets\Player\Player State\PlayerContext.cs" />
+    <Compile Include="Assets\Player\EarlyZombie.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerAnimator.cs" />
     <Compile Include="Assets\State Machine\StateMachine.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerMovement.cs" />

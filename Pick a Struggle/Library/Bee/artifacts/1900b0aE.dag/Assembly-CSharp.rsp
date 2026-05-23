@@ -473,6 +473,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Items/Item.cs"
 "Assets/Items/ItemData.cs"
+"Assets/Player/EarlyZombie.cs"
 "Assets/Player/Handler/PlayerHandler.cs"
 "Assets/Player/Player Code/PlayerAnimator.cs"
 "Assets/Player/Player Code/PlayerCombat.cs"
