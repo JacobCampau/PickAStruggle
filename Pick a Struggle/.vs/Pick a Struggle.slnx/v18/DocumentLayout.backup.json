@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\onedrive\\desktop\\unity\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playerinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playerinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\onedrive\\desktop\\unity\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playergrabbing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playergrabbing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\onedrive\\desktop\\unity\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playeranimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playeranimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\onedrive\\desktop\\unity\\pickastruggle\\pick a struggle\\assets\\player\\player code\\ragdolllogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\ragdolllogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\onedrive\\desktop\\unity\\pickastruggle\\pick a struggle\\assets\\player\\earlyzombie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\earlyzombie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\onedrive\\desktop\\unity\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playerinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playerinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\onedrive\\desktop\\unity\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playergrabbing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playergrabbing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\onedrive\\desktop\\unity\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,11 +42,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EarlyZombie.cs",
+              "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\EarlyZombie.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\EarlyZombie.cs",
+              "ToolTip": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\EarlyZombie.cs",
+              "RelativeToolTip": "Assets\\Player\\EarlyZombie.cs",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAcwJUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T18:27:32.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PlayerAnimator.cs",
+              "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerAnimator.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerAnimator.cs",
+              "ToolTip": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerAnimator.cs",
+              "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerAnimator.cs",
+              "ViewState": "AgIAAKQAAAAAAAAAAADwv60AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T00:22:13.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "PlayerInventory.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerInventory.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerInventory.cs",
@@ -55,7 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "PlayerGrabbing.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerGrabbing.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerGrabbing.cs",
@@ -63,12 +93,11 @@
               "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerGrabbing.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-23T04:09:18.596Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-23T04:09:18.596Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "PlayerCombat.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerCombat.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerCombat.cs",
@@ -76,12 +105,11 @@
               "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerCombat.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-23T04:02:32.991Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-23T04:02:32.991Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ThirdPersonCam.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\ThirdPersonCam.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\ThirdPersonCam.cs",
@@ -89,12 +117,11 @@
               "RelativeToolTip": "Assets\\Player\\Player Code\\ThirdPersonCam.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-23T03:19:28.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-23T03:19:28.498Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerMovement.cs",
@@ -102,31 +129,17 @@
               "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerMovement.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwA0AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T23:31:40.878Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T23:31:40.878Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PlayerAnimator.cs",
-              "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerAnimator.cs",
-              "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerAnimator.cs",
-              "ToolTip": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerAnimator.cs",
-              "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerAnimator.cs",
-              "ViewState": "AgIAAKYAAAAAAAAAAAA0wKAAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-22T00:22:13.92Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "RagdollLogic.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\RagdollLogic.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\RagdollLogic.cs",
               "ToolTip": "C:\\Users\\jacob\\OneDrive\\Desktop\\Unity\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\RagdollLogic.cs",
               "RelativeToolTip": "Assets\\Player\\Player Code\\RagdollLogic.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAG8AAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAowG8AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-22T00:21:50.092Z",
               "EditorCaption": ""

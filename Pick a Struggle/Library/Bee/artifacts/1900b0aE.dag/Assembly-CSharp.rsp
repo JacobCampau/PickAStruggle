@@ -475,6 +475,7 @@
 "Assets/Items/ItemData.cs"
 "Assets/Player/EarlyZombie.cs"
 "Assets/Player/Handler/PlayerHandler.cs"
+"Assets/Player/Player Code/AnimatorToController.cs"
 "Assets/Player/Player Code/PlayerAnimator.cs"
 "Assets/Player/Player Code/PlayerCombat.cs"
 "Assets/Player/Player Code/PlayerEmotion.cs"

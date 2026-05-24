@@ -49,6 +49,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.5f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Player\Player Code\AnimatorToController.cs" />
     <Compile Include="Assets\Items\ItemData.cs" />
     <Compile Include="Assets\Player\Zombie.cs" />
     <Compile Include="Assets\Player\Player Code\RagdollLogic.cs" />

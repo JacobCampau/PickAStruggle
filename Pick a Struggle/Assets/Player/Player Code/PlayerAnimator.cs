@@ -2,6 +2,8 @@ using PurrNet;
 using System;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UIElements;
 
 public class PlayerAnimator : NetworkIdentity
 {
@@ -84,10 +86,10 @@ public class PlayerAnimator : NetworkIdentity
         _movement = GetComponent<PlayerMovement>();
 
         _hipBone = _bodyBone.parent;
-        _rootBone = _hipBone.parent;
+        _rootBone = _hipBone.parent.parent; // Double parent since the hipbone has an origin transform as its parent
 
         // Bone transistions for ragdoll
-        _bones = _hipBone.GetComponentsInChildren<Transform>();
+        _bones = _rootBone.GetComponentsInChildren<Transform>();
         _standUpBoneTransforms = new BoneTransform[_bones.Length];
         _ragdollBoneTransforms = new BoneTransform[_bones.Length];
 
@@ -106,7 +108,7 @@ public class PlayerAnimator : NetworkIdentity
     private void Start() 
     {
         SetIk(1);
-        SetTargetTracking(1);
+        SetTargetTracking(0); // Not set yet
 
         if (_slowDown)
             Time.timeScale = 0.333f;
@@ -155,13 +157,13 @@ public class PlayerAnimator : NetworkIdentity
     }
 
     // FK & IK Transisitons
-    private void SetIk(float amount)
+    public void SetIk(float amount)
     {
         foreach (TwoBoneIKConstraint constraint in _ikConstraints)
             constraint.weight = amount;
     }
 
-    private void SetTargetTracking(float amount)
+    public void SetTargetTracking(float amount)
     {
         _targetTracker.weight = amount;
     }
@@ -180,8 +182,6 @@ public class PlayerAnimator : NetworkIdentity
             Debug.Log("Ragdoll applied force: " + force);
 
         _ragdoll.EnableRagdoll(mult * force / _handler.RB.mass);
-        SetTargetTracking(0);
-        SetIk(0);
     }
 
     private void GetUp()
@@ -195,10 +195,6 @@ public class PlayerAnimator : NetworkIdentity
         PopulateBoneTransforms(_ragdollBoneTransforms);
         _elapsedResetBonesTime = 0;
         _animationState = EAnimationState.resetingBones;
-
-        // Prep the animator and animation tools
-        SetIk(1);
-        _anim.enabled = true;
     }
 
     public void ExitRagdoll()
@@ -229,6 +225,7 @@ public class PlayerAnimator : NetworkIdentity
         if (elapsedPercentage >= 1)
         {
             _animationState = EAnimationState.standingUp;
+            _anim.enabled = true;
             _anim.Play(_standUpStateName);
         }
     }
@@ -239,8 +236,6 @@ public class PlayerAnimator : NetworkIdentity
         {
             _animationState = EAnimationState.complete;
             _handler.playerState = PlayerHandler.EPlayerState.moving;
-            SetIk(1);
-            SetTargetTracking(1);
         }
     }
 
@@ -283,10 +278,10 @@ public class PlayerAnimator : NetworkIdentity
 
     private void PopulateBoneTransforms(BoneTransform[] boneTransforms)
     {
-        for (int boneIndex = 0; boneIndex < _bones.Length; boneIndex++)
+        for (int i = 0; i < _bones.Length; i++)
         {
-            boneTransforms[boneIndex].Position = _bones[boneIndex].localPosition;
-            boneTransforms[boneIndex].Rotation = _bones[boneIndex].localRotation;
+            boneTransforms[i].Position = _bones[i].localPosition;
+            boneTransforms[i].Rotation = _bones[i].localRotation;
         }
     }
 
@@ -300,7 +295,7 @@ public class PlayerAnimator : NetworkIdentity
             if (clip.name == clipName)
             {
                 clip.SampleAnimation(gameObject, 0);
-                PopulateBoneTransforms(_standUpBoneTransforms);
+                PopulateBoneTransforms(boneTransforms);
                 break;
             }
         }
@@ -310,19 +305,22 @@ public class PlayerAnimator : NetworkIdentity
     }
 
     // Eye functions
-    private void SetNormalEyes() {
+    private void SetNormalEyes() 
+    {
         _normalEyes.SetActive(true);
         _deadEyes.SetActive(false);
         _stunnedEyes.SetActive(false);
     }
 
-    private void SetDeadEyes() {
+    private void SetDeadEyes() 
+    {
         _normalEyes.SetActive(false);
         _deadEyes.SetActive(true);
         _stunnedEyes.SetActive(false);
     }
 
-    private void SetStunEyes() {
+    private void SetStunEyes() 
+    {
         _normalEyes.SetActive(false);
         _deadEyes.SetActive(false);
         _stunnedEyes.SetActive(true);
