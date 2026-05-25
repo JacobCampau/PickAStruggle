@@ -71,7 +71,7 @@ public class RagdollLogic : NetworkIdentity
             joint.enableCollision = true;
         
         foreach(Collider collider in _colliders) 
-            collider.enabled = true;
+            collider.isTrigger = false;
 
         foreach(Rigidbody rb in _rigidbodies) {
             rb.isKinematic = false;
@@ -89,7 +89,7 @@ public class RagdollLogic : NetworkIdentity
             joint.enableCollision = false;
 
         foreach(Collider collider in _colliders)
-            collider.enabled = false;
+            collider.isTrigger = true;
 
         foreach(Rigidbody rb in _rigidbodies) {
             rb.linearVelocity = Vector3.zero;

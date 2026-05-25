@@ -7,6 +7,20 @@ using UnityEngine.UIElements;
 
 public class PlayerAnimator : NetworkIdentity
 {
+    private enum EAnimationState {
+        standingUp,
+        resetingBones,
+        complete
+    }
+    private EAnimationState _animationState;
+
+    private class BoneTransform
+    {
+        public Vector3 Position { get; set; }
+
+        public Quaternion Rotation { get; set; }
+    }
+
     // Debug
     [SerializeField] private bool _debug;
     [SerializeField] private bool _slowDown;
@@ -27,6 +41,9 @@ public class PlayerAnimator : NetworkIdentity
 
     [Header("Time in ragdoll")]
     [SerializeField] private float _stunTimer;
+    private float _timeToWakeUp;
+    [SerializeField] private float _endRagdollSpeedThreshold;
+    private bool _ragdollMoving;
 
     [Header("Needed Bones")]
     [SerializeField] private Transform _bodyBone;
@@ -34,7 +51,8 @@ public class PlayerAnimator : NetworkIdentity
     private Transform _rootBone;
     private Transform[] _bones;
 
-    private BoneTransform[] _standUpBoneTransforms;
+    private BoneTransform[] _getUpFaceUpBoneTransforms;
+    private BoneTransform[] _getUpFaceDownBoneTransforms;
     private BoneTransform[] _ragdollBoneTransforms;
     private float _elapsedResetBonesTime;
 
@@ -43,32 +61,26 @@ public class PlayerAnimator : NetworkIdentity
 
     // Getting up logic
     private bool _isFacingUp;
-    private int _hipIndex;
-
-    private enum EAnimationState
-    {
-        standingUp,
-        resetingBones,
-        complete
-    }
-    private EAnimationState _animationState;
-
-    private class BoneTransform
-    {
-        public Vector3 Position { get; set; }
-
-        public Quaternion Rotation { get; set; }
-    }
+    private bool _bodyRigidbody;
 
     [Header("Getting up logic")]
-    [SerializeField] private string _standUpStateName;
-    [SerializeField] private string _standUpClipName;
+    [SerializeField] private string _getUpFaceUpStateName;
+    [SerializeField] private string _getUpFaceUpClipName;
+
+    [SerializeField] private string _getUpFaceDownStateName;
+    [SerializeField] private string _getUpFaceDownClipName;
+
     [SerializeField] private float _timeToResetBones;
 
     // FK & IK bool
     [Header("Ik controls")]
     [SerializeField] private TwoBoneIKConstraint[] _ikConstraints;
     [SerializeField] private MultiAimConstraint _targetTracker;
+    [SerializeField] private Transform _targetLookAt;
+    private Transform _restoreLookAt;
+    private Transform _actualTarget;
+    [SerializeField] private float _targetFollowSpeed;
+    [SerializeField] private float _maxTargetDistance = 0f;
 
     protected override void OnSpawned()
     {
@@ -81,6 +93,8 @@ public class PlayerAnimator : NetworkIdentity
         // Needed components
         _handler = GetComponent<PlayerHandler>();
 
+        _bodyRigidbody = _bodyBone.GetComponent<Rigidbody>();
+
         _anim = GetComponentInChildren<Animator>();
         _ragdoll = GetComponent<RagdollLogic>();
         _combat = GetComponent<PlayerCombat>();
@@ -91,29 +105,23 @@ public class PlayerAnimator : NetworkIdentity
 
         // Bone transistions for ragdoll
         _bones = _rootBone.GetComponentsInChildren<Transform>();
-        _standUpBoneTransforms = new BoneTransform[_bones.Length];
+        _getUpFaceUpBoneTransforms = new BoneTransform[_bones.Length];
+        _getUpFaceDownBoneTransforms = new BoneTransform[_bones.Length];
         _ragdollBoneTransforms = new BoneTransform[_bones.Length];
 
         for (int i = 0; i < _bones.Length; i++) {
-            _standUpBoneTransforms[i] = new BoneTransform();
+            _getUpFaceUpBoneTransforms[i] = new BoneTransform();
+            _getUpFaceDownBoneTransforms[i] = new BoneTransform();
             _ragdollBoneTransforms[i] = new BoneTransform();
-
-            if(_bones[i] == _hipBone) {
-                _hipIndex = i;
-            }
         }
 
-        PopulateAnimationStartBoneTransforms(_standUpClipName, _standUpBoneTransforms);
-
-        for(int i = 0; i < _bones.Length; i++) {
-            if(_bones[i] == _hipBone) {
-                Debug.Log($"Final position for hip: {_standUpBoneTransforms[i].Position}");
-                Debug.Log($"Final rotation for hip: {_standUpBoneTransforms[i].Rotation.eulerAngles}");
-            }
-        }
+        PopulateAnimationStartBoneTransforms(_getUpFaceUpClipName, _getUpFaceUpBoneTransforms);
+        PopulateAnimationStartBoneTransforms(_getUpFaceDownClipName, _getUpFaceDownBoneTransforms);
 
         // Initializations
         _animationState = EAnimationState.complete;
+        _timeToWakeUp = Random.Range(_stunTimer / 2f, _stunTimer * 1.5f);
+        _restoreLookAt = _targetLookAt;
     }
 
     private void Start() 
@@ -128,15 +136,19 @@ public class PlayerAnimator : NetworkIdentity
     private void Update()
     {
         SetActiveEye();
+        MoveTargetPosition();
 
         switch (_handler.playerState)
         {
             case PlayerHandler.EPlayerState.moving:
                 // Player controlled animations
+                MovementAnimations();
+                CombatAnimations();
                 break;
             default:
                 // Player NON controlled transition animations
                 RagdollStandup();
+                RagdollEnd();
                 break;
         }
     }
@@ -167,6 +179,74 @@ public class PlayerAnimator : NetworkIdentity
         }
     }
 
+    private void RagdollEnd(){
+        if(_handler.playerState == PlayerHandler.EPlayerState.ragdoll){
+            // In ragdoll, not dead
+            if(_bodyRigidbody.linearVelocity.magnitude < _endRagdollSpeedThreshold){
+                // player is no longer moving fast, so begin to wake up
+                if(_ragdollMoving){
+                    _ragdollMoving = false;
+                    Invoke(nameof(GetUp), _timeToWakeUp);
+                }
+            }else{
+                _ragdollMoving = true;
+                CancelInvoke(nameof(GetUp));
+            }
+        }
+
+        // If the player dies during the ragdoll, then prevent the getup function from being called
+        if(_handler.playerState == PlayerHandler.EPlayerState.ragdoll){
+            CancelInvoke(nameof(GetUp));
+        }
+
+        // If the player is in the process of getting up and is moved for any reason, reenter the ragdoll state
+        if(_animationState == EAnimationState.resetingBones || _animationState == EAnimationState.standingUp){
+            if(_handler.RB.linearVelocity > _endRagdollSpeedThreshold){
+                // The player is in the process of getting up and has begun moving
+                StunPlayer(_handler.RB.linearVelocity, 1);
+            }
+        }
+        
+    }
+
+    // Player controlled animation triggers/bools
+    private void MovementAnimations(){
+        switch(_movement.moveState){
+            case _movement.EPlayerMoveState.walking:
+                if(_handler.RB.linearVelocity.magnitude <= 0.1f)
+                    _anim.SetBool("isIdle", true);
+                else
+                    _anim.SetBool("isWalking", true);
+                break;
+            case _movement.EPlayerMoveState.sprinting:
+                _anim.SetBool("isSprinting", true);
+                break;
+            case _movement.EPlayerMoveState.crouching:
+                _anim.SetBool("isCrouching", true);
+                break;
+            default: // Tpose
+                _anim.SetBool("Tpose", true);
+                break;
+        }
+    }
+
+    private void CombatAnimations(){
+        switch(_combat.combatState){
+            case _combat.EPlayerCombatState.emptyHanded:
+                _anim.SetBool("emptyHanded", true);
+                break;
+            case _combat.EPlayerCombatState.oneHanded:
+                _anim.SetBool("oneHanded", true);
+                break;
+            case _combat.EPlayerCombatState.twoHanded:
+                _anim.SetBool("twoHanded", true);
+                break;
+            default:
+                _anim.SetBool("emptyHanded", true);
+                break;
+        }
+    }
+
     // FK & IK Transisitons
     public void SetIk(float amount)
     {
@@ -180,14 +260,10 @@ public class PlayerAnimator : NetworkIdentity
     }
 
     // Ragdoll stunning
-    public void StunPlayer(bool getBackUp, Vector3 force, float mult) 
+    public void StunPlayer(Vector3 force, float mult) 
     {
         // Make sure GetUp isnt running
         CancelInvoke(nameof(GetUp));
-
-        // Begin ragdoll process and timer
-        if (getBackUp)
-            Invoke(nameof(GetUp), _stunTimer);
         
         if(_debug)
             Debug.Log("Ragdoll applied force: " + force);
@@ -197,6 +273,9 @@ public class PlayerAnimator : NetworkIdentity
 
     private void GetUp()
     {
+        // Is the player on its back?
+        _isFacingUp = _bodyBone.forward.y > 0;
+
         // Align player and turn off the rigidbody
         AlignRotation();
         _ragdoll.EnableAnimator();
@@ -217,16 +296,18 @@ public class PlayerAnimator : NetworkIdentity
         _elapsedResetBonesTime += Time.deltaTime;
         float elapsedPercentage = _elapsedResetBonesTime / _timeToResetBones;
 
+        BoneTransform[] standUpBoneTransforms = GetStandUpBoneTransforms();
+
         for (int i = 0; i < _bones.Length; i++)
         {
             _bones[i].localPosition = Vector3.Lerp(
                 _ragdollBoneTransforms[i].Position,
-                _standUpBoneTransforms[i].Position,
+                standUpBoneTransforms[i].Position,
                 elapsedPercentage);
 
             _bones[i].localRotation = Quaternion.Lerp(
                 _ragdollBoneTransforms[i].Rotation,
-                _standUpBoneTransforms[i].Rotation,
+                standUpBoneTransforms[i].Rotation,
                 elapsedPercentage);
         }
 
@@ -234,13 +315,13 @@ public class PlayerAnimator : NetworkIdentity
         {
             _animationState = EAnimationState.standingUp;
             _anim.enabled = true;
-            _anim.Play(_standUpStateName);
+            _anim.Play(GetStandUpStateName(), 0, 0);
         }
     }
 
     private void StandingUp()
     {
-        if (_anim.GetCurrentAnimatorStateInfo(0).IsName(_standUpStateName) == false)
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName(_getUpFaceUpStateName) == false)
         {
             _animationState = EAnimationState.complete;
             _handler.playerState = PlayerHandler.EPlayerState.moving;
@@ -303,26 +384,51 @@ public class PlayerAnimator : NetworkIdentity
         Vector3 positionBeforeSampling = transform.position;
         Quaternion rotationBeforeSampling = transform.rotation;
 
-        bool found = false;
         foreach (AnimationClip clip in _anim.runtimeAnimatorController.animationClips)
         {
             if (clip.name == clipName)
             {
-                found = true;
                 clip.SampleAnimation(_anim.gameObject, 0);
                 PopulateBoneTransforms(boneTransforms);
                 break;
             }
         }
 
-        if(!found)
-            Debug.LogError($"Clip '{clipName}' not found! Bones were never sampled.");
-
         transform.position = positionBeforeSampling;
         transform.rotation = rotationBeforeSampling;
     }
 
+    private string GetStandUpStateName()
+    {
+        return _isFacingUp ? _getUpFaceUpStateName : _getUpFaceDownStateName;
+    }
+
+    private BoneTransform[] GetStandUpBoneTransforms()
+    {
+        return _isFacingUp ? _getUpFaceUpBoneTransforms : _getUpFaceDownBoneTransforms;
+    }
+
     // Eye functions
+    public void SetLookAtObject(Transform object){
+        Vector3 distance = object.position - transform.position;
+        if(distance.magnitude < _maxTargetDistance){
+            _actualTarget = object;
+        }
+    }
+
+    private MoveTargetPosition(){
+        if(_actualTarget != null){
+            Vector3 distance = _actualTarget - transform.position;
+            if(distance.magnitude >= _maxTargetDistance){
+                // move target to default
+                _targetLookAt.position = Vector3.Lerp(_targetLookAt.position, _restoreLookAt.position, Time.deltaTime * _targetFollowSpeed);
+            }else{
+                // move target to target
+                _targetLookAt.position = Vector3.Lerp(_targetLookAt.position, _actualTarget.position, Time.deltaTime * _targetFollowSpeed);
+            }
+        }
+    }
+
     private void SetNormalEyes() 
     {
         _normalEyes.SetActive(true);

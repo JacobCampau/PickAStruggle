@@ -5,39 +5,39 @@ public class PlayerCombat : NetworkIdentity
 {
     private PlayerHandler _handler;
 
-    private RagdollLogic ragdoll;
-    private PlayerAnimator animator;
+    private RagdollLogic _ragdoll;
+    private PlayerAnimator _animator;
 
     // Health stats
-    private float health;
-    private float currHealth;
+    private float _health;
+    private float _currHealth;
 
-    private float boostHealth = 0;
+    private float _boostHealth = 0;
 
-    private float totalHealth;
+    private float _totalHealth;
 
     // Combat stats
-    private float meleeDamage;
-    private float meleeRange;
-    private float handlingSpeed;
+    private float _meleeDamage;
+    private float _meleeRange;
+    private float _handlingSpeed;
 
-    private float boostMeleeDamage = 0;
-    private float boostMeleeRange = 0;
-    private float boostHandlingSpeed = 0;
+    private float _boostMeleeDamage = 0;
+    private float _boostMeleeRange = 0;
+    private float _boostHandlingSpeed = 0;
 
-    private float totalMeleeDamage;
-    private float totalMeleeRange;
-    private float totalHandlingSpeed;
+    private float _totalMeleeDamage;
+    private float _totalMeleeRange;
+    private float _totalHandlingSpeed;
 
     // Death info
     public bool isDead;
-    private bool deathSequence;
+    private bool _deathSequence;
 
     // Other
-    [SerializeField] private bool debug;
+    [SerializeField] private bool _debug;
 
     [Header("Fall Damage Mult")]
-    [SerializeField] private float fallDamageMult = 1;
+    [SerializeField] private float _fallDamageMult = 1;
 
     // States
     public enum EPlayerCombatState
@@ -52,22 +52,22 @@ public class PlayerCombat : NetworkIdentity
     {
         // Components
         _handler = GetComponent<PlayerHandler>();
-        ragdoll = GetComponent<RagdollLogic>();
-        animator = GetComponent<PlayerAnimator>();
+        _ragdoll = GetComponent<RagdollLogic>();
+        _animator = GetComponent<PlayerAnimator>();
 
         // Inspector based values
         isDead = false;
-        deathSequence = false;
+        _deathSequence = false;
     }
 
     private void Start() {
         // Set starting values
-        health = _handler.Stats.health;
-        currHealth = health;
+        _health = _handler.Stats.health;
+        _currHealth = _health;
 
-        meleeDamage = _handler.Stats.meleeDamage;
-        meleeRange = _handler.Stats.meleeRange;
-        handlingSpeed = _handler.Stats.handlingSpeed;
+        _meleeDamage = _handler.Stats.meleeDamage;
+        _meleeRange = _handler.Stats.meleeRange;
+        _handlingSpeed = _handler.Stats.handlingSpeed;
 
         // Call the setters
         SetHealth();
@@ -78,54 +78,54 @@ public class PlayerCombat : NetworkIdentity
 
     private void Update() {
         // Checking for dead
-        if (isDead && !deathSequence){
+        if (isDead && !_deathSequence){
             // Run the sequence once
             DeathSequence();
-            deathSequence = true;
+            _deathSequence = true;
         }
     }
 
     private void DeathSequence(){
         // All actions that happen with death
         Debug.Log("Player Has Died");
-        ragdoll.TossRagdoll(Vector3.up / _handler.RB.mass, (1933/54));
+        _ragdoll.TossRagdoll(Vector3.up / _handler.RB.mass, (1933/54));
     }
 
     // Player affects
     public void DealDamage(float dmg){
-        currHealth -= dmg;
+        _currHealth -= dmg;
 
-        if(currHealth <= 0){
+        if(_currHealth <= 0){
             // Death logic
             isDead = true;
-            currHealth = 0;
+            _currHealth = 0;
         }
 
-        if(debug)
+        if(_debug)
             Debug.Log($"Player health took a hit for {dmg} HP");
     }
 
     public void FallDamage(Vector3 dir, float forceMult){
-        if (debug)
+        if (_debug)
             Debug.Log("Fallen");
 
         // Deal damage
-        DealDamage(dir.y * fallDamageMult);
+        DealDamage(dir.y * _fallDamageMult);
 
         // Ragdoll direction and logic
         Vector3 ragdollForce = new Vector3(dir.x, 0, dir.z);
-        animator.StunPlayer(currHealth != 0, ragdollForce, forceMult); // begin the ragdoll
+        _animator.StunPlayer(ragdollForce, forceMult); // begin the ragdoll
     }
 
     // Setters used to ensure the stats are accurate to boosts
-    void SetHealth() { totalHealth = health + boostHealth; }
-    void SetMeleeDamage() { totalMeleeDamage = meleeDamage + boostMeleeDamage; }
-    void SetMeleeRange() { totalMeleeRange = meleeRange + boostMeleeRange; }
-    void SetHandlingSpeed() { totalHandlingSpeed = handlingSpeed + boostHandlingSpeed; }
+    void SetHealth() { _totalHealth = _health + _boostHealth; }
+    void SetMeleeDamage() { _totalMeleeDamage = _meleeDamage + _boostMeleeDamage; }
+    void SetMeleeRange() { _totalMeleeRange = _meleeRange + _boostMeleeRange; }
+    void SetHandlingSpeed() { _totalHandlingSpeed = _handlingSpeed + _boostHandlingSpeed; }
 
     // Boosts for gaining boosts
-    void BoostHealth(float boost){ boostHealth += boost; }
-    void BoostMeleeDamage(float boost){ boostMeleeDamage += boost; }
-    void BoostMeleeRange(float boost){ boostMeleeRange += boost; }
-    void BoostHandlingSpeed(float boost){ boostHandlingSpeed += boost; }
+    void BoostHealth(float boost){ _boostHealth += _boost; }
+    void BoostMeleeDamage(float boost){ _boostMeleeDamage += _boost; }
+    void BoostMeleeRange(float boost){ _boostMeleeRange += _boost; }
+    void BoostHandlingSpeed(float boost){ _boostHandlingSpeed += _boost; }
 }

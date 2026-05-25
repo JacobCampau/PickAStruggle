@@ -181,7 +181,7 @@ public class PlayerMovement : NetworkIdentity
             moveState = EPlayerMoveState.sprinting;
             SetSprintSpeed();
         } else if (_grounded) {
-            // Walking
+            // Regular moving or idle
             moveState = EPlayerMoveState.walking;
             SetMoveSpeed();
         } else {
