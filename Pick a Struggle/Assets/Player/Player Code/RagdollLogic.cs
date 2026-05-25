@@ -59,15 +59,6 @@ public class RagdollLogic : NetworkIdentity
             weight += rb.mass;
     }
 
-    private void Update()
-    {
-        if(!_ragdollIsActive && _handler.playerState == PlayerHandler.EPlayerState.ragdoll)
-        {
-            // Ragdoll state is active, but the ragdoll has finished
-            _animator.ExitRagdoll();
-        }
-    }
-
     public void EnableRagdoll(Vector3 force) {
         _ragdollIsActive = true;
         _handler.playerState = PlayerHandler.EPlayerState.ragdoll;
@@ -123,7 +114,6 @@ public class RagdollLogic : NetworkIdentity
 
         // Exit truths
         _ragdollIsActive = false;
-        _animator.ExitRagdoll();
     }
 
     public void TossRagdoll(Vector3 dir, float mult){

@@ -43,6 +43,7 @@ public class PlayerAnimator : NetworkIdentity
 
     // Getting up logic
     private bool _isFacingUp;
+    private int _hipIndex;
 
     private enum EAnimationState
     {
@@ -93,13 +94,23 @@ public class PlayerAnimator : NetworkIdentity
         _standUpBoneTransforms = new BoneTransform[_bones.Length];
         _ragdollBoneTransforms = new BoneTransform[_bones.Length];
 
-        for (int i = 0; i < _bones.Length; i++)
-        {
+        for (int i = 0; i < _bones.Length; i++) {
             _standUpBoneTransforms[i] = new BoneTransform();
             _ragdollBoneTransforms[i] = new BoneTransform();
+
+            if(_bones[i] == _hipBone) {
+                _hipIndex = i;
+            }
         }
 
         PopulateAnimationStartBoneTransforms(_standUpClipName, _standUpBoneTransforms);
+
+        for(int i = 0; i < _bones.Length; i++) {
+            if(_bones[i] == _hipBone) {
+                Debug.Log($"Final position for hip: {_standUpBoneTransforms[i].Position}");
+                Debug.Log($"Final rotation for hip: {_standUpBoneTransforms[i].Rotation.eulerAngles}");
+            }
+        }
 
         // Initializations
         _animationState = EAnimationState.complete;
@@ -191,14 +202,11 @@ public class PlayerAnimator : NetworkIdentity
         _ragdoll.EnableAnimator();
         AlignPosition();
 
-        // Change state and get initial transforms
+        // Get initial transforms
         PopulateBoneTransforms(_ragdollBoneTransforms);
         _elapsedResetBonesTime = 0;
-        _animationState = EAnimationState.resetingBones;
-    }
 
-    public void ExitRagdoll()
-    {
+        // Change states
         _handler.playerState = PlayerHandler.EPlayerState.animated;
         _animationState = EAnimationState.resetingBones;
     }
@@ -252,8 +260,16 @@ public class PlayerAnimator : NetworkIdentity
             transform.position = new Vector3(bodyPosition.x, hitInfo.point.y, bodyPosition.z);
 
         // Reset timmy
-        _characterModel.localPosition = Vector3.zero;
-        _characterModel.localRotation = Quaternion.identity;
+        Vector3 moveTimmy = Vector3.zero - _characterModel.localPosition;
+        _characterModel.localPosition += moveTimmy;
+
+        // Move hipbone
+        Vector3 moveHip = _bodyBone.transform.localPosition - _hipBone.transform.localPosition;
+        _hipBone.transform.localPosition += moveHip;
+        foreach(Transform child in _hipBone.transform) {
+            child.transform.localPosition -= moveHip;
+        }
+        _hipBone.localPosition = new Vector3(0f, _hipBone.localPosition.y - moveTimmy.y, 0f);
     }
 
     private void AlignRotation()
@@ -261,16 +277,13 @@ public class PlayerAnimator : NetworkIdentity
         // Direction of fall
         _isFacingUp = _bodyBone.forward.y > 0;
 
+        // Rotate timmy
         Quaternion desiredDirection = Quaternion.Euler(0f, _bodyBone.eulerAngles.y, 0f);
-        transform.rotation = desiredDirection;
+        Quaternion delta = desiredDirection * Quaternion.Inverse(_characterModel.rotation);
+        _characterModel.rotation = desiredDirection;
 
-        if (_debug)
-        {
-            Debug.Log($"Start Direction: {_bodyBone.rotation.eulerAngles}");
-            Debug.Log($"Specific y direction: {_bodyBone.rotation.eulerAngles.y}");
-            Debug.Log($"Desired Direction: {desiredDirection.eulerAngles}");
-            Debug.Log($"End Direction: {transform.rotation.eulerAngles}");
-        }
+        // Rotate the hip
+        _hipBone.rotation *= Quaternion.Inverse(delta);
 
         // Immediately face the opposite direction (saved in case it is needed for another time)
         //transform.rotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
@@ -290,15 +303,20 @@ public class PlayerAnimator : NetworkIdentity
         Vector3 positionBeforeSampling = transform.position;
         Quaternion rotationBeforeSampling = transform.rotation;
 
+        bool found = false;
         foreach (AnimationClip clip in _anim.runtimeAnimatorController.animationClips)
         {
             if (clip.name == clipName)
             {
-                clip.SampleAnimation(gameObject, 0);
+                found = true;
+                clip.SampleAnimation(_anim.gameObject, 0);
                 PopulateBoneTransforms(boneTransforms);
                 break;
             }
         }
+
+        if(!found)
+            Debug.LogError($"Clip '{clipName}' not found! Bones were never sampled.");
 
         transform.position = positionBeforeSampling;
         transform.rotation = rotationBeforeSampling;

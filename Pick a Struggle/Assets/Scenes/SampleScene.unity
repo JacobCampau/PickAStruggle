@@ -872,8 +872,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532941761}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.531, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -881,7 +881,7 @@ Transform:
   - {fileID: 6830547787272097457}
   - {fileID: 723170348178349566}
   m_Father: {fileID: 1052140543}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &586127007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,7 +2862,7 @@ Transform:
   m_GameObject: {fileID: 1737214336}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000029860473, y: -0.000000001861968, z: 5.559925e-17, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25874615, z: -5.97596}
+  m_LocalPosition: {x: 0, y: 1.765707, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3834,7 +3834,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7024483454036184192}
   - {fileID: 1567621307}
@@ -6284,7 +6284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5332809966970832199}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6529,7 +6529,7 @@ MonoBehaviour:
   _invertedPathToNearestParent: 
   _directChildren: []
   _debug: 0
-  _slowDown: 1
+  _slowDown: 0
   _normalEyes: {fileID: 7251302832179094395}
   _deadEyes: {fileID: 3870916985643920226}
   _stunnedEyes: {fileID: 8894405263849704707}
@@ -6538,7 +6538,7 @@ MonoBehaviour:
   _characterModel: {fileID: 543450651754724794}
   _standUpStateName: GetUpFaceUp
   _standUpClipName: GetUpFaceUp
-  _timeToResetBones: 0.5
+  _timeToResetBones: 0.2
   _ikConstraints:
   - {fileID: 1429356246}
   - {fileID: 418246892}
