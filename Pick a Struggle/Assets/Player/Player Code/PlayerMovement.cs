@@ -9,6 +9,7 @@ public class PlayerMovement : NetworkIdentity
     private PlayerHandler _handler;
 
     private PlayerCombat _combat;
+    private PlayerAnimator _animator;
 
     // Move stats from stats
     private float _moveSpeed;
@@ -83,6 +84,7 @@ public class PlayerMovement : NetworkIdentity
         // Get the handler and other components
         _handler = GetComponent<PlayerHandler>();
         _combat = GetComponent<PlayerCombat>();
+        _animator = GetComponent<PlayerAnimator>();
 
         // Initial booleans
         _readyToJump = true;
@@ -154,6 +156,7 @@ public class PlayerMovement : NetworkIdentity
             if (_debug)
                 Debug.Log($"Player hit the ground too hard with velocity of {_handler.RB.linearVelocity.y}");
             _combat.FallDamage(_handler.RB.linearVelocity, 3);
+            _animator.FallParticles(transform);
         }
     }
 
@@ -256,7 +259,7 @@ public class PlayerMovement : NetworkIdentity
     }
 
     // Stun stuff
-    private bool FallingFast() {
+    public bool FallingFast() {
         return _handler.RB.linearVelocity.y < -_maxVelocity;
     }
 
@@ -269,4 +272,7 @@ public class PlayerMovement : NetworkIdentity
     // Boosters
     public void BoostSpeed(float boost) { _boostSpeed += boost; }
     public void BoostStaminaDrain(float boost) { _boostStaminaDrain += boost; }
+
+    // Getters
+    public bool Grounded => _grounded;
 }

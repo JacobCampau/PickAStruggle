@@ -19,8 +19,6 @@ public class PlayerHandler : NetworkIdentity
         ragdoll,
         dead
     }
-
-    [Header("States")]
     public EPlayerState playerState;
 
     private void Awake()

@@ -82,6 +82,9 @@ public class PlayerAnimator : NetworkIdentity
     [SerializeField] private float _targetFollowSpeed;
     [SerializeField] private float _maxTargetDistance = 0f;
 
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem _fallenParticles;
+
     protected override void OnSpawned()
     {
         base.OnSpawned();
@@ -207,6 +210,10 @@ public class PlayerAnimator : NetworkIdentity
             }
         }
         
+    }
+
+    public void FallParticles(Transform location){
+        // Particle stuffs
     }
 
     // Player controlled animation triggers/bools
