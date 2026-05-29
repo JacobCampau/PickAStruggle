@@ -124,8 +124,8 @@ public class PlayerCombat : NetworkIdentity
     void SetHandlingSpeed() { _totalHandlingSpeed = _handlingSpeed + _boostHandlingSpeed; }
 
     // Boosts for gaining boosts
-    void BoostHealth(float boost){ _boostHealth += _boost; }
-    void BoostMeleeDamage(float boost){ _boostMeleeDamage += _boost; }
-    void BoostMeleeRange(float boost){ _boostMeleeRange += _boost; }
-    void BoostHandlingSpeed(float boost){ _boostHandlingSpeed += _boost; }
+    void BoostHealth(float boost){ _boostHealth += boost; }
+    void BoostMeleeDamage(float boost){ _boostMeleeDamage += boost; }
+    void BoostMeleeRange(float boost){ _boostMeleeRange += boost; }
+    void BoostHandlingSpeed(float boost){ _boostHandlingSpeed += boost; }
 }

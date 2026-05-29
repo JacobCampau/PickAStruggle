@@ -49,13 +49,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.4.5f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Player\Player Code\AnimatorToController.cs" />
     <Compile Include="Assets\Items\ItemData.cs" />
-    <Compile Include="Assets\Player\Zombie.cs" />
     <Compile Include="Assets\Player\Player Code\RagdollLogic.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerCombat.cs" />
     <Compile Include="Assets\Player\Player State\PlayerContext.cs" />
-    <Compile Include="Assets\Player\EarlyZombie.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerAnimator.cs" />
     <Compile Include="Assets\State Machine\StateMachine.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerMovement.cs" />
@@ -63,10 +60,13 @@
     <Compile Include="Assets\Player\Player Code\PlayerStats.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerGrabbing.cs" />
     <Compile Include="Assets\Player\Player Code\ThirdPersonCam.cs" />
+    <Compile Include="Assets\Player\_Others\Zombie.cs" />
     <Compile Include="Assets\Player\States\PlayerRagdollState.cs" />
     <Compile Include="Assets\Player\Player State\PlayerStateMachine.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerEmotion.cs" />
     <Compile Include="Assets\Player\States\PlayerMove.cs" />
+    <Compile Include="Assets\Player\_Others\EarlyZombie.cs" />
+    <Compile Include="Assets\Player\Player Code\PlayerHitbox.cs" />
     <Compile Include="Assets\Player\States\PlayerStandUp.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerInventory.cs" />
     <Compile Include="Assets\State Machine\State.cs" />

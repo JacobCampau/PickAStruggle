@@ -4,9 +4,11 @@ using UnityEngine;
 public class PlayerHitbox : NetworkIdentity
 {
     private PlayerCombat _combat;
+    private PlayerAnimator _animator;
 
     void Awake(){
         _combat = GetComponent<PlayerCombat>();
+        _animator = GetComponent<PlayerAnimator>();
     }
 
     // Trigger based detections -> player is moving or animated
@@ -23,17 +25,17 @@ public class PlayerHitbox : NetworkIdentity
     }
 
     // Collision based detection -> Ragdoll is activated
-    private void OnCollisionEnter(Collider other){
+    private void OnCollisionEnter(Collision other){
         if(other.gameObject.tag == "Environment"){
             _animator.FallParticles(transform);
         }
     }
 
-    private void OnCollisionStay(Collider other){
+    private void OnCollisionStay(Collision other){
 
     }
 
-    private void OnCollisionExit(Collider other){
+    private void OnCollisionExit(Collision other){
 
     }
 }

@@ -29,7 +29,7 @@ public class PlayerHandler : NetworkIdentity
     }
 
     // Collisions onto the whole player --> temp to be changed
-    private void OnCollisionEnter(Collider other){
+    private void OnCollisionEnter(Collision other){
         if(other.gameObject.tag == "Projectile"){
             GetComponent<PlayerAnimator>().StunPlayer(other.gameObject.GetComponent<Rigidbody>().linearVelocity, 5);
         }

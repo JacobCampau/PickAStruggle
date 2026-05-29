@@ -7,16 +7,24 @@
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playeranimator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\player code\\ragdolllogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\ragdolllogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\earlyzombie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\earlyzombie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\handler\\playerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\handler\\playerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playerhitbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playerhitbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playercombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playercombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\player code\\ragdolllogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\ragdolllogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playerinventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,8 +39,8 @@
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\thirdpersoncam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\jacob\\documents\\github\\pickastruggle\\pick a struggle\\assets\\player\\player code\\playercombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\player code\\playercombat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\EarlyZombie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Player\\EarlyZombie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +50,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
+              "Title": "PlayerHitbox.cs",
+              "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerHitbox.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerHitbox.cs",
+              "ToolTip": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerHitbox.cs",
+              "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerHitbox.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T21:31:58.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "EarlyZombie.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\EarlyZombie.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\EarlyZombie.cs",
@@ -54,8 +74,7 @@
               "RelativeToolTip": "Assets\\Player\\EarlyZombie.cs",
               "ViewState": "AgIAAGEAAAAAAAAAAAAgwHgAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-23T18:27:32.447Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-23T18:27:32.447Z"
             },
             {
               "$type": "Document",
@@ -65,14 +84,14 @@
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerAnimator.cs",
               "ToolTip": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerAnimator.cs",
               "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerAnimator.cs",
-              "ViewState": "AgIAAIYAAAAAAAAAAAAAwJsAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAHIBAAAAAAAAAAAqwIUBAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-22T00:22:13.92Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "RagdollLogic.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\RagdollLogic.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\RagdollLogic.cs",
@@ -80,12 +99,11 @@
               "RelativeToolTip": "Assets\\Player\\Player Code\\RagdollLogic.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAgwHkAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-22T00:21:50.092Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-22T00:21:50.092Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "PlayerInventory.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerInventory.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerInventory.cs",
@@ -97,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "PlayerGrabbing.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerGrabbing.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerGrabbing.cs",
@@ -109,19 +127,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "PlayerCombat.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerCombat.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerCombat.cs",
               "ToolTip": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerCombat.cs",
               "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerCombat.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAuwIEAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-23T04:02:32.991Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "ThirdPersonCam.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\ThirdPersonCam.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\ThirdPersonCam.cs",
@@ -133,15 +151,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Player Code\\PlayerMovement.cs",
               "ToolTip": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Player Code\\PlayerMovement.cs",
               "RelativeToolTip": "Assets\\Player\\Player Code\\PlayerMovement.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwA0AAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAywLMAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T23:31:40.878Z"
+              "WhenOpened": "2026-05-21T23:31:40.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerHandler.cs",
+              "DocumentMoniker": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Handler\\PlayerHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\Player\\Handler\\PlayerHandler.cs",
+              "ToolTip": "C:\\Users\\jacob\\Documents\\GitHub\\PickAStruggle\\Pick a Struggle\\Assets\\Player\\Handler\\PlayerHandler.cs",
+              "RelativeToolTip": "Assets\\Player\\Handler\\PlayerHandler.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T21:32:59.616Z"
             }
           ]
         }

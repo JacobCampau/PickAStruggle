@@ -2,8 +2,6 @@ using PurrNet;
 using System;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UIElements;
 
 public class PlayerAnimator : NetworkIdentity
 {
@@ -61,7 +59,7 @@ public class PlayerAnimator : NetworkIdentity
 
     // Getting up logic
     private bool _isFacingUp;
-    private bool _bodyRigidbody;
+    private Rigidbody _bodyRigidbody;
 
     [Header("Getting up logic")]
     [SerializeField] private string _getUpFaceUpStateName;
@@ -123,7 +121,7 @@ public class PlayerAnimator : NetworkIdentity
 
         // Initializations
         _animationState = EAnimationState.complete;
-        _timeToWakeUp = Random.Range(_stunTimer / 2f, _stunTimer * 1.5f);
+        _timeToWakeUp = UnityEngine.Random.Range(_stunTimer / 2f, _stunTimer * 1.5f);
         _restoreLookAt = _targetLookAt;
     }
 
@@ -134,6 +132,8 @@ public class PlayerAnimator : NetworkIdentity
 
         if (_slowDown)
             Time.timeScale = 0.333f;
+
+        SetBaseAnimBool("isIdle");
     }
 
     private void Update()
@@ -198,15 +198,19 @@ public class PlayerAnimator : NetworkIdentity
         }
 
         // If the player dies during the ragdoll, then prevent the getup function from being called
-        if(_handler.playerState == PlayerHandler.EPlayerState.ragdoll){
+        if(_handler.playerState == PlayerHandler.EPlayerState.dead){
             CancelInvoke(nameof(GetUp));
+            if(_debug)
+                Debug.Log("DEAD RAGDOLL CANCEL");
         }
 
         // If the player is in the process of getting up and is moved for any reason, reenter the ragdoll state
         if(_animationState == EAnimationState.resetingBones || _animationState == EAnimationState.standingUp){
-            if(_handler.RB.linearVelocity > _endRagdollSpeedThreshold){
+            if(_handler.RB.linearVelocity.magnitude > _endRagdollSpeedThreshold){
                 // The player is in the process of getting up and has begun moving
                 StunPlayer(_handler.RB.linearVelocity, 1);
+                if(_debug)
+                    Debug.Log("Hit during get up");
             }
         }
         
@@ -219,37 +223,38 @@ public class PlayerAnimator : NetworkIdentity
     // Player controlled animation triggers/bools
     private void MovementAnimations(){
         switch(_movement.moveState){
-            case _movement.EPlayerMoveState.walking:
-                if(_handler.RB.linearVelocity.magnitude <= 0.1f)
-                    _anim.SetBool("isIdle", true);
-                else
-                    _anim.SetBool("isWalking", true);
+            case PlayerMovement.EPlayerMoveState.walking:
+                if(_handler.RB.linearVelocity.magnitude <= 0.1f) {
+                    SetBaseAnimBool("isIdle");
+                } else {
+                    SetBaseAnimBool("isWalking");
+                }
                 break;
-            case _movement.EPlayerMoveState.sprinting:
-                _anim.SetBool("isSprinting", true);
+            case PlayerMovement.EPlayerMoveState.sprinting:
+                SetBaseAnimBool("isSprinting");
                 break;
-            case _movement.EPlayerMoveState.crouching:
-                _anim.SetBool("isCrouching", true);
+            case PlayerMovement.EPlayerMoveState.crouching:
+                SetBaseAnimBool("isCrouching");
                 break;
             default: // Tpose
-                _anim.SetBool("Tpose", true);
+                SetBaseAnimBool("TPose");
                 break;
         }
     }
 
     private void CombatAnimations(){
         switch(_combat.combatState){
-            case _combat.EPlayerCombatState.emptyHanded:
-                _anim.SetBool("emptyHanded", true);
+            case PlayerCombat.EPlayerCombatState.emptyHanded:
+                SetArmAnimBool("armsEmptyHanded");
                 break;
-            case _combat.EPlayerCombatState.oneHanded:
-                _anim.SetBool("oneHanded", true);
+            case PlayerCombat.EPlayerCombatState.oneHanded:
+                SetArmAnimBool("armsOneHanded");
                 break;
-            case _combat.EPlayerCombatState.twoHanded:
-                _anim.SetBool("twoHanded", true);
+            case PlayerCombat.EPlayerCombatState.twoHanded:
+                SetArmAnimBool("armsTwoHanded");
                 break;
             default:
-                _anim.SetBool("emptyHanded", true);
+                SetArmAnimBool("armsEmptyHanded");
                 break;
         }
     }
@@ -328,6 +333,7 @@ public class PlayerAnimator : NetworkIdentity
 
     private void StandingUp()
     {
+        SetBaseAnimBool("isIdle");
         if (_anim.GetCurrentAnimatorStateInfo(0).IsName(_getUpFaceUpStateName) == false)
         {
             _animationState = EAnimationState.complete;
@@ -416,16 +422,16 @@ public class PlayerAnimator : NetworkIdentity
     }
 
     // Eye functions
-    public void SetLookAtObject(Transform object){
-        Vector3 distance = object.position - transform.position;
+    public void SetLookAtObject(Transform newTarget){
+        Vector3 distance = newTarget.position - transform.position;
         if(distance.magnitude < _maxTargetDistance){
-            _actualTarget = object;
+            _actualTarget = newTarget;
         }
     }
 
-    private MoveTargetPosition(){
+    private void MoveTargetPosition(){
         if(_actualTarget != null){
-            Vector3 distance = _actualTarget - transform.position;
+            Vector3 distance = _actualTarget.position - transform.position;
             if(distance.magnitude >= _maxTargetDistance){
                 // move target to default
                 _targetLookAt.position = Vector3.Lerp(_targetLookAt.position, _restoreLookAt.position, Time.deltaTime * _targetFollowSpeed);
@@ -455,5 +461,33 @@ public class PlayerAnimator : NetworkIdentity
         _normalEyes.SetActive(false);
         _deadEyes.SetActive(false);
         _stunnedEyes.SetActive(true);
+    }
+
+    private void SetBaseAnimBool(string parameter) {
+        foreach (AnimatorControllerParameter param in _anim.parameters) {
+            if(param.type == AnimatorControllerParameterType.Bool) {
+                if(param.name == parameter) {
+                    // set the needed animation to true
+                    _anim.SetBool(param.name, true);
+                } else if (!param.name.Contains("arms")) {
+                    // sets all non arm animations to false
+                    _anim.SetBool(param.name, false);
+                }
+            }
+        }
+    }
+
+    private void SetArmAnimBool(string parameter) {
+        foreach(AnimatorControllerParameter param in _anim.parameters) {
+            if(param.type == AnimatorControllerParameterType.Bool) {
+                if(param.name == parameter) {
+                    // set the needed arm animation to true
+                    _anim.SetBool(param.name, true);
+                } else if(param.name.Contains("arms")) {
+                    // sets all remaining arm animations to false
+                    _anim.SetBool(param.name, false);
+                }
+            }
+        }
     }
 }
