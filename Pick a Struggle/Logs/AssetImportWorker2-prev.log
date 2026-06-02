@@ -1,0 +1,366 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.4/staging' branch; Version is '6000.4.5f1 (cc83ebd631f8) revision 13403115'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob" at "2026-06-02T02:39:00.521277Z"
+OS: 'Windows 11  (10.0.26200) Core' Language: 'en' Physical Memory: 31849 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-06-02T02:39:00Z
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.4.5f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker2
+-projectPath
+C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle
+-logFile
+Logs/AssetImportWorker2.log
+-srvPort
+63786
+-licensingIpc
+LicenseClient-jacob
+-force-d3d12
+-job-worker-count
+5
+-background-job-worker-count
+8
+-gc-helper-count
+1
+-name
+AssetImport
+Successfully changed project path to: C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle
+C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Player connection [35248]  Target information:
+
+Player connection [35248]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 3483204743 [EditorId] 3483204743 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35248]  * "[IP] 172.23.208.1 [Port] 0 [Flags] 2 [Guid] 3483204743 [EditorId] 3483204743 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35248]  * "[IP] 192.168.1.81 [Port] 0 [Flags] 2 [Guid] 3483204743 [EditorId] 3483204743 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [35248] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [35248] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 5
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 2.30 ms, found 3 plugins.
+Initialize engine version: 6000.4.5f1 (cc83ebd631f8)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle/Assets
+Forcing GfxDevice: Direct3D 12
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 4070 SUPER (ID=0x2783)
+    Vendor:          NVIDIA
+    VRAM:            11997 MB
+    App VRAM Budget: 11229 MB
+    Driver:          32.0.15.9649
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56092
+CodeReloadManager initialized
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001870 seconds.
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-jacob"
+[Licensing::IpcConnector] LicenseClient-jacob channel disconnected successfully.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob-6000.4.5" at "2026-06-02T02:39:01.8490996Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 24752, path: "C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              d614c8d11a0c4e78af5514668cce08d1
+  Correlation Id:          0340a41760f4f12732e99af7298a6e94
+  External correlation Id: 8393070962570031608
+  Machine Id:              aaz8R3PdWULESZ7tp/N2FERCrZ0=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jacob-6000.4.5" (connect: 0.00s, validation: 0.00s, handshake: 0.03s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob-6000.4.5-notifications" at "2026-06-02T02:39:01.8802554Z"
+[Licensing::Module] Licensing Background thread has ended after 1.36s
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Package Manager log level set to [2]
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.252 seconds
+Domain Reload Profiling: 835ms
+	BeginReloadAssembly (78ms)
+	RebuildCommonClasses (107ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (347ms)
+		LoadAssemblies (75ms)
+		AnalyzeDomain (341ms)
+			TypeCache.Refresh (340ms)
+				TypeCache.ScanAssembly (209ms)
+	FinalizeReload (252ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (33ms)
+			BeforeProcessingInitializeOnLoad (46ms)
+			ProcessInitializeOnLoadAttributes (69ms)
+			ProcessInitializeOnLoadMethodAttributes (58ms)
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+========================================================================
+Worker process is ready to serve import requests
+Import Worker Mode flag is 0x00
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 20066292731872-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-Editor.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly DocCodeExamples.dll at Library/ScriptAssemblies/DocCodeExamples.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.BurstCompatibilityGen.dll at Library/ScriptAssemblies/Unity.Collections.BurstCompatibilityGen.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.DocCodeSamples.dll at Library/ScriptAssemblies/Unity.Collections.DocCodeSamples.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.PerformanceTests.dll at Library/ScriptAssemblies/Unity.Collections.PerformanceTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.dll at Library/ScriptAssemblies/Unity.Collections.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.Playmode.dll at Library/ScriptAssemblies/Unity.Collections.Tests.Playmode.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Mathematics.Tests.dll at Library/ScriptAssemblies/Unity.Mathematics.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Editor.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Nuget.Mono-Cecil.dll at Library/ScriptAssemblies/Unity.Nuget.Mono-Cecil.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Config.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Config.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Searcher.EditorTests.dll at Library/ScriptAssemblies/Unity.Searcher.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Settings.Tests.dll at Library/ScriptAssemblies/Unity.Settings.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ShaderGraph.Editor.Tests.dll at Library/ScriptAssemblies/Unity.ShaderGraph.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.UnifiedRayTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.UnifiedRayTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+Symbol file LoadedFromMemory is not a mono symbol file
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Pick a Struggle
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.517 seconds
+Domain Reload Profiling: 1041ms
+	BeginReloadAssembly (112ms)
+		DisableScriptedObjects (3ms)
+		CreateAndSetChildDomain (24ms)
+	RebuildCommonClasses (23ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (45ms)
+	LoadAllAssembliesAndSetupDomain (336ms)
+		LoadAssemblies (234ms)
+		AnalyzeDomain (158ms)
+			TypeCache.Refresh (107ms)
+				TypeCache.ScanAssembly (96ms)
+			BuildScriptInfoCaches (41ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (517ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (84ms)
+			ProcessInitializeOnLoadAttributes (223ms)
+			ProcessInitializeOnLoadMethodAttributes (53ms)
+			AfterProcessingInitializeOnLoad (5ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5948 unused Assets / (4.6 MB). Loaded Objects now: 6772.
+Memory consumption went from 153.1 MB to 148.6 MB.
+Total: 5.590600 ms (FindLiveObjects: 0.583500 ms CreateObjectMapping: 0.164300 ms MarkObjects: 3.584600 ms  DeleteObjects: 1.256800 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 3268721.193647 seconds.
+  path: Assets/Player/Clanker.prefab
+  importAddress: Guid(9941a14868688b746bf394437afc9389) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player/Clanker.prefab using Guid(9941a14868688b746bf394437afc9389) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: 'e080f513beb985cfbb45895f37119a48') in 0.2892756 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5abb0ae463591254df566f17f991aa4c DependenciesID=250214a0d00dcc635e7113ce3e1a0496 StaticDependenciesID=78434d924aa33f5b509f80cb885e412a 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 239
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.970971 seconds.
+  path: Assets/Player/Clanker-First Person.prefab
+  importAddress: Guid(9941a14868688b746bf394437afc9389) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player/Clanker-First Person.prefab using Guid(9941a14868688b746bf394437afc9389) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: '715673a848f693e0edcd6dd181d27d68') in 0.1484019 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5abb0ae463591254df566f17f991aa4c DependenciesID=4037c19c5f1951397af235102b4fe7ca StaticDependenciesID=db012a9e0a91856a42ec87a7618cb5e3 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 239
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.772654 seconds.
+  path: Assets/Player/Clanker-First Person.prefab
+  importAddress: Guid(9941a14868688b746bf394437afc9389) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Clanker-First Person.prefab using Guid(9941a14868688b746bf394437afc9389) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'bd9af4bf321b65d7d8119d80f2f19a8f') in 0.0562475 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0e9d22b6f4bb6c45e8ff02f13649ab66 DependenciesID=3ea5db7168aaca7413b70060c5434540 StaticDependenciesID=5faa9b30c937644c010f069a4b7b70dc 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 116
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.729068 seconds.
+  path: Assets/Player/Clanker-Third Person.prefab
+  importAddress: Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player/Clanker-Third Person.prefab using Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: 'b37dc2b31cf3b19ffdf19fe123b009f8') in 0.0202504 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0150a52860ef5acafe28dafa05bc0e8c DependenciesID=e11716971ee331dccc7713b6a80b054a StaticDependenciesID=1e71944af4e122fb57eb98e1118107ae 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 239
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.933417 seconds.
+  path: Assets/Player/Clanker-Third Person.prefab
+  importAddress: Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Clanker-Third Person.prefab using Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'db3d220a003ddd3ad5463a493b03a342') in 0.0110145 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=56d014a40359a71dfd910d9e41f60fea DependenciesID=01d761aa4d5f803835b5a074372d788f StaticDependenciesID=f36e43e421212820e852bcd6c43c7b1b 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 116
+
+========================================================================
+Received Import Request.
+  Time since last request: 43.587597 seconds.
+  path: Assets/Player/Clanker-First Person.prefab
+  importAddress: Guid(9941a14868688b746bf394437afc9389) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player/Clanker-First Person.prefab using Guid(9941a14868688b746bf394437afc9389) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: 'f898274a1501e677d1395dd484753341') in 0.0232069 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5abb0ae463591254df566f17f991aa4c DependenciesID=9fb4eff1330f744304946fdd228033a1 StaticDependenciesID=d6793bd9796b32e0c665bcda122eeee5 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 239
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.930179 seconds.
+  path: Assets/Player/Clanker-First Person.prefab
+  importAddress: Guid(9941a14868688b746bf394437afc9389) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Clanker-First Person.prefab using Guid(9941a14868688b746bf394437afc9389) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '22c8f37a487c367b3182ec1182cc08c8') in 0.0103336 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b7b89e95c4b785fb6b403752e6cd7d71 DependenciesID=636b7aa0abd8b2a3cb0ca0980ff59139 StaticDependenciesID=bbc04abebf0e579fcfc9ccedba32fc0f 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 116
+
+========================================================================
+Received Import Request.
+  Time since last request: 714.826293 seconds.
+  path: Assets/Scenes/NewCharacter.unity
+  importAddress: Guid(1af1632c33cc4224db4312b487285c44) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scenes/NewCharacter.unity using Guid(1af1632c33cc4224db4312b487285c44) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '8aec130598afdba03a44be8a889cc436') in 0.0096804 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=432591c6d0d9ad9be01e812aada42fa5 DependenciesID=b288745d2dd5279ab22e14743595ab89 StaticDependenciesID=98af76d600c0297df829fcd19f5a7808 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 223.795482 seconds.
+  path: Assets/Scenes/NewCharacter.unity
+  importAddress: Guid(1af1632c33cc4224db4312b487285c44) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scenes/NewCharacter.unity using Guid(1af1632c33cc4224db4312b487285c44) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '74ddd40f3daaf22b30bce90a5eca56cb') in 0.0080943 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8f955fd4deedfaea37f297d1492e4cc6 DependenciesID=ba4af874a9c1cf234b7c9f2786637f30 StaticDependenciesID=3e6e7108fd5a4c64d7d41f4ddd5bde44 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.224988 seconds.
+  path: Assets/Player/Clanker-Third Person.prefab
+  importAddress: Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player/Clanker-Third Person.prefab using Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: '9842b8bfec35348fbe427abc2f1dc2b9') in 0.0875361 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=09afb4b994d7906cfb6fde9ba1ec4e6a DependenciesID=e7b43965ab9b405c51141d4a17e1a92d StaticDependenciesID=eaf6a5f30a03c22499cfd03b2631ce8b 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 253
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.846855 seconds.
+  path: Assets/Player/Clanker-Third Person.prefab
+  importAddress: Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Clanker-Third Person.prefab using Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '861cf706d416d54e8d6dfa439d8736b4') in 0.0103023 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=aed3a86a1660f5cc7c6934f11862a180 DependenciesID=35c542b84701d24caf6046e7b2fb1642 StaticDependenciesID=7f73bc10ceed2f51d3708082a20888a3 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 127
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.206335 seconds.
+  path: Assets/Player/Clanker-First Person.prefab
+  importAddress: Guid(9941a14868688b746bf394437afc9389) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player/Clanker-First Person.prefab using Guid(9941a14868688b746bf394437afc9389) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: '4daaf535d8a884e732435a3d855f60d7') in 0.0153073 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5abb0ae463591254df566f17f991aa4c DependenciesID=ed3a26383b19ad7b39b629b6954a3d14 StaticDependenciesID=bfb44128d4656bc18d12a03068b404f6 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 239
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.937340 seconds.
+  path: Assets/Player/Clanker-First Person.prefab
+  importAddress: Guid(9941a14868688b746bf394437afc9389) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Clanker-First Person.prefab using Guid(9941a14868688b746bf394437afc9389) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'bb2b02b47f809240517b707c8fef0028') in 0.0101148 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4f8ac2f9c316d12fbcbf46d0dad5d58b DependenciesID=3b322d328821772dbcb75d064bbdb4ef StaticDependenciesID=b37aaa94fcd4c44e2b576c96b81e277a 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 116
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.092874 seconds.
+  path: Assets/Scenes/NewCharacter.unity
+  importAddress: Guid(1af1632c33cc4224db4312b487285c44) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scenes/NewCharacter.unity using Guid(1af1632c33cc4224db4312b487285c44) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'ddbf11f6ecf35521548fc0d09baff0e7') in 0.0090243 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f32be0bcf1218a92b6448f5fbbfe25d2 DependenciesID=8b19ab5dbf34fad8fecf7eb557908229 StaticDependenciesID=82795d57eeb2cc2125d18c86b8594e46 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+

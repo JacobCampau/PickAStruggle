@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639145097825482856
+      ticks: 639160239940702147
     m_Hash: 2167036731
   m_LockFileStatus:
     m_FilePath: C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639145097825523049
+      ticks: 639160239940732192
     m_Hash: 1290351113
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}

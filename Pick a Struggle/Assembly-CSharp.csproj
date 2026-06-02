@@ -52,9 +52,12 @@
     <Compile Include="Assets\Items\ItemData.cs" />
     <Compile Include="Assets\Player\Player Code\RagdollLogic.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerCombat.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Player\Player State\PlayerContext.cs" />
+    <Compile Include="Assets\Player\Controller\Input\PlayerControls.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerAnimator.cs" />
     <Compile Include="Assets\State Machine\StateMachine.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\PlayerLocomotionInput.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerMovement.cs" />
     <Compile Include="Assets\Player\Handler\PlayerHandler.cs" />
     <Compile Include="Assets\Player\Player Code\PlayerStats.cs" />
