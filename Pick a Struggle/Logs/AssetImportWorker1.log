@@ -1,11 +1,11 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob" at "2026-06-05T06:25:31.4665857Z"
 Built from '6000.4/staging' branch; Version is '6000.4.5f1 (cc83ebd631f8) revision 13403115'; Using compiler version '194234433'; Build Type 'Release'
 OS: 'Windows 11  (10.0.26200) Core' Language: 'en' Physical Memory: 31849 MB
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob" at "2026-06-02T19:09:39.676195Z"
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
-Date: 2026-06-02T19:09:39Z
+Date: 2026-06-05T06:25:31Z
 
 COMMAND LINE ARGUMENTS:
 C:\Program Files\Unity\Hub\Editor\6000.4.5f1\Editor\Unity.exe
@@ -19,7 +19,7 @@ C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-61487
+55428
 -licensingIpc
 LicenseClient-jacob
 -force-d3d12
@@ -68,16 +68,16 @@ C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle
     "memorysetup-job-temp-allocator-block-size=2097152"
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
-Player connection [31104]  Target information:
+Player connection [41044]  Target information:
 
-Player connection [31104]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 3018225127 [EditorId] 3018225127 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [41044]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1576911522 [EditorId] 1576911522 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [31104]  * "[IP] 172.23.208.1 [Port] 0 [Flags] 2 [Guid] 3018225127 [EditorId] 3018225127 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [41044]  * "[IP] 172.23.208.1 [Port] 0 [Flags] 2 [Guid] 1576911522 [EditorId] 1576911522 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [31104]  * "[IP] 192.168.1.81 [Port] 0 [Flags] 2 [Guid] 3018225127 [EditorId] 3018225127 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [41044]  * "[IP] 192.168.1.81 [Port] 0 [Flags] 2 [Guid] 1576911522 [EditorId] 1576911522 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-BE4VRKJ) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [31104] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [31104] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [41044] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [41044] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 5
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -89,7 +89,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 2.59 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 3.50 ms, found 3 plugins.
 Initialize engine version: 6000.4.5f1 (cc83ebd631f8)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path C:/Users/jacob/Documents/GitHub/PickAStruggle/Pick a Struggle/Assets
@@ -107,31 +107,14 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56024
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56728
 CodeReloadManager initialized
 Begin MonoManager ReloadAssembly
-[Licensing::Client] Error: HandshakeResponse reported an error:
-	ResponseCode: 505
-	ResponseStatus: Unsupported protocol version '1.18.1'.
-[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-jacob"
-[Licensing::IpcConnector] LicenseClient-jacob channel disconnected successfully.
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob-6000.4.5" at "2026-06-02T19:09:41.1327638Z"
-[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 7780, path: "C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
-[Licensing::Module] LicensingClient has failed validation; ignoring
-[Licensing::Client] Handshaking with LicensingClient:
-  Version:                 1.18.1+9fbee8e
-  Session Id:              058e230b89274636925641dbe7386785
-  Correlation Id:          041b9e293b7c85fcbf5bb88ac4bc26c8
-  External correlation Id: 7281740088081001363
-  Machine Id:              aaz8R3PdWULESZ7tp/N2FERCrZ0=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jacob-6000.4.5" (connect: 0.00s, validation: 0.00s, handshake: 0.03s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob-6000.4.5-notifications" at "2026-06-02T19:09:41.1654853Z"
-[Licensing::Module] Licensing Background thread has ended after 1.49s
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002251 seconds.
+Registered in 0.003409 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
@@ -141,28 +124,45 @@ Package Manager log level set to [2]
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.247 seconds
-Domain Reload Profiling: 1363ms
-	BeginReloadAssembly (225ms)
-	RebuildCommonClasses (149ms)
-	RebuildNativeTypeToScriptingClass (8ms)
-	initialDomainReloadingComplete (44ms)
-	LoadAllAssembliesAndSetupDomain (690ms)
-		LoadAssemblies (222ms)
-		AnalyzeDomain (684ms)
-			TypeCache.Refresh (682ms)
-				TypeCache.ScanAssembly (496ms)
-	FinalizeReload (248ms)
+- Finished resetting the current domain, in  0.342 seconds
+Domain Reload Profiling: 798ms
+	BeginReloadAssembly (129ms)
+	RebuildCommonClasses (44ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (71ms)
+	LoadAllAssembliesAndSetupDomain (199ms)
+		LoadAssemblies (125ms)
+		AnalyzeDomain (190ms)
+			TypeCache.Refresh (189ms)
+				TypeCache.ScanAssembly (177ms)
+	FinalizeReload (343ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (31ms)
-			BeforeProcessingInitializeOnLoad (48ms)
-			ProcessInitializeOnLoadAttributes (69ms)
-			ProcessInitializeOnLoadMethodAttributes (55ms)
+			InitializePlatformSupportModulesInManaged (45ms)
+			BeforeProcessingInitializeOnLoad (72ms)
+			ProcessInitializeOnLoadAttributes (98ms)
+			ProcessInitializeOnLoadMethodAttributes (73ms)
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 ========================================================================
 Worker process is ready to serve import requests
 Import Worker Mode flag is 0x00
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-jacob"
+[Licensing::IpcConnector] LicenseClient-jacob channel disconnected successfully.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob-6000.4.5" at "2026-06-05T06:25:33.4586752Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 7696, path: "C:/Program Files/Unity/Hub/Editor/6000.4.5f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              13f1606bb66f4686b454fdc02e730968
+  Correlation Id:          01279194e12a176c6f2e55a6cd9ca35c
+  External correlation Id: 3200356250859814253
+  Machine Id:              aaz8R3PdWULESZ7tp/N2FERCrZ0=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jacob-6000.4.5" (connect: 0.00s, validation: 0.00s, handshake: 0.01s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jacob-6000.4.5-notifications" at "2026-06-05T06:25:33.4680466Z"
+[Licensing::Module] Licensing Background thread has ended after 2.00s
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
 [Licensing::Client] Successfully resolved entitlement details
@@ -224,48 +224,83 @@ Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInter
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.828 seconds
-Domain Reload Profiling: 2078ms
-	BeginReloadAssembly (124ms)
+- Finished resetting the current domain, in  0.567 seconds
+Domain Reload Profiling: 1233ms
+	BeginReloadAssembly (150ms)
 		DisableScriptedObjects (4ms)
 		CreateAndSetChildDomain (28ms)
-	RebuildCommonClasses (23ms)
-	RebuildNativeTypeToScriptingClass (8ms)
-	initialDomainReloadingComplete (47ms)
-	LoadAllAssembliesAndSetupDomain (1047ms)
-		LoadAssemblies (862ms)
-		AnalyzeDomain (248ms)
-			TypeCache.Refresh (200ms)
-				TypeCache.ScanAssembly (188ms)
-			BuildScriptInfoCaches (40ms)
+	RebuildCommonClasses (36ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (63ms)
+	LoadAllAssembliesAndSetupDomain (403ms)
+		LoadAssemblies (293ms)
+		AnalyzeDomain (190ms)
+			TypeCache.Refresh (134ms)
+				TypeCache.ScanAssembly (121ms)
+			BuildScriptInfoCaches (47ms)
 			ResolveRequiredComponents (7ms)
-	FinalizeReload (828ms)
+	FinalizeReload (567ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (3ms)
-			BeforeProcessingInitializeOnLoad (84ms)
-			ProcessInitializeOnLoadAttributes (226ms)
-			ProcessInitializeOnLoadMethodAttributes (51ms)
+			BeforeProcessingInitializeOnLoad (101ms)
+			ProcessInitializeOnLoadAttributes (243ms)
+			ProcessInitializeOnLoadMethodAttributes (59ms)
 			AfterProcessingInitializeOnLoad (4ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+		AwakeInstancesAfterBackupRestoration (6ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
 Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5948 unused Assets / (4.7 MB). Loaded Objects now: 6772.
-Memory consumption went from 153.2 MB to 148.5 MB.
-Total: 6.145000 ms (FindLiveObjects: 0.628000 ms CreateObjectMapping: 0.160800 ms MarkObjects: 3.728900 ms  DeleteObjects: 1.625700 ms)
+Unloading 5948 unused Assets / (6.0 MB). Loaded Objects now: 6772.
+Memory consumption went from 153.3 MB to 147.3 MB.
+Total: 8.513100 ms (FindLiveObjects: 0.950500 ms CreateObjectMapping: 0.231700 ms MarkObjects: 4.868900 ms  DeleteObjects: 2.459800 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3328160.485756 seconds.
-  path: Assets/Player/Handler
-  importAddress: Guid(d42a469a85d2f344f8add7038c73e3b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player/Handler using Guid(d42a469a85d2f344f8add7038c73e3b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: 'a627c8ec6c3cd0e90ddfb8f0dff34674') in 0.0072719 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5ef72b978951f1c048a66550ce655fb2 DependenciesID=fd99afc9c1a65b1710a946209d5b0cc2 StaticDependenciesID=e133a134217d410e2e71f3336531825b 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 3541514.491610 seconds.
+  path: Assets/Player/Clanker.prefab
+  importAddress: Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Clanker.prefab using Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'bf2b13880a841f5517271836eb7f0922') in 0.1088395 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b5bf7e366de12e0a375b0b9ba8be8251 DependenciesID=7ac24506451228e3c98d208327006574 StaticDependenciesID=e1afa03ad228f083f700cb1872f1b28a 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 205
 
 ========================================================================
 Received Import Request.
-  Time since last request: 926.349357 seconds.
-  path: Assets/Player/Clanker-Third Person.prefab
+  Time since last request: 137.983596 seconds.
+  path: Assets/Player/Clanker.prefab
   importAddress: Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player/Clanker-Third Person.prefab using Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: 'f134f7d0fadff32258b51afbe2b0fbd7') in 0.3213677 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=09afb4b994d7906cfb6fde9ba1ec4e6a DependenciesID=b42d10ba4d0aaa1fe5931016e687473c StaticDependenciesID=076aebec2f2ac37ca0eec9706d5c16df 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 306
+Start importing Assets/Player/Clanker.prefab using Guid(1b42ba1bc5b2fa548933b0b63027d163) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: '9aa66904b818a407187a6e709186dc47') in 0.357119 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4ebb800ac85855649794d50f30dc1994 DependenciesID=4ae9f877dd7ccd0e23c1743e5e231a82 StaticDependenciesID=d5b1db87a3adac5eb6fa911816654819 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 266
 
+========================================================================
+Received Import Request.
+  Time since last request: 439.479429 seconds.
+  path: Assets/Player/Animations/Player.controller
+  importAddress: Guid(86644fecc8e786445a38d2e7ab8c27ef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Animations/Player.controller using Guid(86644fecc8e786445a38d2e7ab8c27ef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '36f817ebab280a208cf77bd4035d3595') in 0.0116347 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=32b79f98743082babef0901179c567ac DependenciesID=75654da56a2198425a45be30601ec1f9 StaticDependenciesID=a84342aa3284fecef5eaa042cc284304 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 25
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.456635 seconds.
+  path: Assets/Player/PlayerHuman.prefab
+  importAddress: Guid(1b45f532586bf7942a3da7761546c1d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player/PlayerHuman.prefab using Guid(1b45f532586bf7942a3da7761546c1d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: '8283f36c946f3dc48dcf7e934590b94d') in 0.0600121 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ae6afdbf339f7cd01aadd1b6af0d3ad3 DependenciesID=e93b9f5078ce08fbf07c607311912185 StaticDependenciesID=8f0f69faeee425929180ec2845a8bccb 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 455
+
+========================================================================
+Received Import Request.
+  Time since last request: 2387.916536 seconds.
+  path: Assets/Player/Animations/Walking.anim
+  importAddress: Guid(a0ed169d8dfd07045a80abfac4367d0a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Animations/Walking.anim using Guid(a0ed169d8dfd07045a80abfac4367d0a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '6cf3e9d7e5222593c7455f6ffab11127') in 0.0230671 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c8936cf0a92ec81e5c3da87379b14c0c DependenciesID=07e75c3d84efba9bcd172920bd6ed0eb StaticDependenciesID=7c1806887e79702dbd185ebe7d2eadea 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Player/Animations/GetUpFaceUp.anim
+  importAddress: Guid(55913a59c1177b349aaaf0d333725cb2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Player/Animations/GetUpFaceUp.anim using Guid(55913a59c1177b349aaaf0d333725cb2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '7358fac61a0ad83b3e35be657e776e45') in 0.011128 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a03be487570f4571bcd5647583ff2f16 DependenciesID=2f5f6ef5462a0ff8f5f6ef4c1d925667 StaticDependenciesID=3ed80ef77fb7a266a807ba468e89a5a9 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
