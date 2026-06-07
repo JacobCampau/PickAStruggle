@@ -9,10 +9,14 @@ public class PlayerState : MonoBehaviour
     }
 
     public bool InGroundedState() {
-        return  CurrentPlayerMovementState == EPlayerMovementState.Idling ||
-                CurrentPlayerMovementState == EPlayerMovementState.Walking ||
-                CurrentPlayerMovementState == EPlayerMovementState.Running ||
-                CurrentPlayerMovementState == EPlayerMovementState.Sprinting;
+        return IsStateGroundedState(CurrentPlayerMovementState);
+    }
+
+    public bool IsStateGroundedState(EPlayerMovementState movementState) {
+        return movementState == EPlayerMovementState.Idling ||
+                movementState == EPlayerMovementState.Walking ||
+                movementState == EPlayerMovementState.Running ||
+                movementState == EPlayerMovementState.Sprinting;
     }
 }
 
@@ -23,5 +27,5 @@ public enum EPlayerMovementState {
     Sprinting = 3,
     Jumping = 4,
     Falling = 5,
-    Strafing = 6,
+    Ragdoll = 6,
 }

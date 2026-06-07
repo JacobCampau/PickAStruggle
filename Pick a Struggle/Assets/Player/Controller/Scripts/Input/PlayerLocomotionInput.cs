@@ -8,26 +8,32 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
 {
     #region Class Variables
     [SerializeField] private bool holdToSprint = true;
-
-    public bool JumpPressed { get; private set; }
-    public bool SprintToggledOn { get; private set; }
-    public PlayerControls PlayerControls { get; private set; }
     public Vector2 MovementInput { get; private set; }
     public Vector2 LookInput { get; private set; }
+    public bool JumpPressed { get; private set; }
+    public bool SprintToggledOn { get; private set; }
+    public bool CrouchToggledOn { get; private set; }
     #endregion
 
     #region Enable / Disable
     private void OnEnable() {
-        PlayerControls = new PlayerControls();
-        PlayerControls.Enable();
+        if(PlayerInputManager.Instance?.PlayerControls == null) {
+            Debug.LogError("Player controls is not intitialized");
+            return;
+        }
 
-        PlayerControls.PlayerLocomotionMap.Enable();
-        PlayerControls.PlayerLocomotionMap.SetCallbacks(this);
+        PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.Enable();
+        PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.SetCallbacks(this);
     }
 
     private void OnDisable() {
-        PlayerControls.PlayerLocomotionMap.Disable();
-        PlayerControls.PlayerLocomotionMap.RemoveCallbacks(this);
+        if(PlayerInputManager.Instance?.PlayerControls == null) {
+            Debug.LogError("Player controls is not intitialized");
+            return;
+        }
+
+        PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.Disable();
+        PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.RemoveCallbacks(this);
     }
     #endregion
 
@@ -58,6 +64,12 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
         if(!context.performed) return;
 
         JumpPressed = true;
+    }
+
+    public void OnToggleCrouch(InputAction.CallbackContext context) {
+        if(!context.performed) return;
+
+        CrouchToggledOn = !CrouchToggledOn;
     }
     #endregion
 }

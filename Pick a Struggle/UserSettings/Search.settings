@@ -2,13 +2,16 @@ trackSelection = true
 refreshSearchWindowsInPlayMode = false
 pickerAdvancedUI = false
 fetchPreview = true
-defaultFlags = 0
+defaultFlags = 264
 keepOpen = true
 queryFolder = "Assets"
 onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.66F56946" = "inherit position"
+	"OpenInspectorPreview.66F56946" = "0"
+	"currentGroup.66F56946" = "scene"
 }
 providers = {
 	asset = {
@@ -65,6 +68,8 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"inherit position"
+	"inheri"
 ]
 searchItemFavorites = [
 ]

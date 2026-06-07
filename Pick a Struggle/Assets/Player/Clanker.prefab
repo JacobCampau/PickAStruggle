@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4068702937780813195}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Target_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2852429829116690336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right Arm_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3267753591072020967}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hint_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 7887419783625321349}
   - component: {fileID: 5172487348193403272}
   - component: {fileID: 4151144801138656644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Lower Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4763418232228202353}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.L.Upper Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7588964384149301752}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.L.Lower Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6631274403172589909}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 570311932223221633}
   - component: {fileID: 3064351167951159601}
   - component: {fileID: 7627333997875628127}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Lower leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4590878371113645522}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left Arm_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 6175380736845203416}
   - component: {fileID: 4963101626170464416}
   - component: {fileID: 4134472323520704254}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2240808300133956107}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left Leg_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5988904883548525773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right Leg_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2473597744870851223}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.L.Foot_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 4169709723445197897}
   - component: {fileID: 4108554509546653167}
   - component: {fileID: 2278293789497314120}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -695,7 +695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8696186975466170703}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.Hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4137120159268399059}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right Leg_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -762,7 +762,7 @@ GameObject:
   - component: {fileID: 2964276977085669761}
   - component: {fileID: 3355958157077122907}
   - component: {fileID: 9052772324328515951}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,7 +909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2399903238286648153}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -944,7 +944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5388097519393692939}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.R.Lower Arm_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -975,7 +975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3009069998506241635}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.L.Lower Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1094,10 +1094,10 @@ MonoBehaviour:
   CameraSide: 1
   CameraDistance: 4
   AvoidObstacles:
-    Enabled: 0
+    Enabled: 1
     CollisionFilter:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 8
     IgnoreTag: 
     CameraRadius: 0.2
     DampingIntoCollision: 0
@@ -1116,7 +1116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineThirdPersonAim
   AimCollisionFilter:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   IgnoreTag: 
   AimDistance: 200
   NoiseCancellation: 1
@@ -1129,7 +1129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4405373064599872069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GatherBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6077033870279449573}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.Head_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1250,7 +1250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7534389431357040644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.L.Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,7 +1283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3988838603610374566}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left Leg_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1316,7 +1316,7 @@ GameObject:
   - component: {fileID: 234656285555581346}
   - component: {fileID: 4125309863909714376}
   - component: {fileID: 3922826490494579820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Upper Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1517,7 +1517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7132026194653223457}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.Hip_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1549,7 +1549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8164947110832748251}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.R.Upper Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1582,7 +1582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5704627750911188395}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.R.Lower Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1618,7 +1618,7 @@ GameObject:
   - component: {fileID: 8010103755902188081}
   - component: {fileID: 6634696090155160575}
   - component: {fileID: 4396107157660678728}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DummyCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1756,7 +1756,7 @@ GameObject:
   - component: {fileID: 3285580671636772395}
   - component: {fileID: 4895730214051298086}
   - component: {fileID: 5643182196809356155}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Lower Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1845,7 +1845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8316617546516359466}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1879,7 +1879,7 @@ GameObject:
   - component: {fileID: 5149869778861170602}
   - component: {fileID: 214774564828424815}
   - component: {fileID: 4533410129863093980}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Lower Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1968,7 +1968,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4857823933601611617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.R.Foot_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1999,7 +1999,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3810471937287647682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Target_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2031,7 +2031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6820505424238805093}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.R.Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2066,7 +2066,7 @@ GameObject:
   - component: {fileID: 3555841875390762244}
   - component: {fileID: 1714057500560309384}
   - component: {fileID: 6726281689928630608}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Upper Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2157,7 +2157,7 @@ GameObject:
   - component: {fileID: 671602727620841492}
   - component: {fileID: 6339892885500585860}
   - component: {fileID: 5606685038321638529}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Upper Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2248,7 +2248,7 @@ GameObject:
   - component: {fileID: 8445015802883149786}
   - component: {fileID: 1144766748456481635}
   - component: {fileID: 4269013435000837836}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Upper Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2339,7 +2339,7 @@ GameObject:
   - component: {fileID: 9105777485436709722}
   - component: {fileID: 6043836546801271945}
   - component: {fileID: 6254939012000363319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,7 +2486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2795887060252504208}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left Arm_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2521,7 +2521,7 @@ GameObject:
   - component: {fileID: 4157751182737297699}
   - component: {fileID: 2072640996163239463}
   - component: {fileID: 1174668473258022051}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -2745,7 +2745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4066612823950014064}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.R.Lower Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2778,7 +2778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8218556527928432601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right Arm_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2809,7 +2809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9180474088671860039}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hint_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2985,7 +2985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5098300563009866833}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.L.Upper Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3018,7 +3018,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4750836427431861723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hint_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3050,7 +3050,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2069491220871616194}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.Lower Arm_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3081,7 +3081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5155612024876254904}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Target_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3113,7 +3113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3975610470036072890}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Target_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3145,7 +3145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9120575564296055126}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: B.R.Upper Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3178,7 +3178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 718115924316278322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hint_Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3218,6 +3218,7 @@ GameObject:
   - component: {fileID: 5985231346047364895}
   - component: {fileID: 6723228738952771369}
   - component: {fileID: 1536389622319541932}
+  - component: {fileID: 1585912708435995191}
   m_Layer: 7
   m_Name: Clanker
   m_TagString: Player
@@ -3345,8 +3346,8 @@ CharacterController:
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_SkinWidth: 0.01
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5406306563732500395
 MonoBehaviour:
@@ -3362,15 +3363,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _characterController: {fileID: 4435234861691689341}
   _playerCamera: {fileID: 8010103755902188081}
-  runAcceleration: 500
-  runSpeed: 3
-  sprintAcceleration: 700
+  crouchAcceleration: 0.15
+  crouchSpeed: 2
+  runAcceleration: 35
+  runSpeed: 4
+  sprintAcceleration: 50
   sprintSpeed: 7
-  drag: 15
+  inAirAcceleration: 0.5
+  drag: 20
+  inAirDrag: 5
   movingThreshold: 0.01
+  gravity: 25
+  terminalVelocity: 50
+  jumpSpeed: 1
+  playerModelRotationSpeed: 10
+  rotateToTargetTime: 0.3
   lookSenseH: 0.2
   lookSenseV: 0.2
-  lookLimitV: 70
+  lookLimitV: 89
+  _groundLayers:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &5985231346047364895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3411,3 +3424,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
   _animator: {fileID: 6720803263102730386}
   locomotionBlendSpeed: 4
+  actionHashes: 
+--- !u!114 &1585912708435995191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790766626032907570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804ecafe3dfcc41469aeb863bec1fac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerActionsInput
