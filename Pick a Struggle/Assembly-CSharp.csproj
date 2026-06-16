@@ -50,30 +50,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Items\ItemData.cs" />
-    <Compile Include="Assets\Player\Player Code\RagdollLogic.cs" />
-    <Compile Include="Assets\Player\Player Code\PlayerCombat.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\PlayerState.cs" />
     <Compile Include="Assets\Player\Controller\Input\PlayerControls.cs" />
-    <Compile Include="Assets\Player\Player Code\PlayerAnimator.cs" />
     <Compile Include="Assets\State Machine\StateMachine.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\PlayerRagdoll.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\PlayerHeadTracking.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\Input\PlayerLocomotionInput.cs" />
-    <Compile Include="Assets\Player\Player Code\PlayerMovement.cs" />
-    <Compile Include="Assets\Player\Handler\PlayerHandler.cs" />
-    <Compile Include="Assets\Player\Player Code\PlayerStats.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\PlayerAnimation.cs" />
-    <Compile Include="Assets\Player\Player Code\PlayerGrabbing.cs" />
-    <Compile Include="Assets\Player\Player Code\ThirdPersonCam.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\PlayerStatHandler.cs" />
     <Compile Include="Assets\Player\_Others\Zombie.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\PlayerStats.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\Emotion\PlayerEmotion.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\Input\PlayerActionsInput.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\CharacterControlUtils.cs" />
-    <Compile Include="Assets\Player\Player Code\PlayerEmotion.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\Combat\PlayerCombat.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\Inventory\PlayerGrabbing.cs" />
     <Compile Include="Assets\Player\_Others\EarlyZombie.cs" />
-    <Compile Include="Assets\Player\Player Code\PlayerHitbox.cs" />
-    <Compile Include="Assets\Player\Player Code\PlayerInventory.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\Input\PlayerInputManager.cs" />
     <Compile Include="Assets\State Machine\State.cs" />
     <Compile Include="Assets\Items\Item.cs" />
+    <Compile Include="Assets\Player\Controller\Scripts\Inventory\PlayerInventory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

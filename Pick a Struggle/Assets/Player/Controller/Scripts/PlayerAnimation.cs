@@ -30,6 +30,9 @@ public class PlayerAnimation : MonoBehaviour
     private static int isHumpingHash = Animator.StringToHash("isHumping");
     private static int isWavingHash = Animator.StringToHash("isWaving");
 
+    // Ragdoll
+    private static int isRagdollHash = Animator.StringToHash("isRagdoll");
+
     private Vector3 _currentBlendInput = Vector3.zero;
 
     private float _sprintMaxBlendValue = 1.5f;
@@ -56,6 +59,7 @@ public class PlayerAnimation : MonoBehaviour
         bool isFalling = _playerState.CurrentPlayerMovementState == EPlayerMovementState.Falling;
         bool isGrounded = _playerState.InGroundedState();
         bool isPlayingAction = actionHashes.Any(hash => _animator.GetBool(hash));
+        bool isRagdoll = _playerState.CurrentPlayerMovementState == EPlayerMovementState.Ragdoll;
 
         bool isRunBlendValue = isRunning || isJumping || isFalling;
         Vector2 inputTarget = isSprinting ? _playerLocomotionInput.MovementInput * _sprintMaxBlendValue : 
@@ -72,6 +76,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool(isHumpingHash, _playerActionsInput.HumpPressed);
         _animator.SetBool(isPlayingActionHash, isPlayingAction);
         _animator.SetBool(isWavingHash, _playerActionsInput.WavePressed);
+        _animator.SetBool(isRagdollHash, isRagdoll);
 
         _animator.SetFloat(inputXHash, _currentBlendInput.x);
         _animator.SetFloat(inputYHash, _currentBlendInput.y);

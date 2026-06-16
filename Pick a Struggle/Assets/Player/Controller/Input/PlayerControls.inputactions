@@ -45,7 +45,7 @@
                 {
                     "name": "ToggleCrouch",
                     "type": "Button",
-                    "id": "86772d7c-75a4-4183-970a-68fe865078bb",
+                    "id": "414bcdb2-d43b-49a4-85b6-80eba5cc3088",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -198,7 +198,7 @@
                 },
                 {
                     "name": "",
-                    "id": "15c85503-6de0-4fd1-8dc6-be54714db62e",
+                    "id": "361228fe-f488-42bc-b696-be9ba72c2b2a",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",

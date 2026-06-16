@@ -14,13 +14,16 @@ public class PlayerController : MonoBehaviour
     public float RotationMismatch { get; private set; } = 0f;
     public bool IsRotatingToTarget { get; private set; } = false;
 
+    [Header("Debug")]
+    public float timeScale = 1f;
+
     [Header("Base Movement")]
     public float crouchAcceleration = 0.15f;
-    public float crouchSpeed = 2f;
+    private float crouchSpeed;
     public float runAcceleration = 0.25f;
-    public float runSpeed = 4f;
+    private float runSpeed;
     public float sprintAcceleration = 0.5f;
-    public float sprintSpeed = 7f;
+    private float sprintSpeed;
     public float inAirAcceleration = 0.15f;
     public float drag = 20f;
     public float inAirDrag = 5f;
@@ -43,15 +46,23 @@ public class PlayerController : MonoBehaviour
 
     [Header("Environment Details")]
     [SerializeField] private LayerMask _groundLayers;
+    public float groundCheckOffset = 0f;
+    public float groundCheckRadius = 0.2f;
 
     private PlayerLocomotionInput _playerLocomotionInput;
+    private PlayerActionsInput _playerActionInput;
+
     private PlayerState _playerState;
+    private PlayerStatHandler _statHandler;
+    private PlayerCombat _playerCombat;
 
     private Vector2 _cameraRotation = Vector2.zero;
     private Vector2 _playerTargetRotation = Vector2.zero;
+    private Vector3 _maxPlayerVelocity = Vector3.zero;
 
     private bool _jumpedLastFrame = false;
     private bool _isRotatingClockwise = false;
+
     private float _rotatingToTargetTimer = 0f;
     private float _verticalVelocity = 0f;
     private float _antiBump;
@@ -63,22 +74,34 @@ public class PlayerController : MonoBehaviour
     #region Start Methods
     private void Awake() {
         _playerLocomotionInput = GetComponent<PlayerLocomotionInput>();
+        _playerActionInput = GetComponent<PlayerActionsInput>();
+
         _playerState = GetComponent<PlayerState>();
+        _statHandler = GetComponent<PlayerStatHandler>();
+        _playerCombat = GetComponent<PlayerCombat>();
 
         _antiBump = sprintSpeed;
         _stepOffset = _characterController.stepOffset;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void Start() {
+        // Set the stats
+        crouchSpeed = _statHandler.Stats.crouchSpeed;
+        runSpeed = _statHandler.Stats.runSpeed;
+        sprintSpeed = _statHandler.Stats.sprintSpeed;
     }
     #endregion
 
     #region Update Logic
     private void Update() {
-        // Controls when state updates are allowed
-        if(_playerState.CurrentPlayerMovementState != EPlayerMovementState.Ragdoll)
-            UpdateMovementState();
-        
-
+        UpdateMovementState();
         VerticalMovement();
         LateralMovement();
+
+        Time.timeScale = timeScale;
     } 
 
     void UpdateMovementState() {
@@ -87,19 +110,25 @@ public class PlayerController : MonoBehaviour
         bool isMovementInput = _playerLocomotionInput.MovementInput != Vector2.zero;
         bool isMovingLaterally = IsMovingLaterally();
         bool isSprinting = _playerLocomotionInput.SprintToggledOn && isMovingLaterally;
+        bool isCrouching = _playerLocomotionInput.CrouchToggledOn;
         bool isGrounded = IsGrounded();
+        bool isRagdoll = _playerState.CurrentRagdollState != ERagdollState.Complete;
 
-        EPlayerMovementState lateralState = isSprinting ? EPlayerMovementState.Sprinting :
+        Vector3 movingDirection = _characterController.velocity;
+
+        EPlayerMovementState lateralState = isRagdoll ? EPlayerMovementState.Ragdoll :
+                                            isCrouching ? EPlayerMovementState.Crouching :
+                                            isSprinting ? EPlayerMovementState.Sprinting :
                                             isMovingLaterally || isMovementInput ? EPlayerMovementState.Running : EPlayerMovementState.Idling;
 
         _playerState.SetPlayerMovementState(lateralState);
 
         // Airborn
-        if((!isGrounded || _jumpedLastFrame) && _characterController.velocity.y > 0f) {
+        if((!isGrounded || _jumpedLastFrame) && _characterController.velocity.y > 0f && !isRagdoll) {
             _playerState.SetPlayerMovementState(EPlayerMovementState.Jumping);
             _jumpedLastFrame = false;
             _characterController.stepOffset = 0f;
-        }else if((!isGrounded || _jumpedLastFrame) && _characterController.velocity.y <= 0f) {
+        }else if((!isGrounded || _jumpedLastFrame) && _characterController.velocity.y <= 0f && !isRagdoll) {
             _playerState.SetPlayerMovementState(EPlayerMovementState.Falling);
             _jumpedLastFrame = false;
             _characterController.stepOffset = 0f;
@@ -108,11 +137,19 @@ public class PlayerController : MonoBehaviour
         }
 
         // Ragdoll
-        if(_lastMovementState == EPlayerMovementState.Falling && IsGrounded()) {
-            if(Mathf.Abs(_characterController.velocity.y) > fallDamageVelocity) {
-                // Fell too hard
-                _playerState.SetPlayerMovementState(EPlayerMovementState.Ragdoll);
+        if(_playerState.CurrentPlayerMovementState == EPlayerMovementState.Falling) {
+            if(Mathf.Abs(movingDirection.y) > Mathf.Abs(_maxPlayerVelocity.y)) {
+                _maxPlayerVelocity = movingDirection;
             }
+        }
+
+        if(_lastMovementState == EPlayerMovementState.Falling && isGrounded) {
+            if(Mathf.Abs(_maxPlayerVelocity.y) > fallDamageVelocity) {
+                // Set ragdoll and get the wanted velocity
+                Vector3 fallDirection = new Vector3(_maxPlayerVelocity.x, 0f, _maxPlayerVelocity.z);
+                _playerCombat.FallDamage(_maxPlayerVelocity, fallDirection.magnitude);
+            }
+            _maxPlayerVelocity = Vector3.zero;
         }
     }
 
@@ -129,7 +166,7 @@ public class PlayerController : MonoBehaviour
             _jumpedLastFrame = true;
         }
 
-        if(_playerState.IsStateGroundedState(_lastMovementState) && isGrounded) {
+        if(_playerState.IsStateGroundedState(_lastMovementState) && !isGrounded) {
             _verticalVelocity += _antiBump;
         }
 
@@ -139,12 +176,15 @@ public class PlayerController : MonoBehaviour
 
     void LateralMovement() {
         bool isSprinting = _playerState.CurrentPlayerMovementState == EPlayerMovementState.Sprinting;
+        bool isCrouching = _playerState.CurrentPlayerMovementState == EPlayerMovementState.Crouching;
         bool isGrounded = _playerState.InGroundedState();
         bool canMove = _playerState.CurrentPlayerMovementState != EPlayerMovementState.Ragdoll;
 
         float lateralAcceleration = !isGrounded ? inAirAcceleration :
+                                    isCrouching ? crouchAcceleration :
                                     isSprinting ? sprintAcceleration : runAcceleration;
         float clampLateralMagnitude = !isGrounded ? (sprintSpeed + runSpeed) / 2 :
+                                    isCrouching ? crouchSpeed :
                                     isSprinting ? sprintSpeed : runSpeed;
 
         Vector3 cameraForwardXZ = new Vector3(_playerCamera.transform.forward.x, 0f, _playerCamera.transform.forward.z).normalized;
@@ -222,6 +262,7 @@ public class PlayerController : MonoBehaviour
         _rotatingToTargetTimer -= Time.deltaTime;
 
         if(_isRotatingClockwise && RotationMismatch > 0 || !_isRotatingClockwise && RotationMismatch < 0) {
+            _playerActionInput.SetHumpPressedFalse();
             RotatePlaterToTarget();
         }
     }
@@ -246,8 +287,8 @@ public class PlayerController : MonoBehaviour
     }
 
     bool IsGroundedWhileGrounded() {
-        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - _characterController.radius/2, transform.position.z);
-        bool grounded = Physics.CheckSphere(spherePosition, _characterController.radius, _groundLayers, QueryTriggerInteraction.Ignore);
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y + groundCheckOffset, transform.position.z);
+        bool grounded = Physics.CheckSphere(spherePosition, groundCheckRadius, _groundLayers, QueryTriggerInteraction.Ignore);
         return grounded;
     }
 
@@ -256,6 +297,17 @@ public class PlayerController : MonoBehaviour
         float angle = Vector3.Angle(normal, Vector3.up);
         bool validAngle = angle <= _characterController.slopeLimit;
         return _characterController.isGrounded && validAngle;
+    }
+
+    private void OnDrawGizmosSelected() {
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y + groundCheckOffset, transform.position.z);
+
+        // Change color to green if it detects something, otherwise red
+        bool isColliding = Physics.CheckSphere(spherePosition, groundCheckRadius, _groundLayers, QueryTriggerInteraction.Ignore);
+        Gizmos.color = isColliding ? Color.green : Color.red;
+
+        // Draw a wireframe sphere so it doesn't block your view
+        Gizmos.DrawWireSphere(spherePosition, groundCheckRadius);
     }
     #endregion
 }

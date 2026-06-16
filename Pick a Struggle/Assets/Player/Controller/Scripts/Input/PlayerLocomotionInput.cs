@@ -8,6 +8,7 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
 {
     #region Class Variables
     [SerializeField] private bool holdToSprint = true;
+    [SerializeField] private bool holdToCrouch = true;
     public Vector2 MovementInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool JumpPressed { get; private set; }
@@ -67,9 +68,11 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
     }
 
     public void OnToggleCrouch(InputAction.CallbackContext context) {
-        if(!context.performed) return;
-
-        CrouchToggledOn = !CrouchToggledOn;
+        if(context.performed) {
+            CrouchToggledOn = holdToCrouch || !CrouchToggledOn;
+        } else if(context.canceled) {
+            CrouchToggledOn = !holdToSprint && CrouchToggledOn;
+        }
     }
     #endregion
 }
