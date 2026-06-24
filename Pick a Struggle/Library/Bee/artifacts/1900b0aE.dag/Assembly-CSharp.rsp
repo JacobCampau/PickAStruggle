@@ -476,6 +476,7 @@
 "Assets/Items/ItemData.cs"
 "Assets/Player/Controller/Input/PlayerControls.cs"
 "Assets/Player/Controller/Scripts/CharacterControlUtils.cs"
+"Assets/Player/Controller/Scripts/CharacterJointSnapshot.cs"
 "Assets/Player/Controller/Scripts/Combat/PlayerCombat.cs"
 "Assets/Player/Controller/Scripts/Emotion/PlayerEmotion.cs"
 "Assets/Player/Controller/Scripts/Input/PlayerActionsInput.cs"

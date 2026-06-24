@@ -1,4 +1,5 @@
 using PurrNet;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerCombat : NetworkIdentity
@@ -6,6 +7,7 @@ public class PlayerCombat : NetworkIdentity
     private PlayerStatHandler _statHandler;
     private PlayerRagdoll _playerRagdoll;
     private PlayerState _playerState;
+    private PlayerActionsInput _playerActionInput;
 
     // Health stats
     private float _health;
@@ -34,6 +36,10 @@ public class PlayerCombat : NetworkIdentity
     // Other
     [SerializeField] private bool _debug;
 
+    [Header("Camera")]
+    [SerializeField] private CinemachineCamera _mainCamera;
+    [SerializeField] private CinemachineCamera _aimCamera;
+
     [Header("Fall Damage Mult")]
     [SerializeField] private float _fallDamageMult = 1;
 
@@ -43,6 +49,7 @@ public class PlayerCombat : NetworkIdentity
     private void Awake()
     {
         // Components
+        _playerActionInput = GetComponent<PlayerActionsInput>();
         _statHandler = GetComponent<PlayerStatHandler>();
         _playerRagdoll = GetComponent<PlayerRagdoll>();
         _playerState = GetComponent<PlayerState>();
@@ -74,12 +81,25 @@ public class PlayerCombat : NetworkIdentity
             DeathSequence();
             _deathSequence = true;
         }
+
+        // Aim Logic
+        SetActiveCamera();
     }
 
     private void DeathSequence(){
         // All actions that happen with death
         Debug.Log("Player Has Died");
         _playerRagdoll.StunPlayer(Vector3.up, (1933/54));
+    }
+
+    void SetActiveCamera() {
+        if(_playerActionInput.AimPressed) {
+            _mainCamera.Priority = 0;
+            _aimCamera.Priority = 1;
+        } else {
+            _mainCamera.Priority = 1;
+            _aimCamera.Priority = 0;
+        }
     }
 
     // Player affects
@@ -105,7 +125,7 @@ public class PlayerCombat : NetworkIdentity
 
         // Ragdoll direction and logic
         Vector3 ragdollForce = new Vector3(dir.x, 0f, dir.z);
-        _playerRagdoll.StunPlayer(ragdollForce, forceMult); // begin the ragdoll
+        _playerRagdoll.BreakPlayer(ragdollForce, forceMult); // break player
     }
 
     // Setters used to ensure the stats are accurate to boosts

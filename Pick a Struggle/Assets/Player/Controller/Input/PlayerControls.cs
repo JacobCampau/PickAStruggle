@@ -316,6 +316,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""7004b53e-4f49-4f54-83a7-dd274865deae"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -340,6 +349,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Wave"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b22a51b7-0f22-4d85-b1ac-87bba5e5b3da"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -357,6 +377,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActionMap = asset.FindActionMap("PlayerActionMap", throwIfNotFound: true);
         m_PlayerActionMap_HumpDance = m_PlayerActionMap.FindAction("Hump Dance", throwIfNotFound: true);
         m_PlayerActionMap_Wave = m_PlayerActionMap.FindAction("Wave", throwIfNotFound: true);
+        m_PlayerActionMap_Aim = m_PlayerActionMap.FindAction("Aim", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -580,6 +601,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerActionMapActions> m_PlayerActionMapActionsCallbackInterfaces = new List<IPlayerActionMapActions>();
     private readonly InputAction m_PlayerActionMap_HumpDance;
     private readonly InputAction m_PlayerActionMap_Wave;
+    private readonly InputAction m_PlayerActionMap_Aim;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerActionMap".
     /// </summary>
@@ -599,6 +621,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActionMap/Wave".
         /// </summary>
         public InputAction @Wave => m_Wrapper.m_PlayerActionMap_Wave;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActionMap/Aim".
+        /// </summary>
+        public InputAction @Aim => m_Wrapper.m_PlayerActionMap_Aim;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -631,6 +657,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Wave.started += instance.OnWave;
             @Wave.performed += instance.OnWave;
             @Wave.canceled += instance.OnWave;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         /// <summary>
@@ -648,6 +677,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Wave.started -= instance.OnWave;
             @Wave.performed -= instance.OnWave;
             @Wave.canceled -= instance.OnWave;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         /// <summary>
@@ -745,5 +777,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWave(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAim(InputAction.CallbackContext context);
     }
 }

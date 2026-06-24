@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private float _verticalVelocity = 0f;
     private float _antiBump;
     private float _stepOffset;
+    private float _airborneTime = 0f;
 
     private EPlayerMovementState _lastMovementState = EPlayerMovementState.Falling;
     #endregion
@@ -80,7 +81,6 @@ public class PlayerController : MonoBehaviour
         _statHandler = GetComponent<PlayerStatHandler>();
         _playerCombat = GetComponent<PlayerCombat>();
 
-        _antiBump = sprintSpeed;
         _stepOffset = _characterController.stepOffset;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
         crouchSpeed = _statHandler.Stats.crouchSpeed;
         runSpeed = _statHandler.Stats.runSpeed;
         sprintSpeed = _statHandler.Stats.sprintSpeed;
+
+        _antiBump = sprintSpeed;
     }
     #endregion
 
@@ -194,16 +196,27 @@ public class PlayerController : MonoBehaviour
         Vector3 movementDelta = movementDirection * lateralAcceleration;
         Vector3 newVelocity = _characterController.velocity + movementDelta;
 
+        // Airborne frames
+        if(!isGrounded) _airborneTime += Time.deltaTime;
+        else _airborneTime = 0f;
+        bool wallCheckReady = _airborneTime > 0.1f;
+
         // Add drag
         float dragManitude = isGrounded ? drag : inAirDrag;
         Vector3 currentDrag = newVelocity.normalized * dragManitude * Time.deltaTime;
         newVelocity = (newVelocity.magnitude > dragManitude * Time.deltaTime) ? newVelocity - currentDrag : Vector3.zero;
         newVelocity = Vector3.ClampMagnitude(new Vector3(newVelocity.x, 0f, newVelocity.z), clampLateralMagnitude);
         newVelocity.y += _verticalVelocity;
-        newVelocity = !isGrounded ? HandleSteepWalls(newVelocity) : newVelocity;
+        newVelocity = (!isGrounded && wallCheckReady) ? HandleSteepWalls(newVelocity) : newVelocity;
 
         // Check state if dead/ragdoll
         if(!canMove) return;
+
+        // Check animations
+        Vector3 lateralMovement = new Vector3(newVelocity.x, 0f, newVelocity.z);
+        if(lateralMovement != Vector3.zero) {
+            _playerActionInput.SetHumpPressedFalse();
+        }
 
         // ONLY CALL ONCE PER FRAME!!
         _characterController.Move(newVelocity * Time.deltaTime);
@@ -214,8 +227,9 @@ public class PlayerController : MonoBehaviour
         float angle = Vector3.Angle(normal, Vector3.up);
         bool validAngle = angle <= _characterController.slopeLimit;
 
-        if(!validAngle && _verticalVelocity < 0f)
+        if(!validAngle && _verticalVelocity < 0f) {
             velocity = Vector3.ProjectOnPlane(velocity, normal);
+        } 
 
         return velocity;
     }

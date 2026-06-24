@@ -5,8 +5,12 @@ public class PlayerActionsInput : MonoBehaviour, PlayerControls.IPlayerActionMap
     #region Class Variables
     private PlayerLocomotionInput _playerLocomotionInput;
     private PlayerState _playerState;
+
+    [SerializeField] private bool holdToAim = true;
+
     public bool HumpPressed { get; private set; } = false;
     public bool WavePressed { get; private set; } = false;
+    public bool AimPressed { get; private set; } = false;
     #endregion
 
     #region Startup
@@ -65,6 +69,14 @@ public class PlayerActionsInput : MonoBehaviour, PlayerControls.IPlayerActionMap
         if(!context.performed) return;
 
         WavePressed = true;
+    }
+
+    public void OnAim(InputAction.CallbackContext context) {
+        if(context.performed) {
+            AimPressed = holdToAim || !AimPressed;
+        } else if(context.canceled) {
+            AimPressed = !holdToAim && AimPressed;
+        }
     }
     #endregion
 }
