@@ -58,6 +58,7 @@
     <Compile Include="Assets\Player\Controller\Scripts\PlayerRagdoll.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\PlayerHeadTracking.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\Input\PlayerLocomotionInput.cs" />
+    <Compile Include="Assets\Obstacle\SpeedCube.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\PlayerAnimation.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\PlayerStatHandler.cs" />
     <Compile Include="Assets\Player\_Others\Zombie.cs" />

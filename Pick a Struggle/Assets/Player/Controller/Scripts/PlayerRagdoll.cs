@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -44,6 +45,11 @@ public class PlayerRagdoll : MonoBehaviour
     [SerializeField] private string _fallingClipName;
 
     [SerializeField] private float _timeToResetBones;
+
+    [Header("Broken Adjustments")]
+    [SerializeField] private float _timeToRepairBones;
+    [SerializeField] private float _repairVariations;
+    [SerializeField] private float _repairVerticalOffset;
     
     [Header("Particles")]
     [SerializeField] private ParticleSystem _fallenParticles;
@@ -65,6 +71,7 @@ public class PlayerRagdoll : MonoBehaviour
 
     private float _elapsedResetBonesTime = 0f;
     private float _currentFollowTime = 0f;
+    private float[] _randomTimes;
 
     private Transform _hipBone;
     private Transform _rootBone;
@@ -91,12 +98,14 @@ public class PlayerRagdoll : MonoBehaviour
         _getUpFaceDownBoneTransforms = new BoneTransform[_bones.Length];
         _ragdollBoneTransforms = new BoneTransform[_bones.Length];
         _fallingTransforms = new BoneTransform[_bones.Length];
+        _randomTimes = new float[_bones.Length];
 
         for(int i = 0; i < _bones.Length; i++) {
             _getUpFaceUpBoneTransforms[i] = new BoneTransform();
             _getUpFaceDownBoneTransforms[i] = new BoneTransform();
             _ragdollBoneTransforms[i] = new BoneTransform();
             _fallingTransforms[i] = new BoneTransform();
+            _randomTimes[i] = 0f;
         }
 
         PopulateAnimationStartBoneTransforms(_getUpFaceUpClipName, _getUpFaceUpBoneTransforms);
@@ -204,6 +213,10 @@ public class PlayerRagdoll : MonoBehaviour
         PopulateBoneTransforms(_ragdollBoneTransforms);
         _elapsedResetBonesTime = 0;
 
+        // Assign random times incase of a bone repair
+        for(int i = 0; i < _bones.Length; i++)
+            _randomTimes[i] = Random.Range(_timeToRepairBones - _repairVariations, _timeToRepairBones + _repairVariations);
+       
         // Change states
         _playerState.SetPlayerRagdollState(ERagdollState.ResetingBones);
     }
@@ -214,7 +227,7 @@ public class PlayerRagdoll : MonoBehaviour
 
         _isBroken = true;
 
-        ActivateIndividualRagdolls(direction);
+        ActivateIndividualRagdolls(direction * mult);
     }
 
     private void ActivateIndividualRagdolls(Vector3 dir) {
@@ -314,18 +327,32 @@ public class PlayerRagdoll : MonoBehaviour
         BoneTransform[] standUpBoneTransforms = GetStandUpBoneTransforms();
 
         for(int i = 0; i < _bones.Length; i++) {
-            _bones[i].localPosition = Vector3.Lerp(
-                _ragdollBoneTransforms[i].Position,
-                standUpBoneTransforms[i].Position,
-                elapsedPercentage);
+            if(_isBroken) {
+                elapsedPercentage = _elapsedResetBonesTime / _randomTimes[i];
 
-            _bones[i].localRotation = Quaternion.Lerp(
-                _ragdollBoneTransforms[i].Rotation,
-                standUpBoneTransforms[i].Rotation,
-                elapsedPercentage);
+                _bones[i].localPosition = Vector3.Lerp(
+                    _ragdollBoneTransforms[i].Position,
+                    standUpBoneTransforms[i].Position,
+                    elapsedPercentage);
+
+                _bones[i].localRotation = Quaternion.Lerp(
+                    _ragdollBoneTransforms[i].Rotation,
+                    standUpBoneTransforms[i].Rotation,
+                    elapsedPercentage);
+            } else {
+                _bones[i].localPosition = Vector3.Lerp(
+                    _ragdollBoneTransforms[i].Position,
+                    standUpBoneTransforms[i].Position,
+                    elapsedPercentage);
+
+                _bones[i].localRotation = Quaternion.Lerp(
+                    _ragdollBoneTransforms[i].Rotation,
+                    standUpBoneTransforms[i].Rotation,
+                    elapsedPercentage);
+            }
         }
 
-        if(elapsedPercentage >= 1) {
+        if(_isBroken ? _elapsedResetBonesTime > _randomTimes.Max() : elapsedPercentage >= 1) {
             _playerState.SetPlayerRagdollState(ERagdollState.StandingUp);
             _anim.enabled = true;
             _anim.Play(GetStandUpStateName(), 2, 0);
@@ -336,6 +363,7 @@ public class PlayerRagdoll : MonoBehaviour
         if(_anim.GetCurrentAnimatorStateInfo(2).IsName(GetStandUpStateName()) == false) {
             _playerState.SetPlayerRagdollState(ERagdollState.Complete);
             _isGettingUp = false;
+            _isBroken = false;
         }
     }
 
@@ -363,6 +391,18 @@ public class PlayerRagdoll : MonoBehaviour
         // hip adjustment
         Vector3 moveHip = _hipBone.position - bodyPosition;
         _hipBone.position = new Vector3(_hipBone.position.x, _hipBone.position.y - moveHip.y, _hipBone.position.z);
+
+        // adjust bones if broken
+        if(_isBroken) {
+            Vector3 adjustment = new Vector3(0f, _repairVerticalOffset, 0f);
+            // move player up
+            transform.position += adjustment;
+
+            // move bones down
+            foreach(Transform child in _hipBone.transform) {
+                child.transform.position -= adjustment;
+            }
+        }
     }
 
     private void AlignRotation() {

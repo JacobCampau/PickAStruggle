@@ -189,6 +189,8 @@ public class PlayerController : MonoBehaviour
                                     isCrouching ? crouchSpeed :
                                     isSprinting ? sprintSpeed : runSpeed;
 
+        bool exitingRagdoll = _lastMovementState == EPlayerMovementState.Ragdoll && _playerState.CurrentPlayerMovementState != EPlayerMovementState.Ragdoll;
+
         Vector3 cameraForwardXZ = new Vector3(_playerCamera.transform.forward.x, 0f, _playerCamera.transform.forward.z).normalized;
         Vector3 cameraRightXZ = new Vector3(_playerCamera.transform.right.x, 0f, _playerCamera.transform.right.z).normalized;
         Vector3 movementDirection = cameraRightXZ * _playerLocomotionInput.MovementInput.x + cameraForwardXZ * _playerLocomotionInput.MovementInput.y;
@@ -211,12 +213,16 @@ public class PlayerController : MonoBehaviour
 
         // Check state if dead/ragdoll
         if(!canMove) return;
-
+        
         // Check animations
         Vector3 lateralMovement = new Vector3(newVelocity.x, 0f, newVelocity.z);
         if(lateralMovement != Vector3.zero) {
             _playerActionInput.SetHumpPressedFalse();
         }
+
+        // Check for exiting ragdoll
+        if(exitingRagdoll)
+            newVelocity = new Vector3(0f, newVelocity.y, 0f);
 
         // ONLY CALL ONCE PER FRAME!!
         _characterController.Move(newVelocity * Time.deltaTime);
