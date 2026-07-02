@@ -116,7 +116,7 @@ public class PlayerCombat : NetworkIdentity
             Debug.Log($"Player health took a hit for {dmg} HP");
     }
 
-    public void FallDamage(Vector3 dir, float forceMult){
+    public void FallDamage(Vector3 dir){
         if (_debug)
             Debug.Log("Fallen");
 
@@ -125,7 +125,7 @@ public class PlayerCombat : NetworkIdentity
 
         // Ragdoll direction and logic
         Vector3 ragdollForce = new Vector3(dir.x, 0f, dir.z);
-        _playerRagdoll.BreakPlayer(ragdollForce, forceMult); // break player
+        _playerRagdoll.BreakPlayer(ragdollForce, 1); // break player
     }
 
     // Setters used to ensure the stats are accurate to boosts

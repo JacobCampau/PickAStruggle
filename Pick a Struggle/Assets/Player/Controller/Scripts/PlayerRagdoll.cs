@@ -236,7 +236,8 @@ public class PlayerRagdoll : MonoBehaviour
         // Activate the components
         _anim.enabled = false;
         foreach(CharacterJoint joint in _joints) {
-            Destroy(joint.GetComponent<CharacterJoint>());
+            if(joint.GetComponent<CharacterJoint>() != null)
+                Destroy(joint.GetComponent<CharacterJoint>());
         }
 
         foreach(Collider collider in _colliders)

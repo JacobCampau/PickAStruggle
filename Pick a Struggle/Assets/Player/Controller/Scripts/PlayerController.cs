@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     public float lookSenseH = 0.1f;
     public float lookSenseV = 0.1f;
     public float lookLimitV = 89f;
+    [Space]
+    public float aimSenseMult = 1f;
 
     [Header("Environment Details")]
     [SerializeField] private LayerMask _groundLayers;
@@ -149,8 +151,12 @@ public class PlayerController : MonoBehaviour
             if(Mathf.Abs(_maxPlayerVelocity.y) > fallDamageVelocity) {
                 // Set ragdoll and get the wanted velocity
                 Vector3 fallDirection = new Vector3(_maxPlayerVelocity.x, 0f, _maxPlayerVelocity.z);
-                _playerCombat.FallDamage(_maxPlayerVelocity, fallDirection.magnitude);
+                _playerCombat.FallDamage(_maxPlayerVelocity);
             }
+            _maxPlayerVelocity = Vector3.zero;
+        }
+
+        if(_playerState.CurrentPlayerMovementState != EPlayerMovementState.Falling) {
             _maxPlayerVelocity = Vector3.zero;
         }
     }
@@ -247,10 +253,14 @@ public class PlayerController : MonoBehaviour
     }
 
     void CameraRotation() {
-        _cameraRotation.x += lookSenseH * _playerLocomotionInput.LookInput.x;
-        _cameraRotation.y = Mathf.Clamp(_cameraRotation.y - lookSenseV * _playerLocomotionInput.LookInput.y, -lookLimitV, lookLimitV);
+        bool isAiming = _playerActionInput.AimPressed;
+        float totalLookSenseH = isAiming ? lookSenseH * aimSenseMult : lookSenseH;
+        float totalLookSenseV = isAiming ? lookSenseV * aimSenseMult : lookSenseV;
 
-        _playerTargetRotation.x += transform.eulerAngles.x + lookSenseH * _playerLocomotionInput.LookInput.x;
+        _cameraRotation.x += totalLookSenseH * _playerLocomotionInput.LookInput.x;
+        _cameraRotation.y = Mathf.Clamp(_cameraRotation.y - totalLookSenseV * _playerLocomotionInput.LookInput.y, -lookLimitV, lookLimitV);
+
+        _playerTargetRotation.x += transform.eulerAngles.x + totalLookSenseH * _playerLocomotionInput.LookInput.x;
 
         float rotationTolerance = 90f;
         bool isIdling = _playerState.CurrentPlayerMovementState == EPlayerMovementState.Idling;

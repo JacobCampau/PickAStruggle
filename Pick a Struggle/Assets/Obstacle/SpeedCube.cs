@@ -12,6 +12,12 @@ public class SpeedCube: MonoBehaviour {
     public Transform endPosition;
     private float _elapsedTime = 0f;
 
+    private Vector3 velocity;
+
+    private void Start() {
+        velocity = (endPosition.position - startPosition.position)/timeBetweenPoints;
+    }
+
     private void Update() {
         // Times
         _elapsedTime += Time.deltaTime;
@@ -27,7 +33,8 @@ public class SpeedCube: MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.CompareTag("Player")) {
-            collision.gameObject.GetComponent<PlayerRagdoll>().StunPlayer(Vector3.zero, 1);
+            if(collision.gameObject.GetComponent<PlayerState>().CurrentRagdollState == ERagdollState.Complete)
+                collision.gameObject.GetComponent<PlayerRagdoll>().BreakPlayer(velocity, 1);
         }
     }
 }
