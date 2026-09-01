@@ -65,6 +65,7 @@
     <Compile Include="Assets\Player\Controller\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\Emotion\PlayerEmotion.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\Input\PlayerActionsInput.cs" />
+    <Compile Include="Assets\UI\HealthBarController.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\CharacterControlUtils.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\Combat\PlayerCombat.cs" />
     <Compile Include="Assets\Player\Controller\Scripts\Ragdoll\PlayerRagdoll.cs" />
@@ -646,6 +647,10 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Library\PackageCache\dev.purrnet.purrnet@f4dd26fb792b\Externals\7zip\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.4.5f1\Editor\Data\PlaybackEngines\MacStandaloneSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
