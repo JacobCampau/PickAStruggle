@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class HealthBarController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+    public Transform bar;
+    private PlayerCombat _playerCombat;
+
+    private void Start() {
+        _playerCombat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Update() {
+        float xScale = _playerCombat.CurrentPlayerHealth/_playerCombat.TotalHealth;
+        bar.localScale = new Vector3(xScale, 1f, 1f);
     }
 }

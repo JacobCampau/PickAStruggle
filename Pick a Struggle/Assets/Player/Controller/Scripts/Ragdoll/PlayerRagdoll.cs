@@ -7,6 +7,7 @@ using UnityEngine.WSA;
 
 public class PlayerRagdoll : MonoBehaviour
 {
+    #region Class Variables
     private PlayerState _playerState;
     private Animator _anim; 
     private Rigidbody[] _rigidbodies;
@@ -14,8 +15,8 @@ public class PlayerRagdoll : MonoBehaviour
     private Collider[] _colliders;
     private Rigidbody _rbBody;
 
-    [Header("Break Apart")]
-    [SerializeField] private float _directionMult = 1f;
+    [Header("Fast Objects")]
+    [SerializeField] private float _stunSpeedThreshold = 5f;
 
     [Header("Camera")]
     [SerializeField] private Transform _cameraContainer;
@@ -46,6 +47,9 @@ public class PlayerRagdoll : MonoBehaviour
 
     [SerializeField] private float _timeToResetBones;
 
+    [Header("Break Apart")]
+    [SerializeField] private float _directionMult = 1f;
+
     [Header("Broken Adjustments")]
     [SerializeField] private float _timeToRepairBones;
     [SerializeField] private float _repairVariations;
@@ -57,7 +61,6 @@ public class PlayerRagdoll : MonoBehaviour
     private bool _isBroken = false;
     private bool _isFaceUp = false;
     private bool _isGettingUp = false;
-    public bool RagdollIsActive { get; private set; } = false;
 
     private class BoneTransform {
         public Vector3 Position { get; set; }
@@ -79,7 +82,9 @@ public class PlayerRagdoll : MonoBehaviour
     private Transform[] _bones;
 
     private Vector3 _initialCameraLocation;
+    #endregion
 
+    #region Start Functions
     private void Awake() {
         _anim = GetComponentInChildren<Animator>();
         _playerState = GetComponentInChildren<PlayerState>();
@@ -119,7 +124,7 @@ public class PlayerRagdoll : MonoBehaviour
     private void Start() {
         // Starting state
         if(_playerState.CurrentPlayerMovementState == EPlayerMovementState.Ragdoll) {
-            EnableRagdoll(Vector3.zero);
+            EnableRagdoll(Vector3.zero, null);
         } else {
             DisableRagdoll();
         }
@@ -128,7 +133,9 @@ public class PlayerRagdoll : MonoBehaviour
         foreach(Rigidbody rb in _rigidbodies)
             weight += rb.mass;
     }
+    #endregion
 
+    #region Update Functions
     private void Update() {
         RagdollEnd();
 
@@ -140,61 +147,11 @@ public class PlayerRagdoll : MonoBehaviour
     }
 
     private void LateUpdate() {
-        BodyCameraHandler();
-    }
-
-    void BodyCameraHandler()
-    {
-        if (_playerState.CurrentRagdollState == ERagdollState.Active)
-        {
-            _currentFollowTime += Time.deltaTime;
-            _cameraContainer.position = Vector3.Lerp(_cameraContainer.position, _bodyFollowTransform.position, _currentFollowTime / _cameraFollowTimer);
-        }
-        else if (_playerState.CurrentRagdollState == ERagdollState.ResetingBones)
-        {
-            _currentFollowTime = 0;
-            _cameraContainer.position = _bodyFollowTransform.position;
-        }
-        else if (_playerState.CurrentRagdollState == ERagdollState.StandingUp)
-        {
-            _currentFollowTime += Time.deltaTime;
-            _cameraContainer.localPosition = Vector3.Lerp(_cameraContainer.localPosition, _initialCameraLocation, _currentFollowTime / _cameraFollowTimer);
-        }
-        else if (_playerState.CurrentRagdollState == ERagdollState.Complete)
-        {
-            _currentFollowTime = 0;
-            _cameraContainer.localPosition = _initialCameraLocation;
-        }
-    }
-
-    void CameraHandler() {
-        if(_playerState.CurrentRagdollState == ERagdollState.Active) {
-            _currentFollowTime += Time.deltaTime;
-
-            if(!_isBroken) {
-                _cameraContainer.position = Vector3.Lerp(_cameraContainer.position, _bodyFollowTransform.position, _currentFollowTime/_cameraFollowTimer);
-            } else {
-                _cameraContainer.position = Vector3.Lerp(_cameraContainer.position, _headFollowTransform.position, _currentFollowTime/_cameraFollowTimer);
-            }
-        } else if(_playerState.CurrentRagdollState == ERagdollState.ResetingBones) {
-            _currentFollowTime = 0;
-
-            if(!_isBroken) {
-                _cameraContainer.position = _bodyFollowTransform.position;
-            } else {
-                _cameraContainer.position = _headFollowTransform.position;
-            }
-        } else if(_playerState.CurrentRagdollState == ERagdollState.StandingUp) {
-            _currentFollowTime += Time.deltaTime;
-            _cameraContainer.localPosition = Vector3.Lerp(_cameraContainer.localPosition, _initialCameraLocation, _currentFollowTime/_cameraFollowTimer);
-        } else if(_playerState.CurrentRagdollState == ERagdollState.Complete) {
-            _currentFollowTime = 0;
-            _cameraContainer.localPosition = _initialCameraLocation;
-        }
+        CameraHandler();
     }
 
     private void RagdollEnd() {
-        if(_playerState.CurrentPlayerMovementState == EPlayerMovementState.Ragdoll) {
+        if(_playerState.CurrentPlayerMovementState == EPlayerMovementState.Ragdoll && !_playerState.isDead) {
             // In ragdoll, not dead
             if(_rbBody.linearVelocity.magnitude < _endRagdollSpeedThreshold) {
                 // player is no longer moving fast, so begin to wake up
@@ -211,7 +168,8 @@ public class PlayerRagdoll : MonoBehaviour
         }
 
         // If the player dies during the ragdoll, then prevent the getup function from being called
-        if(_playerState.isDead) {
+        if(_playerState.isDead && _isGettingUp) {
+            _isGettingUp = false;
             CancelInvoke(nameof(GetUp));
             Debug.Log("DEAD RAGDOLL CANCEL");
         }
@@ -220,135 +178,10 @@ public class PlayerRagdoll : MonoBehaviour
         if(_playerState.CurrentRagdollState == ERagdollState.ResetingBones || _playerState.CurrentRagdollState == ERagdollState.StandingUp) {
             if(_rbBody.linearVelocity.magnitude > _endRagdollSpeedThreshold) {
                 // The player is in the process of getting up and has begun moving
-                StunPlayer(_rbBody.linearVelocity, 1);
+                StunPlayer(_rbBody.linearVelocity, 1, null);
                 Debug.Log("Hit during get up");
             }
         }
-
-    }
-
-    private void GetUp() {
-        // Is the player on its back?
-        _isFaceUp = _bodyBone.forward.y > 0;
-
-        // Align player and turn off the rigidbody
-        AlignPosition();
-        AlignRotation();
-        EnableAnimator();
-
-        // Get initial transforms
-        PopulateBoneTransforms(_ragdollBoneTransforms);
-        _elapsedResetBonesTime = 0;
-
-        // Assign random times incase of a bone repair and fill global bone positions
-        for (int i = 0; i < _bones.Length; i++)
-        {
-            _randomTimes[i] = Random.Range(_timeToRepairBones - _repairVariations, _timeToRepairBones + _repairVariations);
-            _globalBoneTransforms[i].Position = _bones[i].position;
-            _globalBoneTransforms[i].Rotation = _bones[i].rotation;
-        }
-
-        // Change states
-        _playerState.SetPlayerRagdollState(ERagdollState.ResetingBones);
-    }
-
-    public void BreakPlayer(Vector3 direction, float mult) {
-        // Make sure GetUp isnt running
-        CancelInvoke(nameof(GetUp));
-
-        _isBroken = true;
-
-        ActivateIndividualRagdolls(direction * mult);
-    }
-
-    private void ActivateIndividualRagdolls(Vector3 dir) {
-        _playerState.SetPlayerRagdollState(ERagdollState.Active);
-
-        // Activate the components
-        _anim.enabled = false;
-        foreach(CharacterJoint joint in _joints) {
-            if(joint.GetComponent<CharacterJoint>() != null)
-                Destroy(joint.GetComponent<CharacterJoint>());
-        }
-
-        foreach(Collider collider in _colliders)
-            collider.isTrigger = false;
-
-        foreach(Rigidbody rb in _rigidbodies) {
-            rb.isKinematic = false;
-            rb.linearVelocity = Vector3.zero;
-            rb.detectCollisions = true;
-            rb.useGravity = true;
-        }
-
-        // Apply the directions to each body part
-        foreach(Rigidbody bone in _rigidbodies) {
-            // Get direction from body
-            Vector3 directionFromBody = bone.position - _rbBody.position;
-            Vector3 force = dir + (directionFromBody * _directionMult);
-            float proportionalMult = bone.mass / weight;
-
-            // Toss
-            TossRagdoll(bone, force, proportionalMult);
-        }
-    }
-
-    public void StunPlayer(Vector3 force, float mult) {
-        // Make sure GetUp isnt running
-        CancelInvoke(nameof(GetUp));
-
-        EnableRagdoll(mult * force.normalized);
-    }
-
-    public void EnableRagdoll(Vector3 force) {
-        _playerState.SetPlayerRagdollState(ERagdollState.Active);
-
-        // Activate the components
-        _anim.enabled = false;
-        foreach(CharacterJoint joint in _joints)
-            joint.enableCollision = true;
-
-        foreach(Collider collider in _colliders)
-            collider.isTrigger = false;
-
-        foreach(Rigidbody rb in _rigidbodies) {
-            rb.isKinematic = false;
-            rb.linearVelocity = Vector3.zero;
-            rb.detectCollisions = true;
-            rb.useGravity = true;
-        }
-
-        // Apply force direction
-        TossRagdoll(_rbBody, force, 1);
-    }
-
-    private void DisableRagdoll() {
-        foreach(CharacterJoint joint in _joints)
-            joint.enableCollision = false;
-
-        foreach(Collider collider in _colliders)
-            collider.isTrigger = true;
-
-        foreach(Rigidbody rb in _rigidbodies) {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
-            rb.detectCollisions = false;
-            rb.useGravity = false;
-        }
-    }
-
-    public void EnableAnimator() {
-        // Reapply any missing joints
-        foreach(Transform bone in _bones) {
-            CharacterJointSnapshot snapshot = bone.GetComponent<CharacterJointSnapshot>();
-            if(snapshot != null)
-                snapshot.RestoreJoint();
-        }
-        _joints = _ragdollRoot.GetComponentsInChildren<CharacterJoint>();
-
-        // Reset body parts
-        DisableRagdoll();
     }
 
     private void ResetingBones() {
@@ -366,8 +199,7 @@ public class PlayerRagdoll : MonoBehaviour
                 bool positionMismatch = Vector3.Distance(t.position, _globalBoneTransforms[i].Position) > 0.0001f;
                 bool rotationMismatch = Quaternion.Angle(t.rotation, _globalBoneTransforms[i].Rotation) > 0.01f;
 
-                if (positionMismatch || rotationMismatch)
-                {
+                if(positionMismatch || rotationMismatch) {
                     t.position = _globalBoneTransforms[i].Position;
                     t.rotation = _globalBoneTransforms[i].Rotation;
                 }
@@ -414,6 +246,167 @@ public class PlayerRagdoll : MonoBehaviour
             _isGettingUp = false;
             _isBroken = false;
         }
+    }
+
+    void CameraHandler()
+    {
+        if (_playerState.CurrentRagdollState == ERagdollState.Active)
+        {
+            _currentFollowTime += Time.deltaTime;
+            _cameraContainer.position = Vector3.Lerp(_cameraContainer.position, _bodyFollowTransform.position, _currentFollowTime / _cameraFollowTimer);
+        }
+        else if (_playerState.CurrentRagdollState == ERagdollState.ResetingBones)
+        {
+            _currentFollowTime = 0;
+            _cameraContainer.position = _bodyFollowTransform.position;
+        }
+        else if (_playerState.CurrentRagdollState == ERagdollState.StandingUp)
+        {
+            _currentFollowTime += Time.deltaTime;
+            _cameraContainer.localPosition = Vector3.Lerp(_cameraContainer.localPosition, _initialCameraLocation, _currentFollowTime / _cameraFollowTimer);
+        }
+        else if (_playerState.CurrentRagdollState == ERagdollState.Complete)
+        {
+            _currentFollowTime = 0;
+            _cameraContainer.localPosition = _initialCameraLocation;
+        }
+    }
+    #endregion
+
+    #region Ragdoll Starts and End
+    public void Stun(Vector3 dir, float force, GameObject bone) {
+        if(_playerState.isDead) {
+            BreakPlayer(dir, force, bone);
+        } else {
+            StunPlayer(dir, force, bone);
+        }
+    }
+
+    public void BreakPlayer(Vector3 direction, float mult, GameObject bone) {
+        // Make sure GetUp isnt running
+        CancelInvoke(nameof(GetUp));
+
+        _isBroken = true;
+
+        ActivateIndividualRagdolls(direction * mult, bone);
+    }
+
+    public void StunPlayer(Vector3 force, float mult, GameObject bone) {
+        // Make sure GetUp isnt running
+        CancelInvoke(nameof(GetUp));
+
+        EnableRagdoll(mult * force.normalized, bone);
+    }
+
+    private void GetUp() {
+        // Is the player on its back?
+        _isFaceUp = _bodyBone.forward.y > 0;
+
+        // Align player and turn off the rigidbody
+        AlignPosition();
+        AlignRotation();
+        EnableAnimator();
+
+        // Get initial transforms
+        PopulateBoneTransforms(_ragdollBoneTransforms);
+        _elapsedResetBonesTime = 0;
+
+        // Assign random times incase of a bone repair and fill global bone positions
+        for (int i = 0; i < _bones.Length; i++)
+        {
+            _randomTimes[i] = Random.Range(_timeToRepairBones - _repairVariations, _timeToRepairBones + _repairVariations);
+            _globalBoneTransforms[i].Position = _bones[i].position;
+            _globalBoneTransforms[i].Rotation = _bones[i].rotation;
+        }
+
+        // Change states
+        _playerState.SetPlayerRagdollState(ERagdollState.ResetingBones);
+    }
+    #endregion
+
+    #region Adjustment Functions
+    private void ActivateIndividualRagdolls(Vector3 dir, GameObject startBone) {
+        _playerState.SetPlayerRagdollState(ERagdollState.Active);
+
+        // Activate the components
+        _anim.enabled = false;
+        foreach(CharacterJoint joint in _joints) {
+            if(joint.GetComponent<CharacterJoint>() != null)
+                Destroy(joint.GetComponent<CharacterJoint>());
+        }
+
+        //foreach(Collider collider in _colliders)
+        //    collider.isTrigger = false;
+
+        foreach(Rigidbody rb in _rigidbodies) {
+            rb.isKinematic = false;
+            rb.linearVelocity = Vector3.zero;
+            rb.useGravity = true;
+        }
+
+        // Apply the directions to each body part
+        foreach(Rigidbody bone in _rigidbodies) {
+            // Get direction from body
+            Vector3 directionFromBody = bone.position - _rbBody.position;
+            Vector3 force = dir + (directionFromBody * _directionMult);
+            float proportionalMult = bone.mass / weight;
+
+            // Toss
+            TossRagdoll(bone, force, proportionalMult);
+        }
+    }
+
+    public void EnableRagdoll(Vector3 force, GameObject startBone) {
+        _playerState.SetPlayerRagdollState(ERagdollState.Active);
+
+        // Activate the components
+        _anim.enabled = false;
+        foreach(CharacterJoint joint in _joints)
+            joint.enableCollision = true;
+
+        //foreach(Collider collider in _colliders)
+        //    collider.isTrigger = false;
+
+        foreach(Rigidbody rb in _rigidbodies) {
+            rb.isKinematic = false;
+            rb.linearVelocity = Vector3.zero;
+            rb.useGravity = true;
+        }
+
+        // Apply force direction
+        if(startBone != null) {
+            TossRagdoll(startBone.GetComponent<Rigidbody>(), force, 1);
+        } else {
+            TossRagdoll(_rbBody, force, 1);
+        }
+    }
+
+    private void DisableRagdoll() {
+        foreach(CharacterJoint joint in _joints)
+            joint.enableCollision = false;
+
+        //foreach(Collider collider in _colliders)
+        //    collider.isTrigger = true;
+
+        foreach(Rigidbody rb in _rigidbodies) {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
+    }
+
+    public void EnableAnimator() {
+        // Reapply any missing joints
+        foreach(Transform bone in _bones) {
+            CharacterJointSnapshot snapshot = bone.GetComponent<CharacterJointSnapshot>();
+            if(snapshot != null)
+                snapshot.RestoreJoint();
+        }
+        _joints = _ragdollRoot.GetComponentsInChildren<CharacterJoint>();
+
+        // Reset body parts
+        DisableRagdoll();
     }
 
     // Aligning player
@@ -466,7 +459,9 @@ public class PlayerRagdoll : MonoBehaviour
         // Immediately face the opposite direction (saved in case it is needed for another time)
         //transform.rotation = Quaternion.LookRotation(-transform.forward, Vector3.up)
     }
+    #endregion
 
+    #region Ragdoll Helpers
     private void PopulateBoneTransforms(BoneTransform[] boneTransforms) {
         for(int i = 0; i < _bones.Length; i++) {
             boneTransforms[i].Position = _bones[i].localPosition;
@@ -509,11 +504,13 @@ public class PlayerRagdoll : MonoBehaviour
     private BoneTransform[] GetStandUpBoneTransforms() {
         return _isBroken? _fallingTransforms : _isFaceUp ? _getUpFaceUpBoneTransforms : _getUpFaceDownBoneTransforms;
     }
+    #endregion
 
+    #region Ragdoll Affectors
     public void TossRagdoll(Rigidbody bone, Vector3 dir, float mult) {
         Vector3 force = dir * mult;
-
         if(_playerState.CurrentRagdollState != ERagdollState.Complete)
             bone.AddForce(force * weight, ForceMode.Impulse);
     }
+    #endregion
 }

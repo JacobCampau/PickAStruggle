@@ -30,11 +30,4 @@ public class SpeedCube: MonoBehaviour {
         float timeDelta = _elapsedTime / timeBetweenPoints;
         transform.position = Vector3.Lerp(startPosition.position, endPosition.position, timeDelta);
     }
-
-    private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.CompareTag("Player")) {
-            if(collision.gameObject.GetComponent<PlayerState>().CurrentRagdollState == ERagdollState.Complete)
-                collision.gameObject.GetComponent<PlayerRagdoll>().BreakPlayer(velocity, 1);
-        }
-    }
 }

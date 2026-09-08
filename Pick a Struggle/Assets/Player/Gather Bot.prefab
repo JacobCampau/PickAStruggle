@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 4600975502856661925}
   - component: {fileID: 421177855327675343}
   - component: {fileID: 786148174564310635}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Upper Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,6 +186,37 @@ Transform:
   - {fileID: 8218556527928432601}
   m_Father: {fileID: 7026648249022852771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &306216657771340577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5099938531800869563}
+  m_Layer: 6
+  m_Name: Head Follow
+  m_TagString: Untagged
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5099938531800869563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306216657771340577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.251, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6631274403172589909}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &699473752288495567
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,6 +226,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4763418232228202353}
+  - component: {fileID: 5841910311756573320}
+  - component: {fileID: 5666667360448941149}
   - component: {fileID: 4246851773029289198}
   - component: {fileID: 42953986827174588}
   - component: {fileID: 7352984215494519164}
@@ -222,6 +255,60 @@ Transform:
   - {fileID: 4600975502856661925}
   m_Father: {fileID: 2399903238286648153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5841910311756573320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699473752288495567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &5666667360448941149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699473752288495567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
 --- !u!65 &4246851773029289198
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -241,8 +328,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0016582677, y: 0.0027638662, z: 0.0016192246}
-  m_Center: {x: -0.000010709911, y: -0.0002923566, z: -0.000010623931}
+  m_Size: {x: 0.17475569, y: 0.33489537, z: 0.16566634}
+  m_Center: {x: -0.0008556843, y: -0.07493019, z: 0.000010967255}
 --- !u!54 &42953986827174588
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -325,7 +412,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7588964384149301752}
-  - component: {fileID: 5055832530255035757}
+  - component: {fileID: 2529162267526211631}
+  - component: {fileID: 5309124608368348991}
+  - component: {fileID: 2808136480699133024}
   - component: {fileID: 1484813431724708564}
   - component: {fileID: 2424354350665702357}
   m_Layer: 6
@@ -352,7 +441,61 @@ Transform:
   - {fileID: 8926234751557948845}
   m_Father: {fileID: 4763418232228202353}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5055832530255035757
+--- !u!114 &2529162267526211631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701191118276669593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &5309124608368348991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701191118276669593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
+--- !u!65 &2808136480699133024
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -371,8 +514,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0017036435, y: 0.004268657, z: 0.0017851829}
-  m_Center: {x: 0.0000055123865, y: -0.001462217, z: 0.0000092029195}
+  m_Size: {x: 0.20918125, y: 0.33324862, z: 0.19440997}
+  m_Center: {x: -0.001215905, y: -0.17486084, z: -0.001678288}
 --- !u!54 &1484813431724708564
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -455,6 +598,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6631274403172589909}
+  - component: {fileID: 478091215638529271}
+  - component: {fileID: 8247857305000116281}
   - component: {fileID: 6241154867781347357}
   - component: {fileID: 9150416037012341524}
   - component: {fileID: 4347622731925335102}
@@ -480,8 +625,63 @@ Transform:
   m_Children:
   - {fileID: 6077033870279449573}
   - {fileID: 379868721908332110}
+  - {fileID: 5099938531800869563}
   m_Father: {fileID: 2399903238286648153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &478091215638529271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799756323510182799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &8247857305000116281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799756323510182799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
 --- !u!65 &6241154867781347357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -501,8 +701,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.006449585, y: 0.0048955344, z: 0.0048200213}
-  m_Center: {x: 0, y: 0.0026937388, z: -0.00021956085}
+  m_Size: {x: 0.64956, y: 0.5028465, z: 0.40417534}
+  m_Center: {x: 0.00053459406, y: 0.25319266, z: 0.0011231005}
 --- !u!54 &9150416037012341524
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -829,7 +1029,7 @@ GameObject:
   - component: {fileID: 1565953345273637766}
   - component: {fileID: 1300021145423693148}
   - component: {fileID: 4699981229792387944}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -985,7 +1185,7 @@ GameObject:
   - component: {fileID: 379868721908332110}
   - component: {fileID: 404441055221141480}
   - component: {fileID: 2523836929202880847}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,6 +1335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2399903238286648153}
+  - component: {fileID: 5666010951584640934}
   - component: {fileID: 3960070677545191203}
   - component: {fileID: 8903967898484012955}
   m_Layer: 6
@@ -1164,6 +1365,19 @@ Transform:
   - {fileID: 4022041176996544895}
   m_Father: {fileID: 8696186975466170703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5666010951584640934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931857703909065093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
 --- !u!65 &3960070677545191203
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1183,8 +1397,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.006773783, y: 0.0066012, z: 0.004721367}
-  m_Center: {x: -0.00000834167, y: 0.0043046474, z: -0.000012303591}
+  m_Size: {x: 0.7047863, y: 0.7025471, z: 0.21}
+  m_Center: {x: -0.0011281967, y: 0.42519474, z: -0.000012300909}
 --- !u!54 &8903967898484012955
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1223,7 +1437,7 @@ GameObject:
   - component: {fileID: 7578155737204067807}
   - component: {fileID: 8680726575162593959}
   - component: {fileID: 430305822081508601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1344,6 +1558,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3009069998506241635}
+  - component: {fileID: 1821541639835507997}
+  - component: {fileID: 737635953464390219}
   - component: {fileID: 4714136318247677046}
   - component: {fileID: 3371868179074010832}
   - component: {fileID: 5331690295804431950}
@@ -1371,6 +1587,60 @@ Transform:
   - {fileID: 1225227894441991212}
   m_Father: {fileID: 5098300563009866833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1821541639835507997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3855620677872889129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &737635953464390219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3855620677872889129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
 --- !u!65 &4714136318247677046
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1390,8 +1660,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.002103909, y: 0.0038618434, z: 0.0015250588}
-  m_Center: {x: 0.00000001527369, y: -0.0020933324, z: 0.0000041675567}
+  m_Size: {x: 0.20691136, y: 0.3937198, z: 0.15828681}
+  m_Center: {x: -0.0014975518, y: -0.21260369, z: 0.0007510185}
 --- !u!54 &3371868179074010832
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1477,7 +1747,7 @@ GameObject:
   - component: {fileID: 2524352911347993827}
   - component: {fileID: 5896596761541925337}
   - component: {fileID: 4244980922112149954}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Third Person Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1564,8 +1834,8 @@ MonoBehaviour:
     CollisionFilter:
       serializedVersion: 2
       m_Bits: 8
-    IgnoreTag: 
-    CameraRadius: 0.2
+    IgnoreTag: Player
+    CameraRadius: 0.102
     DampingIntoCollision: 0
     DampingFromCollision: 0.5
 --- !u!114 &4244980922112149954
@@ -1629,7 +1899,7 @@ GameObject:
   - component: {fileID: 4283626793610847622}
   - component: {fileID: 1593882116437412662}
   - component: {fileID: 6143441702409650776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Lower leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1751,7 +2021,7 @@ GameObject:
   - component: {fileID: 5903628610282054018}
   - component: {fileID: 8885608281072266127}
   - component: {fileID: 361286611151196035}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Lower Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2106,6 +2376,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8164947110832748251}
+  - component: {fileID: 8213324235637665655}
+  - component: {fileID: 4379668932410377993}
   - component: {fileID: 4552755583162380498}
   - component: {fileID: 8680591776245347283}
   - component: {fileID: 9200950727096213918}
@@ -2133,6 +2405,60 @@ Transform:
   - {fileID: 3876010959975209491}
   m_Father: {fileID: 8696186975466170703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8213324235637665655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729438514835987275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &4379668932410377993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729438514835987275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
 --- !u!65 &4552755583162380498
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2152,8 +2478,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0019005581, y: 0.0033156376, z: 0.0015075302}
-  m_Center: {x: 0.000036239548, y: -0.0010680857, z: 0}
+  m_Size: {x: 0.21, y: 0.28806752, z: 0.19493663}
+  m_Center: {x: 0.000036239624, y: -0.14226654, z: -0.0015020967}
 --- !u!54 &8680591776245347283
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2236,6 +2562,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5704627750911188395}
+  - component: {fileID: 3117420835450781235}
+  - component: {fileID: 2961878408315958365}
   - component: {fileID: 1025553357966450756}
   - component: {fileID: 8879357651480756676}
   - component: {fileID: 2479931313341048350}
@@ -2263,6 +2591,60 @@ Transform:
   - {fileID: 4283626793610847622}
   m_Father: {fileID: 8164947110832748251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3117420835450781235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4899220389247406826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &2961878408315958365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4899220389247406826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
 --- !u!65 &1025553357966450756
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2282,8 +2664,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0017849731, y: 0.003865986, z: 0.0014892769}
-  m_Center: {x: 0.000004558563, y: -0.0020813465, z: -0.000000009536743}
+  m_Size: {x: 0.20691136, y: 0.3937198, z: 0.15828681}
+  m_Center: {x: -0.0014975518, y: -0.21260369, z: 0.0007510185}
 --- !u!54 &8879357651480756676
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2369,7 +2751,7 @@ GameObject:
   - component: {fileID: 8010103755902188081}
   - component: {fileID: 6634696090155160575}
   - component: {fileID: 4396107157660678728}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: DummyCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2637,7 +3019,7 @@ GameObject:
   - component: {fileID: 5123865127452327152}
   - component: {fileID: 3399593000940239934}
   - component: {fileID: 824911862388799573}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Aim Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2653,7 +3035,7 @@ Transform:
   m_GameObject: {fileID: 5965608812882507812}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.88, y: 0.4000001, z: -4}
+  m_LocalPosition: {x: -0.8800001, y: 0.39999986, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2895,7 +3277,7 @@ GameObject:
   - component: {fileID: 4157751182737297699}
   - component: {fileID: 2072640996163239463}
   - component: {fileID: 1174668473258022051}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -2911,7 +3293,7 @@ Transform:
   m_GameObject: {fileID: 7082705930637950202}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4000001, z: -4}
+  m_LocalPosition: {x: -0.00000011920929, y: 0.4000001, z: -4.000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3121,7 +3503,7 @@ GameObject:
   - component: {fileID: 5308302847907513821}
   - component: {fileID: 3709663425693792612}
   - component: {fileID: 551353851266571467}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Upper Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3212,7 +3594,7 @@ GameObject:
   - component: {fileID: 4811638878624915805}
   - component: {fileID: 8032272329856568974}
   - component: {fileID: 7662410316442138928}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3301,6 +3683,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4066612823950014064}
+  - component: {fileID: 3498267073478563267}
+  - component: {fileID: 5902715915145186844}
   - component: {fileID: 9065070835082260480}
   - component: {fileID: 5135627241493818186}
   - component: {fileID: 2487201212088787813}
@@ -3328,6 +3712,60 @@ Transform:
   - {fileID: 5903628610282054018}
   m_Father: {fileID: 9120575564296055126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3498267073478563267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528783100605091041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &5902715915145186844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528783100605091041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
 --- !u!65 &9065070835082260480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3347,8 +3785,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0021331683, y: 0.0042796447, z: 0.0018013}
-  m_Center: {x: 2.9802322e-10, y: -0.0014567245, z: 0}
+  m_Size: {x: 0.20918125, y: 0.33324862, z: 0.19440997}
+  m_Center: {x: -0.001215905, y: -0.17486084, z: -0.001678288}
 --- !u!54 &5135627241493818186
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3653,7 +4091,7 @@ GameObject:
   - component: {fileID: 990997704147584771}
   - component: {fileID: 3121511616532477583}
   - component: {fileID: 7043865106382900055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Upper Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3744,7 +4182,7 @@ GameObject:
   - component: {fileID: 3876010959975209491}
   - component: {fileID: 7738180922924084611}
   - component: {fileID: 8166902062932121222}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.R.Upper Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3833,6 +4271,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5098300563009866833}
+  - component: {fileID: 1127860141406323116}
+  - component: {fileID: 6779224939467577569}
   - component: {fileID: 4900649494937202495}
   - component: {fileID: 8453206733552624612}
   - component: {fileID: 708300579635727307}
@@ -3860,6 +4300,60 @@ Transform:
   - {fileID: 5308302847907513821}
   m_Father: {fileID: 8696186975466170703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127860141406323116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8074535595708685101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &6779224939467577569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8074535595708685101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
 --- !u!65 &4900649494937202495
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3879,8 +4373,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0019541166, y: 0.0033091449, z: 0.0015167237}
-  m_Center: {x: -0.0000068282334, y: -0.0010380602, z: -3.7252902e-11}
+  m_Size: {x: 0.21, y: 0.28806752, z: 0.19493663}
+  m_Center: {x: 0.000036239624, y: -0.14226654, z: -0.0015020967}
 --- !u!54 &8453206733552624612
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3965,7 +4459,7 @@ GameObject:
   - component: {fileID: 8926234751557948845}
   - component: {fileID: 4495524976911376488}
   - component: {fileID: 176115442127234267}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Lower Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4054,8 +4548,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4022041176996544895}
-  m_Layer: 6
-  m_Name: Ragdoll Follow
+  m_Layer: 7
+  m_Name: Body Follow
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4070,7 +4564,7 @@ Transform:
   m_GameObject: {fileID: 8125228070467748653}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.00611, z: 0}
+  m_LocalPosition: {x: 0, y: 0.631, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4182,7 +4676,7 @@ GameObject:
   - component: {fileID: 1225227894441991212}
   - component: {fileID: 9181002086240579873}
   - component: {fileID: 8271076490115848572}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: M.L.Lower Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4303,6 +4797,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9120575564296055126}
+  - component: {fileID: 7173310734905622050}
+  - component: {fileID: 7754033978860273133}
   - component: {fileID: 582618316367743544}
   - component: {fileID: 5125557309891512781}
   - component: {fileID: 6290992863675406897}
@@ -4330,6 +4826,60 @@ Transform:
   - {fileID: 990997704147584771}
   m_Father: {fileID: 2399903238286648153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7173310734905622050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652879844233894059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a13ddecefa5fb4b814cbc036f2c85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollPart
+  <parentObject>k__BackingField: {fileID: 0}
+--- !u!114 &7754033978860273133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652879844233894059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067725ced50fbb7449ff215b26f63f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterJointSnapshot
+  snapshot:
+    connectedBodyPath: 
+    anchor: {x: 0, y: 0, z: 0}
+    connectedAnchor: {x: 0, y: 0, z: 0}
+    autoConfigureConnectedAnchor: 0
+    axis: {x: 0, y: 0, z: 0}
+    swingAxis: {x: 0, y: 0, z: 0}
+    lowTwistLimitLimit: 0
+    lowTwistLimitBounciness: 0
+    lowTwistLimitContactDistance: 0
+    highTwistLimitLimit: 0
+    highTwistLimitBounciness: 0
+    highTwistLimitContactDistance: 0
+    swing1LimitLimit: 0
+    swing1LimitBounciness: 0
+    swing1LimitContactDistance: 0
+    swing2LimitLimit: 0
+    swing2LimitBounciness: 0
+    swing2LimitContactDistance: 0
+    enableProjection: 0
+    projectionDistance: 0
+    projectionAngle: 0
+    breakForce: 0
+    breakTorque: 0
+    enableCollision: 0
+    enablePreprocessing: 0
+    massScale: 0
+    connectedMassScale: 0
+  hasSnapshot: 0
 --- !u!65 &582618316367743544
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4349,8 +4899,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0017021274, y: 0.0026709074, z: 0.001650505}
-  m_Center: {x: -0.000016522406, y: -0.00024587184, z: 0.000011005402}
+  m_Size: {x: 0.17475569, y: 0.33489537, z: 0.16566634}
+  m_Center: {x: -0.0008556843, y: -0.07493019, z: 0.000010967255}
 --- !u!54 &5125557309891512781
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4655,6 +5205,7 @@ MonoBehaviour:
   lookSenseH: 0.2
   lookSenseV: 0.2
   lookLimitV: 89
+  aimSenseMult: 0.3
   _groundLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -4733,9 +5284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3c37134d4959d4386de64c02728d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRagdoll
+  _stunSpeedThreshold: 5
   _cameraContainer: {fileID: 8377263643797985830}
-  _cameraFollowTimer: 0
-  _ragdollFollowTransform: {fileID: 4022041176996544895}
+  _cameraFollowTimer: 0.1
+  _bodyFollowTransform: {fileID: 4022041176996544895}
+  _headFollowTransform: {fileID: 5099938531800869563}
   _ragdollRoot: {fileID: 8316617546516359466}
   _bodyBone: {fileID: 2399903238286648153}
   weight: 0
@@ -4746,7 +5299,13 @@ MonoBehaviour:
   _getUpFaceUpClipName: GetUpFaceUp
   _getUpFaceDownStateName: GetUpFaceDown
   _getUpFaceDownClipName: GetUpFaceDown
+  _fallingStateName: Falling
+  _fallingClipName: Falling
   _timeToResetBones: 0.2
+  _directionMult: 3
+  _timeToRepairBones: 0.4
+  _repairVariations: 0.2
+  _repairVerticalOffset: 0
   _fallenParticles: {fileID: 0}
 --- !u!114 &1585912708435995191
 MonoBehaviour:
@@ -4783,6 +5342,7 @@ MonoBehaviour:
   _invertedPathToNearestParent: 
   _directChildren: []
   <CurrentPlayerHealth>k__BackingField: 0
+  <TotalHealth>k__BackingField: 0
   _debug: 0
   _mainCamera: {fileID: 2524352911347993827}
   _aimCamera: {fileID: 5123865127452327152}

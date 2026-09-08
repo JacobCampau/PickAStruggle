@@ -1,6 +1,7 @@
 using PurrNet;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerCombat : NetworkIdentity
 {
@@ -15,7 +16,7 @@ public class PlayerCombat : NetworkIdentity
 
     private float _boostHealth = 0;
 
-    private float _totalHealth;
+    [field: SerializeField] public float TotalHealth { get; private set; }
 
     // Combat stats
     private float _meleeDamage;
@@ -31,7 +32,7 @@ public class PlayerCombat : NetworkIdentity
     private float _totalHandlingSpeed;
 
     // Death info
-    private bool _deathSequence;
+    [SerializeField] private bool _deathSequence = false;
 
     // Other
     [SerializeField] private bool _debug;
@@ -40,8 +41,9 @@ public class PlayerCombat : NetworkIdentity
     [SerializeField] private CinemachineCamera _mainCamera;
     [SerializeField] private CinemachineCamera _aimCamera;
 
-    [Header("Fall Damage Mult")]
+    [Header("Damage Mults")]
     [SerializeField] private float _fallDamageMult = 1;
+    [SerializeField] private float _thrownDamageMult = 1;
 
     // States
     public EPlayerCombatState CurrentPlayerCombatState { get; private set; } = EPlayerCombatState.emptyHanded;
@@ -53,9 +55,6 @@ public class PlayerCombat : NetworkIdentity
         _statHandler = GetComponent<PlayerStatHandler>();
         _playerRagdoll = GetComponent<PlayerRagdoll>();
         _playerState = GetComponent<PlayerState>();
-
-        // Inspector based values
-        _deathSequence = false;
     }
 
     private void Start() {
@@ -79,7 +78,6 @@ public class PlayerCombat : NetworkIdentity
         if (_playerState.isDead && !_deathSequence){
             // Run the sequence once
             DeathSequence();
-            _deathSequence = true;
         }
 
         // Aim Logic
@@ -88,8 +86,8 @@ public class PlayerCombat : NetworkIdentity
 
     private void DeathSequence(){
         // All actions that happen with death
+        _deathSequence = true;
         Debug.Log("Player Has Died");
-        _playerRagdoll.StunPlayer(Vector3.up, (1933/54));
     }
 
     void SetActiveCamera() {
@@ -125,11 +123,16 @@ public class PlayerCombat : NetworkIdentity
 
         // Ragdoll direction and logic
         Vector3 ragdollForce = new Vector3(dir.x, 0f, dir.z);
-        _playerRagdoll.BreakPlayer(ragdollForce, 1); // break player
+        _playerRagdoll.Stun(ragdollForce, 1, null); // break player
+    }
+
+    public void ThrownObjectDamage(Vector3 force, float mult, GameObject bone) {
+        DealDamage(force.magnitude * _thrownDamageMult);
+        _playerRagdoll.Stun(force, mult, bone);
     }
 
     // Setters used to ensure the stats are accurate to boosts
-    void SetHealth() { _totalHealth = _health + _boostHealth; }
+    void SetHealth() { TotalHealth = _health + _boostHealth; }
     void SetMeleeDamage() { _totalMeleeDamage = _meleeDamage + _boostMeleeDamage; }
     void SetMeleeRange() { _totalMeleeRange = _meleeRange + _boostMeleeRange; }
     void SetHandlingSpeed() { _totalHandlingSpeed = _handlingSpeed + _boostHandlingSpeed; }

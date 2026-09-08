@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour
         _playerCombat = GetComponent<PlayerCombat>();
 
         _stepOffset = _characterController.stepOffset;
+        _cameraRotation.x = _playerCamera.transform.eulerAngles.y;
+        _playerTargetRotation.x = transform.eulerAngles.y;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
