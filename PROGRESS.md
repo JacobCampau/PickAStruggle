@@ -28,3 +28,6 @@ After the previous log I decided to completely rework the player controller from
 
 ### 09/08/2026
 I worked on the ragdoll to breaking system. The player will enter a ragdoll state if alive and break apart if dead. The way it is setup will also allow for the player to come together again from the broken stage. Maybe revives? I have found an issue where if the player continues to be hit by a moving object fast enough, they wont be able to get up. So I will need to increase the tolerance on movement for that. The player also has some weird logic at times when getting up. Good enough for now, but will definitely need to work on it again. I want to start working on interactable items now. Maybe multiplayer first to test what I have? I am unsure what the best call is.
+
+### 09/19/2026
+Networking is the bane of my existence. Honestly, it has been very informative learning about RPCs in purrnet. Hard to full understand, but I think I am starting to get the hand of it. Right now the Player can pickup a stick of dynamite and the hotbar will update for it. The original code for the hotbar and pickup/dropping was coded all by me. But since my attempt to convert it to network working code was terrible, I had Claude rework the logic.
