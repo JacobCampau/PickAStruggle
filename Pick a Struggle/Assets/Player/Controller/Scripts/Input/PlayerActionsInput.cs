@@ -1,7 +1,9 @@
+using PurrNet;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerActionsInput : MonoBehaviour, PlayerControls.IPlayerActionMapActions {
+public class PlayerActionsInput : NetworkIdentity, PlayerControls.IPlayerActionMapActions {
     #region Class Variables
     private PlayerLocomotionInput _playerLocomotionInput;
     private PlayerState _playerState;
@@ -19,7 +21,10 @@ public class PlayerActionsInput : MonoBehaviour, PlayerControls.IPlayerActionMap
         _playerState = GetComponent<PlayerState>();
     }
 
-    private void OnEnable() {
+    protected override void OnSpawned() {
+        base.OnSpawned();
+        if(!isOwner) return;
+
         if(PlayerInputManager.Instance?.PlayerControls == null) {
             Debug.LogError("Player controls is not intitialized");
             return;
@@ -29,7 +34,10 @@ public class PlayerActionsInput : MonoBehaviour, PlayerControls.IPlayerActionMap
         PlayerInputManager.Instance.PlayerControls.PlayerActionMap.SetCallbacks(this);
     }
 
-    private void OnDisable() {
+    protected override void OnDespawned() {
+        base.OnDespawned();
+        if(!isOwner) return;
+
         if(PlayerInputManager.Instance?.PlayerControls == null) {
             Debug.LogError("Player controls is not intitialized");
             return;

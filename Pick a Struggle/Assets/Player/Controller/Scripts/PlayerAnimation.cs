@@ -1,9 +1,10 @@
+using PurrNet;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
+    [SerializeField] private NetworkAnimator _animator;
     [SerializeField] private float locomotionBlendSpeed = 0.02f;
 
     private PlayerLocomotionInput _playerLocomotionInput;

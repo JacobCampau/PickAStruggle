@@ -1,10 +1,13 @@
+using PurrNet;
 using System;
 using Unity.Cinemachine;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [DefaultExecutionOrder(-1)]
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkIdentity
 {
     #region Class Variables
     [Header("Components")]
@@ -36,8 +39,9 @@ public class PlayerController : MonoBehaviour
     public float playerModelRotationSpeed = 10f;
     public float rotateToTargetTime = 0.25f;
 
-    [Header("Ragdoll")]
+    [Header("World Interactions")]
     public float fallDamageVelocity = 8f;
+    public float thrownObjectVelocity = 5f;
 
     [Header("Camera Settings")]
     public float lookSenseH = 0.1f;
@@ -87,8 +91,7 @@ public class PlayerController : MonoBehaviour
         _cameraRotation.x = _playerCamera.transform.eulerAngles.y;
         _playerTargetRotation.x = transform.eulerAngles.y;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        LockCursor();
     }
 
     private void Start() {
@@ -233,7 +236,7 @@ public class PlayerController : MonoBehaviour
             newVelocity = new Vector3(0f, newVelocity.y, 0f);
 
         // ONLY CALL ONCE PER FRAME!!
-        _characterController.Move(newVelocity * Time.deltaTime);
+        var flags = _characterController.Move(newVelocity * Time.deltaTime);
     }
 
     Vector3 HandleSteepWalls(Vector3 velocity) {
@@ -251,7 +254,11 @@ public class PlayerController : MonoBehaviour
 
     #region Late Update Logic
     private void LateUpdate() {
-        CameraRotation();
+        if(_playerState.IsDead) {
+            UnlockCursor();
+        } else {
+            CameraRotation();
+        }
     }
 
     void CameraRotation() {
@@ -261,7 +268,7 @@ public class PlayerController : MonoBehaviour
 
         _cameraRotation.x += totalLookSenseH * _playerLocomotionInput.LookInput.x;
         _cameraRotation.y = Mathf.Clamp(_cameraRotation.y - totalLookSenseV * _playerLocomotionInput.LookInput.y, -lookLimitV, lookLimitV);
-
+        
         _playerTargetRotation.x += transform.eulerAngles.x + totalLookSenseH * _playerLocomotionInput.LookInput.x;
 
         float rotationTolerance = 90f;
@@ -271,7 +278,7 @@ public class PlayerController : MonoBehaviour
 
         if(!isRagoll) {
             if(!isIdling) {
-                RotatePlaterToTarget();
+                RotatePlayerToTarget();
             }
             else if(Mathf.Abs(RotationMismatch) > rotationTolerance || IsRotatingToTarget) {
                 UpdateIdleRotation(rotationTolerance);
@@ -295,14 +302,25 @@ public class PlayerController : MonoBehaviour
 
         if(_isRotatingClockwise && RotationMismatch > 0 || !_isRotatingClockwise && RotationMismatch < 0) {
             _playerActionInput.SetHumpPressedFalse();
-            RotatePlaterToTarget();
+            RotatePlayerToTarget();
         }
     }
 
-    void RotatePlaterToTarget() {
+    void RotatePlayerToTarget() {
         Quaternion targetRotationX = Quaternion.Euler(0f, _playerTargetRotation.x, 0f);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotationX, playerModelRotationSpeed * Time.deltaTime);
     }
+
+    public void LockCursor() {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void UnlockCursor() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     #endregion
 
     #region State Checks

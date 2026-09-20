@@ -36,14 +36,22 @@ public class PlayerCombat : NetworkIdentity
 
     // Other
     [SerializeField] private bool _debug;
+    public bool _hitboxDebug;
 
     [Header("Camera")]
     [SerializeField] private CinemachineCamera _mainCamera;
     [SerializeField] private CinemachineCamera _aimCamera;
+    public Transform activeCameraTransform;
 
     [Header("Damage Mults")]
     [SerializeField] private float _fallDamageMult = 1;
     [SerializeField] private float _thrownDamageMult = 1;
+    [SerializeField] private float _explosionDamageMult = 1;
+
+    [Header("Hitbox controls")]
+    [SerializeField] private float _hitboxBufferTimer = 0f;
+    private float _maxTimer;
+    private PlayerHitbox[] _hitboxes;
 
     // States
     public EPlayerCombatState CurrentPlayerCombatState { get; private set; } = EPlayerCombatState.emptyHanded;
@@ -55,6 +63,10 @@ public class PlayerCombat : NetworkIdentity
         _statHandler = GetComponent<PlayerStatHandler>();
         _playerRagdoll = GetComponent<PlayerRagdoll>();
         _playerState = GetComponent<PlayerState>();
+        _hitboxes = GetComponentsInChildren<PlayerHitbox>();
+
+        // Values
+        _maxTimer = _hitboxBufferTimer;
     }
 
     private void Start() {
@@ -75,40 +87,63 @@ public class PlayerCombat : NetworkIdentity
 
     private void Update() {
         // Checking for dead
-        if (_playerState.isDead && !_deathSequence){
+        if (_playerState.IsDead && !_deathSequence){
             // Run the sequence once
             DeathSequence();
         }
 
+        if(_playerState.IsDead) return;
+
         // Aim Logic
         SetActiveCamera();
+
+        // Hitbox timer
+        if(!_playerState.IsActiveHitbox) {
+            _hitboxBufferTimer -= Time.deltaTime;
+            if(_hitboxBufferTimer < 0) {
+                _playerState.SetIsActiveHitbox(true);
+            }
+        }
     }
 
     private void DeathSequence(){
         // All actions that happen with death
         _deathSequence = true;
-        Debug.Log("Player Has Died");
+
+        // stun if not done already
+        if(_playerState.CurrentRagdollState == ERagdollState.Complete) {
+            _playerRagdoll.Stun(Vector3.up, (1933/54), null);
+        }
     }
 
     void SetActiveCamera() {
         if(_playerActionInput.AimPressed) {
             _mainCamera.Priority = 0;
             _aimCamera.Priority = 1;
+
+            activeCameraTransform = _aimCamera.transform;
         } else {
             _mainCamera.Priority = 1;
             _aimCamera.Priority = 0;
+
+            activeCameraTransform = _mainCamera.transform;
         }
     }
 
     // Player affects
     public void DealDamage(float dmg){
+        if(_playerState.IsDead) return;
+
         CurrentPlayerHealth -= dmg;
 
-        if(CurrentPlayerHealth <= 0){
+        if(CurrentPlayerHealth <= 0.01) {
             // Death logic
-            _playerState.isDead = true;
+            _playerState.SetIsDead(true);
             CurrentPlayerHealth = 0;
         }
+
+        _playerState.SetIsActiveHitbox(false);
+        _hitboxBufferTimer = _maxTimer;
 
         if(_debug)
             Debug.Log($"Player health took a hit for {dmg} HP");
@@ -127,7 +162,12 @@ public class PlayerCombat : NetworkIdentity
     }
 
     public void ThrownObjectDamage(Vector3 force, float mult, GameObject bone) {
-        DealDamage(force.magnitude * _thrownDamageMult);
+        DealDamage(mult * _explosionDamageMult);
+        _playerRagdoll.Stun(force, mult, bone);
+    }
+
+    public void ExplosionDamage(Vector3 force, float mult, GameObject bone) {
+        DealDamage(mult * _explosionDamageMult);
         _playerRagdoll.Stun(force, mult, bone);
     }
 

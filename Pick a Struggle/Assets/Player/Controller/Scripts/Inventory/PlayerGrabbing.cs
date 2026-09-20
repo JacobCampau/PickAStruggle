@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerGrabbing : NetworkIdentity
 {
     private PlayerState _playerState;
-    private PlayerInventory inv;
 
     [SerializeField] private bool debug;
 
@@ -28,7 +27,6 @@ public class PlayerGrabbing : NetworkIdentity
     private void Start(){
         cam = Camera.main;
 
-        inv = GetComponent<PlayerInventory>();
         _playerState = GetComponent<PlayerState>();
     }
 
@@ -61,13 +59,13 @@ public class PlayerGrabbing : NetworkIdentity
             return;
         }
 
-        if (!inv.TryAddItem(item))
-            Debug.Log("[PlayerHandling] Cannot pick up — inventory is full.");
+        //if (!inv.TryAddItem(item))
+            //Debug.Log("[PlayerHandling] Cannot pick up — inventory is full.");
     }
 
     private void TryThrow(){
         Vector3 throwDir = Quaternion.AngleAxis(-throwUpwardAngle, cam.transform.right) * cam.transform.forward;
-        inv.ThrowActiveItem(throwForce, throwDir);
+        //inv.ThrowActiveItem(throwForce, throwDir);
     }
 
     private void OnDrawGizmosSelected(){

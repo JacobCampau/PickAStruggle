@@ -151,7 +151,7 @@ public class PlayerRagdoll : MonoBehaviour
     }
 
     private void RagdollEnd() {
-        if(_playerState.CurrentPlayerMovementState == EPlayerMovementState.Ragdoll && !_playerState.isDead) {
+        if(_playerState.CurrentPlayerMovementState == EPlayerMovementState.Ragdoll && !_playerState.IsDead) {
             // In ragdoll, not dead
             if(_rbBody.linearVelocity.magnitude < _endRagdollSpeedThreshold) {
                 // player is no longer moving fast, so begin to wake up
@@ -168,7 +168,7 @@ public class PlayerRagdoll : MonoBehaviour
         }
 
         // If the player dies during the ragdoll, then prevent the getup function from being called
-        if(_playerState.isDead && _isGettingUp) {
+        if(_playerState.IsDead && _isGettingUp) {
             _isGettingUp = false;
             CancelInvoke(nameof(GetUp));
             Debug.Log("DEAD RAGDOLL CANCEL");
@@ -275,7 +275,7 @@ public class PlayerRagdoll : MonoBehaviour
 
     #region Ragdoll Starts and End
     public void Stun(Vector3 dir, float force, GameObject bone) {
-        if(_playerState.isDead) {
+        if(_playerState.IsDead) {
             BreakPlayer(dir, force, bone);
         } else {
             StunPlayer(dir, force, bone);
@@ -346,8 +346,8 @@ public class PlayerRagdoll : MonoBehaviour
 
         // Apply the directions to each body part
         foreach(Rigidbody bone in _rigidbodies) {
-            // Get direction from body
-            Vector3 directionFromBody = bone.position - _rbBody.position;
+            // Get direction from bone hit
+            Vector3 directionFromBody = bone.position - startBone.transform.position;
             Vector3 force = dir + (directionFromBody * _directionMult);
             float proportionalMult = bone.mass / weight;
 
@@ -377,7 +377,7 @@ public class PlayerRagdoll : MonoBehaviour
         if(startBone != null) {
             TossRagdoll(startBone.GetComponent<Rigidbody>(), force, 1);
         } else {
-            TossRagdoll(_rbBody, force, 1);
+            TossRagdoll(_rbBody, force, weight);
         }
     }
 
@@ -510,7 +510,7 @@ public class PlayerRagdoll : MonoBehaviour
     public void TossRagdoll(Rigidbody bone, Vector3 dir, float mult) {
         Vector3 force = dir * mult;
         if(_playerState.CurrentRagdollState != ERagdollState.Complete)
-            bone.AddForce(force * weight, ForceMode.Impulse);
+            bone.AddForce(force, ForceMode.Impulse);
     }
     #endregion
 }

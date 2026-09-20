@@ -1,10 +1,12 @@
+using PurrNet;
 using System;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [DefaultExecutionOrder(-2)]
 
-public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomotionMapActions
+public class PlayerLocomotionInput : NetworkIdentity, PlayerControls.IPlayerLocomotionMapActions
 {
     #region Class Variables
     [SerializeField] private bool holdToSprint = true;
@@ -17,7 +19,10 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
     #endregion
 
     #region Enable / Disable
-    private void OnEnable() {
+    protected override void OnSpawned() {
+        base.OnSpawned();
+        if(!isOwner) return;
+
         if(PlayerInputManager.Instance?.PlayerControls == null) {
             Debug.LogError("Player controls is not intitialized");
             return;
@@ -27,18 +32,18 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
         PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.SetCallbacks(this);
     }
 
-    private void OnDisable() {
-        if(PlayerInputManager.Instance?.PlayerControls == null) {
-            Debug.LogError("Player controls is not intitialized");
-            return;
-        }
+    protected override void OnDespawned() {
+        base.OnDespawned();
+        if(!isOwner) return;
+
+        if(PlayerInputManager.Instance?.PlayerControls == null) return;
 
         PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.Disable();
         PlayerInputManager.Instance.PlayerControls.PlayerLocomotionMap.RemoveCallbacks(this);
     }
     #endregion
 
-    #region Late Update
+    #region Update
     private void LateUpdate() {
         JumpPressed = false;
     }

@@ -1,6 +1,8 @@
+using PurrNet;
+using PurrNet.Transports;
 using UnityEngine;
 
-public class BallShooter : MonoBehaviour
+public class BallShooter : NetworkIdentity
 {
     [Header("Shooter Information")]
     public float speed;
@@ -21,11 +23,13 @@ public class BallShooter : MonoBehaviour
     }
 
     private void Update() {
+        if(!isServer) return;
+
         timer += Time.deltaTime;
         if(timer > _timerMax) {
             timer = 0;
             SpawnProjectile();
-            Instantiate(parts, partLocation.position, partLocation.rotation);
+            PlayMuzzleFxRPC();
         }
     }
 
@@ -36,5 +40,10 @@ public class BallShooter : MonoBehaviour
         if(rb != null) {
             rb.linearVelocity = direction * speed;
         }
+    }
+
+    [ObserversRpc(runLocally: true)]
+    void PlayMuzzleFxRPC() {
+        Instantiate(parts, partLocation.position, partLocation.rotation);
     }
 }

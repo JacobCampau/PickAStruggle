@@ -1,12 +1,14 @@
+using PurrNet;
 using UnityEngine;
 
-public class PlayerState : MonoBehaviour
+public class PlayerState : NetworkIdentity
 {
     [field: SerializeField] public EPlayerMovementState CurrentPlayerMovementState { get; private set; } = EPlayerMovementState.Idling;
     [field: SerializeField] public EHeadTrackingState CurrentPlayerTrackingState { get; private set; } = EHeadTrackingState.Default;
     [field: SerializeField] public ERagdollState CurrentRagdollState { get; private set; } = ERagdollState.Complete;
 
-    public bool isDead = false;
+    [field: SerializeField] public bool IsDead { get; private set; } = false;
+    [field: SerializeField] public bool IsActiveHitbox { get; private set; } = true;
     
     public void SetPlayerMovementState(EPlayerMovementState playerMovementState) {
         CurrentPlayerMovementState = playerMovementState;
@@ -18,6 +20,14 @@ public class PlayerState : MonoBehaviour
 
     public void SetPlayerTrackingState(EHeadTrackingState headTrackState) {
         CurrentPlayerTrackingState = headTrackState;
+    }
+
+    public void SetIsDead(bool val) {
+        IsDead = val;
+    }
+
+    public void SetIsActiveHitbox(bool val) {
+        IsActiveHitbox = val;
     }
 
     public bool InGroundedState() {
