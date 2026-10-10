@@ -13,6 +13,10 @@ public class PlayerActionsInput : NetworkIdentity, PlayerControls.IPlayerActionM
     public bool HumpPressed { get; private set; } = false;
     public bool WavePressed { get; private set; } = false;
     public bool AimPressed { get; private set; } = false;
+    public bool InteractPressed { get; private set; } = false;
+    public bool DropPressed { get; private set; } = false;
+    public bool ThrowCharged { get; private set; } = false;
+    public bool ShootPressed { get; private set; } = false;
     #endregion
 
     #region Startup
@@ -64,6 +68,10 @@ public class PlayerActionsInput : NetworkIdentity, PlayerControls.IPlayerActionM
     public void SetWavePressedFalse() {
         WavePressed = false;
     }
+    
+    public void SetThrowCharged(bool truth) {
+        ThrowCharged = truth;
+    }
     #endregion
 
     #region Input Callbacks
@@ -84,6 +92,30 @@ public class PlayerActionsInput : NetworkIdentity, PlayerControls.IPlayerActionM
             AimPressed = holdToAim || !AimPressed;
         } else if(context.canceled) {
             AimPressed = !holdToAim && AimPressed;
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context) {
+        if(context.performed) {
+            InteractPressed = true;
+        } else if(context.canceled) {
+            InteractPressed = false;
+        }
+    }
+
+    public void OnDrop(InputAction.CallbackContext context) {
+        if(context.performed) {
+            DropPressed = true;
+        } else if(context.canceled) {
+            DropPressed = false;
+        }
+    }
+
+    public void OnShoot(InputAction.CallbackContext context) {
+        if(context.performed) {
+            ShootPressed = true;
+        } else if(context.canceled) {
+            ShootPressed = false;
         }
     }
     #endregion

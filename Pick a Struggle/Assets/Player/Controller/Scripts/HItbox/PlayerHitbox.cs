@@ -40,9 +40,11 @@ public class PlayerHitbox : NetworkIdentity
         if(collision.gameObject.layer == LayerMask.NameToLayer("Throwable Objects") && collision.gameObject.GetComponent<VelocityCapture>() != null) {
             // Hit by a throwable object
             Vector3 hitDir = collision.gameObject.GetComponent<VelocityCapture>().PreviousVelocity;
-            if(!(Mathf.Abs(hitDir.magnitude) > _playerController.thrownObjectVelocity)) return;
+            float hitForce = hitDir.magnitude * collision.rigidbody.mass;
+            //Debug.Log($"Breakdown: speed was {hitDir.magnitude} and mass is {collision.rigidbody.mass}");
+            if(!(hitForce > _playerController.thrownObjectVelocity)) return;
 
-            _playerCombat.ThrownObjectDamage(hitDir.normalized, hitDir.magnitude * collision.rigidbody.mass, gameObject);
+            _playerCombat.ThrownObjectDamage(hitDir.normalized, hitForce, gameObject);
 
             if(_playerCombat._hitboxDebug) {
                 Debug.Log($"Hitbox {gameObject.name} was hit by {collision.gameObject.name} at speed {hitDir.magnitude} with direction {hitDir}");

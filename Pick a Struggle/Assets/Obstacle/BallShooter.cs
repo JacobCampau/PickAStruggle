@@ -38,7 +38,7 @@ public class BallShooter : NetworkIdentity
         GameObject instance = Instantiate(projectilePrefab, shooterPosition.position, shooterPosition.rotation);
         Rigidbody rb = instance.GetComponent<Rigidbody>();
         if(rb != null) {
-            rb.linearVelocity = direction * speed;
+            rb.AddForce(direction * speed, ForceMode.Impulse);
         }
     }
 

@@ -1,5 +1,7 @@
 using PurrNet;
+using System;
 using UnityEngine;
+using static UnityEngine.Audio.GeneratorInstance;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Item : NetworkIdentity
@@ -12,7 +14,14 @@ public class Item : NetworkIdentity
     private Collider[] _colliders;
     private Behaviour[] _netSync;
 
+    [SerializeField] private Vector3 _thrownRotation;
+    public bool thrown = false;
+
     [field: SerializeField] public bool IsHeld { get; private set; } = false;
+
+    [Header("Collision Timer")]
+    [SerializeField] float _activatePlayerCollisionTimer = 0.2f;
+    private Collider[] _playerColliders;
 
     private void Start() {
         _rb = GetComponent<Rigidbody>();
@@ -64,6 +73,32 @@ public class Item : NetworkIdentity
             _rb.AddForce(throwDir.normalized * force, ForceMode.Impulse);
     }
 
+    public void Thrown(Vector3 throwDir, float force) {
+        // Handle player collisions
+        IgnorePlayerCollision();
+        Invoke(nameof(ActivatePlayerCollision), _activatePlayerCollisionTimer);
+
+        // Other thrown logic
+        IsHeld = false;
+
+        transform.SetParent(null, true);
+        SetVisible(true);
+        SetColliders(true);
+
+        _rb.isKinematic = false;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+
+        SetNetSync(true);
+
+        // Only the server applies the impulse; NetworkRigidbody syncs the result.
+        if(isServer && force > 0f) {
+            _rb.AddForce(throwDir * force, ForceMode.Impulse);
+            _rb.angularVelocity = transform.TransformDirection(_thrownRotation * Mathf.Deg2Rad);
+            thrown = true;
+        }
+    }
+
     // Hide/show without deactivating the networked GameObject.
     public void SetVisible(bool visible) {
         foreach(var r in _renderers)
@@ -84,38 +119,30 @@ public class Item : NetworkIdentity
             if(b != null) b.enabled = enabled;
     }
 
-    // --- Old Code --- //
-    /*
-    [ObserversRpc]
-    public void StoreInHand(Transform parent) {
-        IsHeld = true;
-        _rb.isKinematic = true;
+    // Collider logic
+    private void IgnorePlayerCollision() {
+        // Get the player colliders
+        Transform parent = transform.root;
+        _playerColliders = parent.GetComponentsInChildren<Collider>();
+        
+        if(_playerColliders == null) return;
 
-        transform.SetParent(parent);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-
-        Debug.Log($"Pos: {transform.localPosition}, Rot: {transform.localRotation.eulerAngles}");
-
-        gameObject.SetActive(false); // hidden until it is the active slot
+        SetIgnoreColliderCollision(true);
     }
 
-    [ObserversRpc]
-    public void Eject(Vector3 throwDir, float force = 0f)
-    {
-        transform.SetParent(null);
-        gameObject.SetActive(true);
+    private void ActivatePlayerCollision() {
+        if(_playerColliders == null) return;
 
-        _rb.isKinematic = false;
-        _rb.linearVelocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
+        SetIgnoreColliderCollision(false);
 
-        if (force > 0f)
-            _rb.AddForce(throwDir.normalized * force, ForceMode.Impulse);
+        _playerColliders = null;
     }
 
-    public void SetSelectedState(bool val) {
-        _outline.enabled = val;
+    private void SetIgnoreColliderCollision(bool truth) {
+        foreach(Collider playerCol in _playerColliders) {
+            foreach(Collider itemCols in _colliders) {
+                Physics.IgnoreCollision(itemCols, playerCol, truth);
+            }
+        }
     }
-    */
 }

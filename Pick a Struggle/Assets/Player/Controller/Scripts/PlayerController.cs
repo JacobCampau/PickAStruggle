@@ -262,7 +262,7 @@ public class PlayerController : NetworkIdentity
     }
 
     void CameraRotation() {
-        bool isAiming = _playerActionInput.AimPressed;
+        bool isAiming = _playerCombat.weaponAimed;
         float totalLookSenseH = isAiming ? lookSenseH * aimSenseMult : lookSenseH;
         float totalLookSenseV = isAiming ? lookSenseV * aimSenseMult : lookSenseV;
 
@@ -306,7 +306,7 @@ public class PlayerController : NetworkIdentity
         }
     }
 
-    void RotatePlayerToTarget() {
+    public void RotatePlayerToTarget() {
         Quaternion targetRotationX = Quaternion.Euler(0f, _playerTargetRotation.x, 0f);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotationX, playerModelRotationSpeed * Time.deltaTime);
     }

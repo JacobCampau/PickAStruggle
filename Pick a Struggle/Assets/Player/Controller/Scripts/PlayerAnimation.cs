@@ -30,6 +30,7 @@ public class PlayerAnimation : MonoBehaviour
     private static int isPlayingActionHash = Animator.StringToHash("isPlayingAction");
     private static int isHumpingHash = Animator.StringToHash("isHumping");
     private static int isWavingHash = Animator.StringToHash("isWaving");
+    private static int isGoingToThrowHash = Animator.StringToHash("isGoingToThrow");
 
     // Ragdoll
     private static int isRagdollHash = Animator.StringToHash("isRagdoll");
@@ -77,6 +78,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool(isHumpingHash, _playerActionsInput.HumpPressed);
         _animator.SetBool(isPlayingActionHash, isPlayingAction);
         _animator.SetBool(isWavingHash, _playerActionsInput.WavePressed);
+        _animator.SetBool(isGoingToThrowHash, _playerActionsInput.ThrowCharged);
         _animator.SetBool(isRagdollHash, isRagdoll);
 
         _animator.SetFloat(inputXHash, _currentBlendInput.x);

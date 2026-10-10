@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerHotbarController: NetworkIdentity {
+    private PlayerCombat _playerCombat;
+    
     [Header("General Hotbar Settings")]
     public int numberOfSlots = 5;
 
     [Header("Hand of Player")]
-    [SerializeField] private Transform _hand;
+    public Transform hand;
 
     [Header("Controls")]
     public int currentSlotSelection = 0;
@@ -18,6 +20,8 @@ public class PlayerHotbarController: NetworkIdentity {
     public event Action OnHotbarChanged;
 
     private void Awake() {
+        _playerCombat = GetComponent<PlayerCombat>();
+
         HotbarItems = new Item[numberOfSlots];
     }
 
@@ -73,7 +77,7 @@ public class PlayerHotbarController: NetworkIdentity {
         if(item == null) return;
 
         HotbarItems[slot] = item;
-        item.SetHeld(_hand);
+        item.SetHeld(hand);
 
         RefreshVisibility();
         OnHotbarChanged?.Invoke();
@@ -93,7 +97,7 @@ public class PlayerHotbarController: NetworkIdentity {
     [ServerRpc]
     public void RequestDrop(float dropSpeed) {
         if(HotbarItems[currentSlotSelection] == null) return;
-
+        
         ApplyDrop(currentSlotSelection, transform.forward, dropSpeed);
     }
 
@@ -109,6 +113,25 @@ public class PlayerHotbarController: NetworkIdentity {
         OnHotbarChanged?.Invoke();
     }
 
+    [ServerRpc]
+    public void RequestThrow(float throwSpeed, Vector3 dir) {
+        if(HotbarItems[currentSlotSelection] == null) return;
+
+        ApplyThrow(currentSlotSelection, dir, throwSpeed);
+    }
+
+    [ObserversRpc(runLocally: true)]
+    private void ApplyThrow(int slot, Vector3 dir, float force) {
+        Item item = HotbarItems[slot];
+        if(item == null) return;
+
+        HotbarItems[slot] = null;
+        item.Thrown(dir, force);
+
+        RefreshVisibility();
+        OnHotbarChanged?.Invoke();
+    }
+
     // --- Visibility --- //
     private void RefreshVisibility() {
         for(int i = 0; i < numberOfSlots; i++) {
@@ -116,71 +139,4 @@ public class PlayerHotbarController: NetworkIdentity {
                 HotbarItems[i].SetVisible(i == currentSlotSelection);
         }
     }
-
-    // --- Old Code --- //
-    /*
-    public bool AddItemToHotbar(GameObject newItem) {
-        if(_filledSlots >= numberOfSlots) return false;
-
-        if(HotbarItems[currentSlotSelection] == null) {
-            // Nothing in current slot, add it to the slot
-            HotbarItems[currentSlotSelection] = newItem;
-            _filledSlots++;
-
-            return true;
-        }
-
-        bool placed = false;
-        for(int i = 0; i < numberOfSlots; i++) {
-            if(HotbarItems[i] == null) {
-                HotbarItems[i] = newItem;
-                placed = true;
-            }
-        }
-
-        if(placed) _filledSlots++;
-
-        return placed;
-    }
-
-    [ObserversRpc]
-    public void SetCurrentItemActive(int slot) {
-        for(int i = 0; i < numberOfSlots; i++) {
-            if(HotbarItems[i] != null) {
-                HotbarItems[i].SetActive(i == slot);
-            }
-        }
-    }
-
-    private void CurrentSlotSelectionController() {
-        Vector2 scrollDelta = Mouse.current.scroll.ReadValue();
-        int tempScroll = currentSlotSelection;
-
-        if(scrollDelta.y < 0) {
-            tempScroll++;
-            if(tempScroll >= numberOfSlots)
-                tempScroll = 0;
-        } else if(scrollDelta.y > 0) {
-            tempScroll--;
-            if(tempScroll < 0)
-                tempScroll = numberOfSlots-1;
-        }
-
-        if(tempScroll != currentSlotSelection) {
-            currentSlotSelection = tempScroll;
-            SetCurrentItemActive(currentSlotSelection);
-        }
-    }
-
-    public bool DropActiveItem(float dropSpeed) {
-        if(HotbarItems[currentSlotSelection] != null) {
-            HotbarItems[currentSlotSelection].GetComponent<Item>().Eject(transform.forward, dropSpeed);
-            _filledSlots--;
-            HotbarItems[currentSlotSelection] = null;
-            return true;
-        }
-
-        return false;
-    }
-    */
 }

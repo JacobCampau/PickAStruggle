@@ -9,7 +9,7 @@ public class PlayerInteraction : NetworkIdentity
 {
     private PlayerCombat _playerCombat;
     private PlayerHotbarController _playerHotbarController;
-    private PlayerHotbar _playerHotbar;
+    private PlayerActionsInput _playerActionsInput;
 
     [Header("Player Arm Settings")]
     [SerializeField] private float _distanceFromCameraToHead = 4.5f;
@@ -17,14 +17,14 @@ public class PlayerInteraction : NetworkIdentity
     [SerializeField] private LayerMask _itemLayers;
     private Transform _playerCamera;
     [SerializeField] private Transform _rightHand;
+
+    [Header("Drop Settings")]
     [SerializeField] private float _dropSpeed = 2f;
+
+    private float _currThrowSpeed;
 
     private Transform _currentItemSelected;
     private Item _currItemComp;
-
-    [Header("Keybinds")]
-    public KeyCode pickup;
-    public KeyCode drop;
 
     // Global reach raycast
     private RaycastHit _raycastHit;
@@ -32,7 +32,7 @@ public class PlayerInteraction : NetworkIdentity
     private void Awake() {
         _playerCombat = GetComponent<PlayerCombat>();
         _playerHotbarController = GetComponent<PlayerHotbarController>();
-        _playerHotbar = GetComponentInChildren<PlayerHotbar>();
+        _playerActionsInput = GetComponent<PlayerActionsInput>();
     }
 
     private void Update() {
@@ -65,7 +65,7 @@ public class PlayerInteraction : NetworkIdentity
             _currItemComp = _currentItemSelected.GetComponent<Item>();
             _currItemComp.SetSelectedState(true);
 
-            if(Input.GetKeyDown(pickup)) {
+            if(_playerActionsInput.InteractPressed) {
                 // Player has decided to pick up a selected item
                 Item item = _currItemComp;
                 item.SetSelectedState(false);
@@ -83,8 +83,7 @@ public class PlayerInteraction : NetworkIdentity
     }
 
     private void CheckForItemDrop() {
-        if(Input.GetKeyDown(drop)) {
+        if(_playerActionsInput.DropPressed)
             _playerHotbarController.RequestDrop(_dropSpeed);
-        }
     }
 }
