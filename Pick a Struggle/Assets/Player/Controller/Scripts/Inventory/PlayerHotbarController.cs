@@ -29,6 +29,7 @@ public class PlayerHotbarController: NetworkIdentity {
         if(!isOwner) return;
         //CurrentSlotSelectionController();
         HandleScroll();
+        HandleNumberSelection();
     }
 
     // --- Selection --- //
@@ -46,6 +47,21 @@ public class PlayerHotbarController: NetworkIdentity {
         RefreshVisibility();
         OnHotbarChanged?.Invoke();
         SelectSlot(next);
+    }
+
+    private void HandleNumberSelection(){
+        for (int i = 0; i < numberOfSlots; i++)
+        {
+            // KeyCode.Alpha1 + 0 is Alpha1, +1 is Alpha2, etc.
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                currentSlotSelection = i;   // instant local feedback for the owner
+                RefreshVisibility();
+                OnHotbarChanged?.Invoke();
+                SelectSlot(i);
+                break;
+            }
+        }
     }
 
     [ServerRpc]

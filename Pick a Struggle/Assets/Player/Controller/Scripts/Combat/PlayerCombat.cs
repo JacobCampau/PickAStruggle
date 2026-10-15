@@ -209,6 +209,11 @@ public class PlayerCombat : NetworkIdentity
         _playerRagdoll.Stun(force, mult, bone);
     }
 
+    public bool CheckDeadOnDamage(float dmg)
+    {
+        return TotalHealth - dmg <= 0;
+    }
+
     private void CheckForThrowableItem() {
         Vector3 adjustedDir = activeCameraTransform.forward;
 

@@ -2,6 +2,7 @@ using PurrNet;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.LowLevel;
 using static UnityEngine.Rendering.DebugUI;
 
 public class ExplodeOverTime : NetworkIdentity
@@ -30,6 +31,7 @@ public class ExplodeOverTime : NetworkIdentity
     public void Explode() {
         // Player hitbox controls
         Collider[] hitboxHits = Physics.OverlapSphere(transform.position, explosionRadius, playerMask);
+        Collider[] allHits = Physics.OverlapSphere(transform.position, explosionRadius);
 
         var closestHitbox = new Dictionary<Transform, PlayerHitbox>();
         var closestDist = new Dictionary<Transform, float>();
@@ -50,11 +52,27 @@ public class ExplodeOverTime : NetworkIdentity
             }
         }
 
-        // Apply the explosion
-        foreach(var (playerRoot, hitbox) in closestHitbox) {
+        foreach (var (playerRoot, hitbox) in closestHitbox) {
             float falloff = Mathf.Clamp01(1f - closestDist[playerRoot] / explosionRadius);
             Vector3 dir = (hitbox.transform.position - transform.position).normalized;
-            hitbox.ExplosionHit(dir, explosionForce * falloff);
+            hitbox.ExplosionHit(dir, explosionForce * falloff * 2f);
+        }
+
+        // Launch every other rigidbody in range
+        var launched = new HashSet<Rigidbody>();
+        foreach (var hit in allHits)
+        {
+            // Skip player hitboxes and anything that's part of a player
+            if (hit.GetComponentInParent<PlayerHitbox>() != null) continue;
+            if (FindPlayerRoot(hit.transform) != null) continue;
+
+            Rigidbody rb = hit.attachedRigidbody;
+            if (rb == null || rb.isKinematic) continue;
+
+            // A rigidbody with several colliders only gets launched once
+            if (!launched.Add(rb)) continue;
+
+            rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, 0f, ForceMode.Impulse);
         }
 
         ExplosionEffect();

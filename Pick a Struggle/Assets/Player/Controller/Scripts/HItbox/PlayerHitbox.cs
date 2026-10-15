@@ -10,6 +10,7 @@ public class PlayerHitbox : NetworkIdentity
 
     private LayerMask _ragdollLayer;
     private LayerMask _inactiveRagdollLayer;
+    private LayerMask _playerBodyItemLayer;
 
     private void Start() {
         _playerCombat = GetComponentInParent<PlayerCombat>();
@@ -19,6 +20,7 @@ public class PlayerHitbox : NetworkIdentity
         // Hard coded so they never change
         _ragdollLayer = LayerMask.NameToLayer("Ragdoll");
         _inactiveRagdollLayer = LayerMask.NameToLayer("Ragdoll Hitbox");
+        _playerBodyItemLayer = LayerMask.NameToLayer("Dead Player Part");
     }
 
     private void Update() {
@@ -27,7 +29,14 @@ public class PlayerHitbox : NetworkIdentity
 
     void RagdollHitboxLayerControl() {
         if(_playerState.CurrentRagdollState != ERagdollState.Complete) {
-            gameObject.layer = _ragdollLayer;
+            if (_playerState.IsDead)
+            {
+                gameObject.layer = _playerBodyItemLayer;
+            }
+            else
+            {
+                gameObject.layer = _ragdollLayer;
+            }
         } else {
             gameObject.layer = _inactiveRagdollLayer;
         }

@@ -18,6 +18,10 @@ public class PlayerInteraction : NetworkIdentity
     private Transform _playerCamera;
     [SerializeField] private Transform _rightHand;
 
+    [Header("Outline Settings")]
+    [SerializeField] private Color _outlineColor = Color.white;
+    [SerializeField] private float _outlineSize = 0.2f;
+
     [Header("Drop Settings")]
     [SerializeField] private float _dropSpeed = 2f;
 
@@ -54,7 +58,7 @@ public class PlayerInteraction : NetworkIdentity
             // Selected item does have an outline script
             if(_currentItemSelected != null) {
                 if(_currentItemSelected != _raycastHit.transform) {
-                    _currItemComp.SetSelectedState(false);
+                    if(_currItemComp != null) _currItemComp.SetSelectedState(false);
                 }
             }
             _currentItemSelected = _raycastHit.transform;
@@ -63,7 +67,16 @@ public class PlayerInteraction : NetworkIdentity
                 Debug.Log("Missing item component");
 
             _currItemComp = _currentItemSelected.GetComponent<Item>();
-            _currItemComp.SetSelectedState(true);
+            if (_currItemComp != null)
+            {
+                Outline testForOutline = _currItemComp.GetComponent<Outline>();
+                if(testForOutline == null)
+                {
+                    Debug.Log("Adding outline");
+                    AddOutlineComp(_currItemComp);
+                }
+                _currItemComp.SetSelectedState(true);
+            } 
 
             if(_playerActionsInput.InteractPressed) {
                 // Player has decided to pick up a selected item
@@ -85,5 +98,14 @@ public class PlayerInteraction : NetworkIdentity
     private void CheckForItemDrop() {
         if(_playerActionsInput.DropPressed)
             _playerHotbarController.RequestDrop(_dropSpeed);
+    }
+
+    private void AddOutlineComp(Item item)
+    {
+        if (item.transform.GetComponent<Outline>() == null) return;
+
+        Outline itemOutline = item.gameObject.AddComponent<Outline>();
+        itemOutline.OutlineColor = _outlineColor;
+        itemOutline.OutlineWidth = _outlineSize;
     }
 }

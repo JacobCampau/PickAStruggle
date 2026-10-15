@@ -482,7 +482,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699473752288495567}
   serializedVersion: 5
-  m_Mass: 8
+  m_Mass: 4
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -690,7 +690,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701191118276669593}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 2.5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -899,7 +899,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799756323510182799}
   serializedVersion: 5
-  m_Mass: 15
+  m_Mass: 7.5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1791,7 +1791,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2931857703909065093}
   serializedVersion: 5
-  m_Mass: 30
+  m_Mass: 15
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1975,7 +1975,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7578155737204067807}
-  - component: {fileID: 2445320291622766546}
   - component: {fileID: 8680726575162593959}
   - component: {fileID: 430305822081508601}
   - component: {fileID: 2591565034306303781}
@@ -2002,27 +2001,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2399903238286648153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2445320291622766546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3623843033537644683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e48560efc62e5499bb6bc8a2ba2e0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHitbox
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
-  _isSetup: 0
-  _prefabId: -2147483648
-  _componentIndex: -2147483648
-  _shouldBePooled: 0
-  _parent: {fileID: 0}
-  _invertedPathToNearestParent: 
-  _directChildren: []
 --- !u!33 &8680726575162593959
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2308,7 +2286,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3855620677872889129}
   serializedVersion: 5
-  m_Mass: 8
+  m_Mass: 4
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3384,7 +3362,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4729438514835987275}
   serializedVersion: 5
-  m_Mass: 8
+  m_Mass: 4
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3592,7 +3570,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4899220389247406826}
   serializedVersion: 5
-  m_Mass: 8
+  m_Mass: 4
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5002,7 +4980,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7528783100605091041}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 2.5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5698,7 +5676,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8074535595708685101}
   serializedVersion: 5
-  m_Mass: 8
+  m_Mass: 4
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6487,7 +6465,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8652879844233894059}
   serializedVersion: 5
-  m_Mass: 8
+  m_Mass: 4
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -7051,8 +7029,10 @@ MonoBehaviour:
   _playerReach: 3
   _itemLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   _rightHand: {fileID: 4424569274898894575}
+  _outlineColor: {r: 1, g: 0.9559715, b: 0.42264152, a: 1}
+  _outlineSize: 5
   _dropSpeed: 2
 --- !u!114 &5279511492500270372
 MonoBehaviour:
@@ -7090,7 +7070,7 @@ MonoBehaviour:
   _explosionDamageMult: 0.15
   _hitboxBufferTimer: 0.2
   allPlayerColliders: []
-  throwSpeed: 150
+  throwSpeed: 300
   upwardThrust: 0.2
   hitMarker: {fileID: 1860677400783500125, guid: 85bcd8e14a2e253478baf93b74005325, type: 3}
   maxPoints: 100
